@@ -54,9 +54,14 @@ func (srv *TgService) Prodolzit(chatId int, prodolzit_id string) error {
 		srv.CopyMessage(chatId, -1001998413789, 13)
 
 
-		text := fmt.Sprintf("тут должен быть вопрос %d", prodolzitIdInt+1)
+		text := `Какова главная причина того, что люди выходят из игры до достижения серьёзных результатов? Всё же настолько просто. 
+		
+A) Недостаток мотивации и усердия.
+B) Отсутствие интереса к игре.
+C) Слишком сложные вопросы.
+D) Не хватает времени, чтобы играть.`
 		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
-			[{ "text": "продолжить", "callback_data": "prodolzit_%d_" }]
+			[ { "text": "A", "callback_data": "prodolzit_%d_" }, { "text": "B", "callback_data": "__" }, { "text": "C", "callback_data": "__" }, { "text": "D", "callback_data": "__" }]
 		]}`, prodolzitIdInt+1)
 		srv.SendMessageWRM(chatId, text, reply_markup)
 		return nil
@@ -64,9 +69,14 @@ func (srv *TgService) Prodolzit(chatId int, prodolzit_id string) error {
 	if prodolzit_id == "2" {
 		srv.SendAnimArticleHTMLV3("1.5", chatId, 2000)
 		
-		text := fmt.Sprintf("тут должен быть вопрос %d", prodolzitIdInt+1)
+		text := `О каком инструменте речь?
+		
+A) Новая маркетинговая стратегия.
+B) Приложение или софт.
+C) Инсайдерская информация.
+D) Своя технология`
 		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
-			[{ "text": "продолжить", "callback_data": "prodolzit_%d_" }]
+			[ { "text": "A", "callback_data": "__" }, { "text": "B", "callback_data": "prodolzit_%d_" }, { "text": "C", "callback_data": "__" }, { "text": "D", "callback_data": "__" }]
 		]}`, prodolzitIdInt+1)
 		srv.SendMessageWRM(chatId, text, reply_markup)
 		return nil
@@ -76,9 +86,14 @@ func (srv *TgService) Prodolzit(chatId int, prodolzit_id string) error {
 		srv.SendAnimArticleHTMLV3("1.6", chatId, 2000)
 		srv.CopyMessage(chatId, -1001998413789, 17)
 		
-		text := fmt.Sprintf("тут должен быть вопрос %d", prodolzitIdInt+1)
+		text := `Каким образом игра, о которой говорится в тексте, способна сделать человека миллионером в такой короткий срок? 
+		
+A) В игре есть уникальная бизнес-стратегия.
+B) Игра обучает навыкам инвестирования и финансового планирования.
+C) После прохождения игры участникам выплачивается крупный денежный приз.
+D) Игра предлагает секретные знания или контакты для старта собственного дела.`
 		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
-			[{ "text": "продолжить", "callback_data": "prodolzit_%d_" }]
+			[ { "text": "A", "callback_data": "__" }, { "text": "B", "callback_data": "__" }, { "text": "C", "callback_data": "prodolzit_%d_" }, { "text": "D", "callback_data": "__" }]
 		]}`, prodolzitIdInt+1)
 		srv.SendMessageWRM(chatId, text, reply_markup)
 		return nil
@@ -87,9 +102,14 @@ func (srv *TgService) Prodolzit(chatId int, prodolzit_id string) error {
 		srv.SendAnimArticleHTMLV3("1.7", chatId, 2000)
 		srv.CopyMessage(chatId, -1001998413789, 19)
 		
-		text := fmt.Sprintf("тут должен быть вопрос %d", prodolzitIdInt+1)
+		text := `Что именно тебя побудило на переход от найма к своему делу, и что дало толчок к действию? 
+		
+A) Желание стать независимым от чужого мнения и команд.
+B) Стремление к финансовой свободе и возможности помочь родителям.
+C) Вдохновился историями успеха других людей из неблагополучных семей.
+D) Осознание, что найм не приведёт к росту в деньгах и качества жизни`
 		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
-			[{ "text": "продолжить", "callback_data": "prodolzit_%d_" }]
+			[ { "text": "A", "callback_data": "__" }, { "text": "B", "callback_data": "prodolzit_%d_" }, { "text": "C", "callback_data": "__" }, { "text": "D", "callback_data": "__" }]
 		]}`, prodolzitIdInt+1)
 		srv.SendMessageWRM(chatId, text, reply_markup)
 		return nil
@@ -98,9 +118,14 @@ func (srv *TgService) Prodolzit(chatId int, prodolzit_id string) error {
 		srv.SendAnimArticleHTMLV3("1.8", chatId, 2000)
 		srv.CopyMessage(chatId, -1001998413789, 21)
 		
-		text := fmt.Sprintf("тут должен быть вопрос %d", prodolzitIdInt+1)
+		text := `Какие возможности и ресурсы появились сейчас, хотя не были доступны тебе на начальном этапе?
+		
+1) Онлайн-курсы и обучающие платформы.
+2) Менторские программы и сеть наставников, способных дать ценные советы и направление.
+3) Сервисы и приложения для сетевого взаимодействия и нетворкинга.
+4) Уникальный софт, обходящий систему онлайн-казино или букмекерской конторы`
 		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
-			[{ "text": "продолжить", "callback_data": "prodolzit_%d_" }]
+			[ { "text": "A", "callback_data": "__" }, { "text": "B", "callback_data": "__" }, { "text": "C", "callback_data": "__" }, { "text": "D", "callback_data": "prodolzit_%d_" }]
 		]}`, prodolzitIdInt+1)
 		srv.SendMessageWRM(chatId, text, reply_markup)
 		return nil
@@ -108,9 +133,14 @@ func (srv *TgService) Prodolzit(chatId int, prodolzit_id string) error {
 	if prodolzit_id == "6" {
 		srv.SendAnimArticleHTMLV3("1.9", chatId, 2000)
 
-		text := fmt.Sprintf("тут должен быть вопрос %d", prodolzitIdInt+1)
+		text := `Почему об этой возможности ещё не знают все, если всё так просто и ты тоже с этого заработаешь?
+		
+A) Маркетинговая команда для распространения ещё не собрана
+B) Люди относятся скептически к такой возможности и упускают её сами.
+C) С резким увеличением числа людей обход системы может быть обнаружен и устранен.
+D) Люди недостаточно знают или супер ленивые.`
 		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
-			[{ "text": "продолжить", "callback_data": "prodolzit_%d_" }]
+			[ { "text": "A", "callback_data": "__" }, { "text": "B", "callback_data": "prodolzit_%d_" }, { "text": "C", "callback_data": "__" }, { "text": "D", "callback_data": "__" }]
 		]}`, prodolzitIdInt+1)
 		srv.SendMessageWRM(chatId, text, reply_markup)
 		return nil
@@ -135,9 +165,14 @@ D) Изучить истории предыдущих участников, чт
 		srv.SendAnimArticleHTMLV3("2.4", chatId, 2000)
 		srv.CopyMessage(chatId, -1001998413789, 31)
 		
-		text := fmt.Sprintf("тут должен быть вопрос %d", prodolzitIdInt+1)
+		text := `Как можно будет узнать о новых перспективных возможностях, которые ускорят мой рост в деньгах и качестве жизни?
+
+A) Искать сливы инфы из моего канала в открытом доступе
+B) Пытаться самому найти информацию в ютубе
+C) Присоединиться к моей команде, чтобы получать актуальные схемы
+D) Купить курс у блогера, который живет в Москва-Сити`
 		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
-			[{ "text": "продолжить", "callback_data": "prodolzit_%d_" }]
+			[ { "text": "A", "callback_data": "__" }, { "text": "B", "callback_data": "__" }, { "text": "C", "callback_data": "prodolzit_%d_" }, { "text": "D", "callback_data": "__" }]
 		]}`, prodolzitIdInt+1)
 		srv.SendMessageWRM(chatId, text, reply_markup)
 		return nil
