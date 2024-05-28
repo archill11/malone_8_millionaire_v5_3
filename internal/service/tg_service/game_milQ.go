@@ -343,6 +343,15 @@ func (srv *TgService) ShowQWin(chatId int, q_num string) error {
 		]}`
 		srv.SendMessageWRM(chatId, messText, reply_markup)
 
+		messText = "."
+		reply_markup = `{"keyboard" : [
+			[{ "text": "сос" }]
+		]}`
+		_, err := srv.SendMessageWRM(chatId, messText, reply_markup)
+		if err != nil {
+			srv.l.Error("сос err: ", err)
+		}
+
 		// srv.SendMsgToServer(chatId, "bot", "Ссылка")
 		return nil
 	}

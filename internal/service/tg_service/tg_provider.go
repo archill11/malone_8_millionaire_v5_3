@@ -490,6 +490,26 @@ func (srv *TgService) SendVideo(body io.Reader, contentType string) (models.Send
 	return j, nil
 }
 
+func (srv *TgService) SendVideo(body io.Reader, contentType string) (models.SendMediaResp, error) {
+	resp, err := http.Post(
+		fmt.Sprintf(srv.Cfg.TgEndp, srv.Cfg.Token, "ReplyKeyboardMarkup"),
+		contentType,
+		body,
+	)
+	if err != nil {
+		return models.SendMediaResp{}, fmt.Errorf("SendVideo Post err: %v", err)
+	}
+	defer resp.Body.Close()
+	var j models.SendMediaResp
+	if err := json.NewDecoder(resp.Body).Decode(&j); err != nil {
+		return models.SendMediaResp{}, fmt.Errorf("SendVideo Decode err: %v", err)
+	}
+	if j.ErrorCode != 0 {
+		return j, fmt.Errorf("SendVideo errResp: %+v", j.BotErrResp)
+	}
+	return j, nil
+}
+
 func (srv *TgService) SendVideoWCaption(chat_id int, caption, fileNameInServer string) (models.SendMediaResp, error) {
 	futureJson := map[string]string{
 		"chat_id":    strconv.Itoa(chat_id),
