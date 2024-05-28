@@ -2,6 +2,7 @@ package tg_service
 
 import (
 	"fmt"
+	"strconv"
 	"time"
 )
 
@@ -44,6 +45,7 @@ func (srv *TgService) ShowMilQ(chatId, qNum int) error {
 
 func (srv *TgService) Prodolzit(chatId int, prodolzit_id string) error {
 	time.Sleep(time.Second * 2)
+	prodolzitIdInt, _ := strconv.Atoi(prodolzit_id)
 
 	if prodolzit_id == "1" {
 		srv.SendAnimArticleHTMLV3("1.3", chatId, 2000)
@@ -51,20 +53,21 @@ func (srv *TgService) Prodolzit(chatId int, prodolzit_id string) error {
 		srv.SendAnimArticleHTMLV3("1.4", chatId, 2000)
 		srv.CopyMessage(chatId, -1001998413789, 13)
 
-		text := "тут должен быть вопрос"
-		reply_markup := `{"inline_keyboard" : [
-			[{ "text": "продолжить", "callback_data": "prodolzit_2_" }]
-		]}`
+
+		text := fmt.Sprintf("тут должен быть вопрос %d", prodolzitIdInt+1)
+		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
+			[{ "text": "продолжить", "callback_data": "prodolzit_%d_" }]
+		]}`, prodolzitIdInt+1)
 		srv.SendMessageWRM(chatId, text, reply_markup)
 		return nil
 	}
 	if prodolzit_id == "2" {
 		srv.SendAnimArticleHTMLV3("1.5", chatId, 2000)
 		
-		text := "тут должен быть вопрос"
-		reply_markup := `{"inline_keyboard" : [
-			[{ "text": "продолжить", "callback_data": "prodolzit_3_" }]
-		]}`
+		text := fmt.Sprintf("тут должен быть вопрос %d", prodolzitIdInt+1)
+		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
+			[{ "text": "продолжить", "callback_data": "prodolzit_%d_" }]
+		]}`, prodolzitIdInt+1)
 		srv.SendMessageWRM(chatId, text, reply_markup)
 		return nil
 	}
@@ -73,10 +76,10 @@ func (srv *TgService) Prodolzit(chatId int, prodolzit_id string) error {
 		srv.SendAnimArticleHTMLV3("1.6", chatId, 2000)
 		srv.CopyMessage(chatId, -1001998413789, 17)
 		
-		text := "тут должен быть вопрос"
-		reply_markup := `{"inline_keyboard" : [
-			[{ "text": "продолжить", "callback_data": "prodolzit_4_" }]
-		]}`
+		text := fmt.Sprintf("тут должен быть вопрос %d", prodolzitIdInt+1)
+		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
+			[{ "text": "продолжить", "callback_data": "prodolzit_%d_" }]
+		]}`, prodolzitIdInt+1)
 		srv.SendMessageWRM(chatId, text, reply_markup)
 		return nil
 	}
@@ -84,10 +87,10 @@ func (srv *TgService) Prodolzit(chatId int, prodolzit_id string) error {
 		srv.SendAnimArticleHTMLV3("1.7", chatId, 2000)
 		srv.CopyMessage(chatId, -1001998413789, 19)
 		
-		text := "тут должен быть вопрос"
-		reply_markup := `{"inline_keyboard" : [
-			[{ "text": "продолжить", "callback_data": "prodolzit_5_" }]
-		]}`
+		text := fmt.Sprintf("тут должен быть вопрос %d", prodolzitIdInt+1)
+		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
+			[{ "text": "продолжить", "callback_data": "prodolzit_%d_" }]
+		]}`, prodolzitIdInt+1)
 		srv.SendMessageWRM(chatId, text, reply_markup)
 		return nil
 	}
@@ -95,26 +98,31 @@ func (srv *TgService) Prodolzit(chatId int, prodolzit_id string) error {
 		srv.SendAnimArticleHTMLV3("1.8", chatId, 2000)
 		srv.CopyMessage(chatId, -1001998413789, 21)
 		
-		text := "тут должен быть вопрос"
-		reply_markup := `{"inline_keyboard" : [
-			[{ "text": "продолжить", "callback_data": "prodolzit_6_" }]
-		]}`
+		text := fmt.Sprintf("тут должен быть вопрос %d", prodolzitIdInt+1)
+		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
+			[{ "text": "продолжить", "callback_data": "prodolzit_%d_" }]
+		]}`, prodolzitIdInt+1)
 		srv.SendMessageWRM(chatId, text, reply_markup)
 		return nil
 	}
 	if prodolzit_id == "6" {
 		srv.SendAnimArticleHTMLV3("1.9", chatId, 2000)
-		srv.Db.EditBotState(chatId, "read_article_after_KNB_win_2")
+
+		text := fmt.Sprintf("тут должен быть вопрос %d", prodolzitIdInt+1)
+		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
+			[{ "text": "продолжить", "callback_data": "prodolzit_%d_" }]
+		]}`, prodolzitIdInt+1)
+		srv.SendMessageWRM(chatId, text, reply_markup)
 		return nil
 	}
 	if prodolzit_id == "7" {
 		srv.SendAnimArticleHTMLV3("2.3", chatId, 2000)
 		srv.CopyMessage(chatId, -1001998413789, 29)
 		
-		text := "тут должен быть вопрос"
-		reply_markup := `{"inline_keyboard" : [
-			[{ "text": "продолжить", "callback_data": "prodolzit_8_" }]
-		]}`
+		text := fmt.Sprintf("тут должен быть вопрос %d", prodolzitIdInt+1)
+		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
+			[{ "text": "продолжить", "callback_data": "prodolzit_%d_" }]
+		]}`, prodolzitIdInt+1)
 		srv.SendMessageWRM(chatId, text, reply_markup)
 		return nil
 	}
@@ -122,10 +130,10 @@ func (srv *TgService) Prodolzit(chatId int, prodolzit_id string) error {
 		srv.SendAnimArticleHTMLV3("2.4", chatId, 2000)
 		srv.CopyMessage(chatId, -1001998413789, 31)
 		
-		text := "тут должен быть вопрос"
-		reply_markup := `{"inline_keyboard" : [
-			[{ "text": "продолжить", "callback_data": "prodolzit_9_" }]
-		]}`
+		text := fmt.Sprintf("тут должен быть вопрос %d", prodolzitIdInt+1)
+		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
+			[{ "text": "продолжить", "callback_data": "prodolzit_%d_" }]
+		]}`, prodolzitIdInt+1)
 		srv.SendMessageWRM(chatId, text, reply_markup)
 		return nil
 	}
@@ -135,10 +143,10 @@ func (srv *TgService) Prodolzit(chatId int, prodolzit_id string) error {
 		srv.SendAnimArticleHTMLV3("2.6", chatId, 2000)
 		srv.CopyMessage(chatId, -1001998413789, 35)
 		
-		text := "тут должен быть вопрос"
-		reply_markup := `{"inline_keyboard" : [
-			[{ "text": "продолжить", "callback_data": "prodolzit_10_" }]
-		]}`
+		text := fmt.Sprintf("тут должен быть вопрос %d", prodolzitIdInt+1)
+		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
+			[{ "text": "продолжить", "callback_data": "prodolzit_%d_" }]
+		]}`, prodolzitIdInt+1)
 		srv.SendMessageWRM(chatId, text, reply_markup)
 		return nil
 	}
@@ -148,10 +156,10 @@ func (srv *TgService) Prodolzit(chatId int, prodolzit_id string) error {
 		srv.SendAnimArticleHTMLV3("2.8", chatId, 2000)
 		srv.CopyMessage(chatId, -1001998413789, 39)
 		
-		text := "тут должен быть вопрос"
-		reply_markup := `{"inline_keyboard" : [
-			[{ "text": "продолжить", "callback_data": "prodolzit_11_" }]
-		]}`
+		text := fmt.Sprintf("тут должен быть вопрос %d", prodolzitIdInt+1)
+		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
+			[{ "text": "продолжить", "callback_data": "prodolzit_%d_" }]
+		]}`, prodolzitIdInt+1)
 		srv.SendMessageWRM(chatId, text, reply_markup)
 		return nil
 	}
@@ -161,16 +169,22 @@ func (srv *TgService) Prodolzit(chatId int, prodolzit_id string) error {
 		srv.SendAnimArticleHTMLV3("2.10", chatId, 2000)
 		srv.CopyMessage(chatId, -1001998413789, 43)
 		srv.SendAnimArticleHTMLV3("2.11", chatId, 2000)
+
+		text := fmt.Sprintf("тут должен быть вопрос %d", prodolzitIdInt+1)
+		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
+			[{ "text": "продолжить", "callback_data": "prodolzit_%d_" }]
+		]}`, prodolzitIdInt+1)
+		srv.SendMessageWRM(chatId, text, reply_markup)
 		return nil
 	}
 	if prodolzit_id == "12" {
 		srv.SendAnimArticleHTMLV3("3.3", chatId, 2000)
 		srv.CopyMessage(chatId, -1001998413789, 51)
 		
-		text := "тут должен быть вопрос"
-		reply_markup := `{"inline_keyboard" : [
-			[{ "text": "продолжить", "callback_data": "prodolzit_13_" }]
-		]}`
+		text := fmt.Sprintf("тут должен быть вопрос %d", prodolzitIdInt+1)
+		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
+			[{ "text": "продолжить", "callback_data": "prodolzit_%d_" }]
+		]}`, prodolzitIdInt+1)
 		srv.SendMessageWRM(chatId, text, reply_markup)
 		return nil
 	}
@@ -180,10 +194,10 @@ func (srv *TgService) Prodolzit(chatId int, prodolzit_id string) error {
 		srv.SendAnimArticleHTMLV3("3.5", chatId, 2000)
 		srv.CopyMessage(chatId, -1001998413789, 55)
 		
-		text := "тут должен быть вопрос"
-		reply_markup := `{"inline_keyboard" : [
-			[{ "text": "продолжить", "callback_data": "prodolzit_14_" }]
-		]}`
+		text := fmt.Sprintf("тут должен быть вопрос %d", prodolzitIdInt+1)
+		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
+			[{ "text": "продолжить", "callback_data": "prodolzit_%d_" }]
+		]}`, prodolzitIdInt+1)
 		srv.SendMessageWRM(chatId, text, reply_markup)
 		return nil
 	}
@@ -197,10 +211,10 @@ func (srv *TgService) Prodolzit(chatId int, prodolzit_id string) error {
 		srv.SendAnimArticleHTMLV3("3.9", chatId, 2000)
 		srv.CopyMessage(chatId, -1001998413789, 66)
 		
-		text := "тут должен быть вопрос"
-		reply_markup := `{"inline_keyboard" : [
-			[{ "text": "продолжить", "callback_data": "prodolzit_15_" }]
-		]}`
+		text := fmt.Sprintf("тут должен быть вопрос %d", prodolzitIdInt+1)
+		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
+			[{ "text": "продолжить", "callback_data": "prodolzit_%d_" }]
+		]}`, prodolzitIdInt+1)
 		srv.SendMessageWRM(chatId, text, reply_markup)
 		
 		return nil

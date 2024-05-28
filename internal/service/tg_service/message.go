@@ -317,7 +317,7 @@ func (srv *TgService) M_state(m models.Update) error {
 			srv.SendAnimArticleHTMLV3("1.2", fromId, 2000)
 			srv.CopyMessage(fromId, -1001998413789, 9)
 
-			text := "тут должен быть вопрос"
+			text := "тут должен быть вопрос 1"
 			reply_markup := `{"inline_keyboard" : [
 				[{ "text": "продолжить", "callback_data": "prodolzit_1_" }]
 			]}`
@@ -357,15 +357,10 @@ func (srv *TgService) M_state(m models.Update) error {
 		srv.Db.EditStep(fromId, "9")
 		srv.SendAnimMessageHTML("9", fromId, animTimeoutTest)
 
-		text := "Предлагаю тебе ответить на один вопрос 😏\nЗа него ты получишь +25.000₽ к банку💸"
-		replyMarkup :=`{"inline_keyboard" : [
-			[ { "text": "Давай попробуем", "callback_data": "show_q_3_" } ]
-		]}`
-		srv.SendMessageWRM(fromId, text, replyMarkup)
 
 		// srv.ShowMilQ(fromId, 2)
 		// srv.Db.EditStep(fromId, "7")
-		srv.SendMsgToServer(fromId, "bot", text)
+		srv.SendMsgToServer(fromId, "bot", msgText)
 		return nil
 	}
 
