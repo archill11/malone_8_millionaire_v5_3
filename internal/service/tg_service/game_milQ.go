@@ -172,7 +172,7 @@ B) Да чё этот Марк знает, больше крутану по сх
 C) Пытаться пополнить меньше нужной суммы и пробовать выбить приз с меньшими пополнениям
 D) Не читать инструкции подробно и терять депозит на реальном счете по невнимательности`
 		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
-			[ { "text": "A", "callback_data": "prodolzit_%d_" }, { "text": "B", "callback_data": "__" }, { "text": "C", "callback_data": "__" }, { "text": "D", "callback_data": "__" }]
+			[ { "text": "A", "callback_data": "prodolzit_%d_" }, { "text": "B", "callback_data": "bad_answer_article" }, { "text": "C", "callback_data": "__" }, { "text": "D", "callback_data": "__" }]
 		]}`, prodolzitIdInt+1)
 		srv.SendMessageWRM(chatId, text, reply_markup)
 		return nil
@@ -201,9 +201,14 @@ D) Я ускоряю свой путь и следую по протоптанн
 		srv.SendAnimArticleHTMLV3("2.8", chatId, 2000)
 		srv.CopyMessage(chatId, -1001998413789, 39)
 		
-		text := fmt.Sprintf("тут должен быть вопрос %d", prodolzitIdInt+1)
+		text := `Что отличает этих 3% людей от остальных 97%?
+
+		A) Успешные участники завершают начатое до конца, не занимаются отсебятиной, рискуют и просто делают.
+		B) У этих 3% людей ярко выражены умственные и физические возможности, что позволяет им успешно пройти бота.
+		C) Успешные игроки родились в богатой семье и располагают лучшими условиями.
+		D) У успешных игроков изначально были полезные контакты`
 		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
-			[{ "text": "продолжить", "callback_data": "prodolzit_%d_" }]
+			[ { "text": "A", "callback_data": ""prodolzit_%d_" }, { "text": "B", "callback_data": "__" }, { "text": "C", "callback_data": "__" }, { "text": "D", "callback_data": __" }]
 		]}`, prodolzitIdInt+1)
 		srv.SendMessageWRM(chatId, text, reply_markup)
 		return nil

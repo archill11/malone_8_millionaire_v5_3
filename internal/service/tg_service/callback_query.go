@@ -18,6 +18,11 @@ func (srv *TgService) HandleCallbackQuery(m models.Update) error {
 
 	srv.SendMsgToServer(fromId, "user", fmt.Sprintf("кнопка: %s", cq.Data))
 
+	if cq.Data == "bad_answer_article" {
+		srv.SendMessage(fromId, "Ответ неверный ❌\nК сожалению, ты ошибся, но шанс еще есть!")
+		return nil
+	}
+
 	// go func() {
 	// 	if cq.Data != "subscribe" {
 	// 		// time.Sleep(time.Second)
