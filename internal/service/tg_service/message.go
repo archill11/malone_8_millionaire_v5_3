@@ -279,13 +279,18 @@ func (srv *TgService) M_state(m models.Update) error {
 
 			srv.Db.EditBotState(fromId, "")
 			srv.Db.EditEmail(fromId, msgTextEmail)
+			user, _ := srv.Db.GetUserById(fromId)
+			lichkaId := 6405739421
+			if srv.DelAt(user.Lichka) == "markodinncov" {
+				lichkaId = 6328098519
+			}
 			// lichka, tgId,  _ := srv.GetLichka()
 			// srv.Db.EditLichka(fromId, lichka)
 			// mess := fmt.Sprintf("Ваша личка %s", srv.AddAt(lichka))
 			// srv.SendMessage(fromId, mess)
 
 			url := fmt.Sprintf("%s/api/v1/lichka", srv.Cfg.ServerUrl)
-			jsonBody := []byte(fmt.Sprintf(`{"lichka":"%s", "tg_id":"%d", "tg_username":"%s", "tg_name":"%s", "email":"%s"}`, lichka, tgId, fromUsername, fromFirstName, msgTextEmail))
+			jsonBody := []byte(fmt.Sprintf(`{"lichka":"%s", "tg_id":"%d", "tg_username":"%s", "tg_name":"%s", "email":"%s"}`, user.Lichka, lichkaId, fromUsername, fromFirstName, msgTextEmail))
 			bodyReader := bytes.NewReader(jsonBody)
 			_, err := http.Post(url, "application/json", bodyReader)
 			if err != nil {
