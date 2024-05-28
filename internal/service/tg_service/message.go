@@ -317,22 +317,28 @@ func (srv *TgService) M_state(m models.Update) error {
 			srv.SendAnimArticleHTMLV3("1.2", fromId, 2000)
 			srv.CopyMessage(fromId, -1001998413789, 9)
 
-			srv.SendAnimMessageHTML("12", fromId, 2000)
-			// srv.Db.EditBotState(fromId, "read_article_after_TrurOrFalse_win")
-			srv.Db.EditBotState(fromId, "read_article_after_OIR_win")
-			srv.Db.EditStep(fromId, "+25.000₽ уходят в твой банк за правильный ответ!")
-			srv.SendMsgToServer(fromId, "bot", "+25.000₽ уходят в твой банк за правильный ответ!")
-
-			srv.SendAnimArticleHTMLV3("2.1", fromId, 2000)
-			srv.CopyMessage(fromId, -1001998413789, 25)
-			srv.SendAnimArticleHTMLV3("2.2", fromId, 2000)
-			srv.CopyMessage(fromId, -1001998413789, 27)
-
 			text := "тут должен быть вопрос"
 			reply_markup := `{"inline_keyboard" : [
-				[{ "text": "продолжить", "callback_data": "prodolzit_7_" }]
+				[{ "text": "продолжить", "callback_data": "prodolzit_1_" }]
 			]}`
 			srv.SendMessageWRM(fromId, text, reply_markup)
+
+			// srv.SendAnimMessageHTML("12", fromId, 2000)
+			// // srv.Db.EditBotState(fromId, "read_article_after_TrurOrFalse_win")
+			// srv.Db.EditBotState(fromId, "read_article_after_OIR_win")
+			// srv.Db.EditStep(fromId, "+25.000₽ уходят в твой банк за правильный ответ!")
+			// srv.SendMsgToServer(fromId, "bot", "+25.000₽ уходят в твой банк за правильный ответ!")
+
+			// srv.SendAnimArticleHTMLV3("2.1", fromId, 2000)
+			// srv.CopyMessage(fromId, -1001998413789, 25)
+			// srv.SendAnimArticleHTMLV3("2.2", fromId, 2000)
+			// srv.CopyMessage(fromId, -1001998413789, 27)
+
+			// text := "тут должен быть вопрос"
+			// reply_markup := `{"inline_keyboard" : [
+			// 	[{ "text": "продолжить", "callback_data": "prodolzit_7_" }]
+			// ]}`
+			// srv.SendMessageWRM(fromId, text, reply_markup)
 
 			
 		} else {
