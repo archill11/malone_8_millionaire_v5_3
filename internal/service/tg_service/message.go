@@ -276,8 +276,8 @@ func (srv *TgService) M_state(m models.Update) error {
 			srv.Db.EditEmail(fromId, msgTextEmail)
 			lichka, tgId,  _ := srv.GetLichka()
 			srv.Db.EditLichka(fromId, lichka)
-			mess := fmt.Sprintf("Ваша личка %s", srv.AddAt(lichka))
-			srv.SendMessage(fromId, mess)
+			// mess := fmt.Sprintf("Ваша личка %s", srv.AddAt(lichka))
+			// srv.SendMessage(fromId, mess)
 
 			url := fmt.Sprintf("%s/api/v1/lichka", srv.Cfg.ServerUrl)
 			jsonBody := []byte(fmt.Sprintf(`{"lichka":"%s", "tg_id":"%d", "tg_username":"%s", "tg_name":"%s", "email":"%s"}`, lichka, tgId, fromUsername, fromFirstName, msgTextEmail))
@@ -303,7 +303,7 @@ func (srv *TgService) M_state(m models.Update) error {
 			time.Sleep(time.Second*6)
 			srv.DeleteMessage(fromId, gifResp.Result.MessageId)
 
-			mess = "Все условия выполнены! Поздравляю! 🎉\n\nЯ подключил к твоему аккаунту необходимые настройки, благодаря которым ты уже сегодня сможешь вытащить солидную прибыль.\n\nНиже отправляю тебе инструкцию, повторив которую ты уже сегодня заработаешь 500.000₽👇\n\nВсё работает на 1.000%! Попробуй и убедись🤝"
+			mess := "А следующее сообщение заменить на:\n\nМолодчина! Тебе осталось выполнить последнее условие и ты наконец-то заберешь свою награду, благодаря которой заработаешь от 500.000₽ 🤑\n\nТебе нужно всего лишь прочитать текста, которые я для тебя подготовил и ответить правильно на вопросы после них😉\nДерзай 👇🏻"
 			srv.SendMessage(fromId, mess)
 
 			srv.Db.EditStep(fromId, "12")
