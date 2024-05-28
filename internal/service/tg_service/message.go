@@ -317,9 +317,14 @@ func (srv *TgService) M_state(m models.Update) error {
 			srv.SendAnimArticleHTMLV3("1.2", fromId, 2000)
 			srv.CopyMessage(fromId, -1001998413789, 9)
 
-			text := "тут должен быть вопрос 1"
+			text := `Какова главная причина того, что люди выходят из игры до достижения серьёзных результатов? Всё же настолько просто. 
+		
+			A) Недостаток мотивации и усердия.
+			B) Отсутствие интереса к игре.
+			C) Слишком сложные вопросы.
+			D) Не хватает времени, чтобы играть.`
 			reply_markup := `{"inline_keyboard" : [
-				[{ "text": "продолжить", "callback_data": "prodolzit_1_" }]
+				[ { "text": "A", "callback_data": "prodolzit_1_" }, { "text": "B", "callback_data": "__" }, { "text": "C", "callback_data": "__" }, { "text": "D", "callback_data": "__" }]
 			]}`
 			srv.SendMessageWRM(fromId, text, reply_markup)
 
