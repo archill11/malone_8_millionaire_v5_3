@@ -276,9 +276,12 @@ D) Желание жить не так, как все, внимательный 
 		srv.SendAnimArticleHTMLV3("3.9", chatId, 2000)
 		srv.CopyMessage(chatId, -1001998413789, 66)
 		
-		text := fmt.Sprintf("тут должен быть вопрос %d", prodolzitIdInt+1)
-		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
-			[{ "text": "продолжить", "callback_data": "prodolzit_%d_" }]
+		text := `Какую таблетку выберешь ты?
+
+A) Синяя — новая жизнь, свобода, изобилие, достаток
+B) Красная — будильник в 6 утра, ты просыпаешься в холодном поту, это был сон, тебе пора на РАБоту`
+		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [bad_answer_article
+			[ { "text": "A", "callback_data": "prodolzit_%d_" } { "text": "B", "callback_data": "bad_answer_article" }]
 		]}`, prodolzitIdInt+1)
 		srv.SendMessageWRM(chatId, text, reply_markup)
 		
