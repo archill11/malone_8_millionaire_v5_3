@@ -236,9 +236,14 @@ D) Я не разберусь с интерфейсом сайта`
 		srv.SendAnimArticleHTMLV3("3.3", chatId, 2000)
 		srv.CopyMessage(chatId, -1001998413789, 51)
 		
-		text := fmt.Sprintf("тут должен быть вопрос %d", prodolzitIdInt+1)
+		text := `Что необходимо для прохождения игры?
+
+A) Интернет, телеграм, внимательность, телефон/ноутбук, мотивация жить лучшую жизнь
+B) Собственно-поднятый сервер
+C) Зарубежный IP-адрес
+D) Находиться в офисе Москва-Сити`
 		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
-			[{ "text": "продолжить", "callback_data": "prodolzit_%d_" }]
+			[ { "text": "A", "callback_data": "prodolzit_%d_" }, { "text": "B", "callback_data": "bad_answer_article" }, { "text": "C", "callback_data": "bad_answer_article" }, { "text": "D", "callback_data": "bad_answer_article" }]
 		]}`, prodolzitIdInt+1)
 		srv.SendMessageWRM(chatId, text, reply_markup)
 		return nil
