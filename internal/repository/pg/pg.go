@@ -49,6 +49,7 @@ func New(config DBConfig, l *logger.Logger) (*Database, error) {
 	queries := []string{
 		users,
 		anim_mess,
+		schemes,
 	}
 	for _, v := range queries {
 		if _, err := db.Exec(context.Background(), v); err != nil {
