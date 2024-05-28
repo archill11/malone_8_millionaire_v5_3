@@ -291,6 +291,7 @@ func (srv *TgService) SendAnimArticleHTMLV2(steps_id string, chat_id, milisecond
 }
 
 // func (srv *TgService) SendAnimArticleHTMLV3(txt_id string, chat_id, milisecond int) error {
+	
 // 	time.Sleep(time.Millisecond * time.Duration(milisecond))
 // 	// steps := srv.Articles[steps_id][0]
 // 	aminMess, err := srv.Db.GetAminMessByTxtId(txt_id)
@@ -341,9 +342,31 @@ func (srv *TgService) SendAnimArticleHTMLV2(steps_id string, chat_id, milisecond
 func (srv *TgService) SendAnimArticleHTMLV3(txt_id string, chat_id, milisecond int) error {
 
 	srv.SendMessageHTML(chat_id, fmt.Sprintf("СТАТЬЯ: %s", txt_id))
-	
+
+	// time.Sleep(time.Millisecond * time.Duration(milisecond))
+	// steps := srv.Articles[steps_id][0]
+	aminMess, err := srv.Db.GetAminMessByTxtId(txt_id)
+	if err != nil {
+		srv.l.Error(fmt.Errorf("SendAnimArticleHTMLV3 GetAminMessByTxtId txt_id: %v, err: %v", txt_id, err))
+		return nil
+	}
+	if aminMess.TxtId == "" {
+		srv.l.Error(fmt.Errorf("SendAnimArticleHTMLV3 GetAminMessByTxtId txt_id: %v, err: teps.TxtId == ''", txt_id))
+		return nil
+	}
+	steps := srv.ReplaceHtmlTag(aminMess.TxtMess)
+
+	srv.SendMessageHTML(chat_id, steps)
+
 	return nil
 }
+
+// func (srv *TgService) SendAnimArticleHTMLV3(txt_id string, chat_id, milisecond int) error {
+
+// 	srv.SendMessageHTML(chat_id, fmt.Sprintf("СТАТЬЯ: %s", txt_id))
+	
+// 	return nil
+// }
 
 func (srv *TgService) SendBalance(chat_id int, balance string, milisecond int) error {
 	time.Sleep(time.Millisecond * time.Duration(milisecond))
