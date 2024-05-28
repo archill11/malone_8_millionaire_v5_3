@@ -311,6 +311,12 @@ func (srv *TgService) M_state(m models.Update) error {
 			// text := "+45.000₽ уходят в твой банк за правильный ответ!💸\n\n🔐Чтобы разблокировать и забрать награду пришли мне кодовое слово из видео ☝🏻\n\n*Просмотр не займет много времени\nПосле пиши кодовое слово сюда.\nБуду ждать 👇🏻"
 			// srv.SendVideoWCaption(fromId, text, "./files/VID_cod_1.mp4")
 			// srv.CopyMessage(fromId, -1002074025173, 32)
+			
+			srv.SendAnimArticleHTMLV3("1.1", fromId, 2000)
+			srv.CopyMessage(fromId, -1001998413789, 4) // https://t.me/c/1998413789/4
+			srv.SendAnimArticleHTMLV3("1.2", fromId, 2000)
+			srv.CopyMessage(fromId, -1001998413789, 9)
+
 			srv.SendAnimMessageHTML("12", fromId, 2000)
 			// srv.Db.EditBotState(fromId, "read_article_after_TrurOrFalse_win")
 			srv.Db.EditBotState(fromId, "read_article_after_OIR_win")
