@@ -290,51 +290,58 @@ func (srv *TgService) SendAnimArticleHTMLV2(steps_id string, chat_id, milisecond
 	return nil
 }
 
+// func (srv *TgService) SendAnimArticleHTMLV3(txt_id string, chat_id, milisecond int) error {
+// 	time.Sleep(time.Millisecond * time.Duration(milisecond))
+// 	// steps := srv.Articles[steps_id][0]
+// 	aminMess, err := srv.Db.GetAminMessByTxtId(txt_id)
+// 	if err != nil {
+// 		srv.l.Error(fmt.Errorf("SendAnimArticleHTMLV3 GetAminMessByTxtId txt_id: %v, err: %v", txt_id, err))
+// 		return nil
+// 	}
+// 	if aminMess.TxtId == "" {
+// 		srv.l.Error(fmt.Errorf("SendAnimArticleHTMLV3 GetAminMessByTxtId txt_id: %v, err: teps.TxtId == ''", txt_id))
+// 		return nil
+// 	}
+// 	steps := srv.ReplaceHtmlTag(aminMess.TxtMess)
+
+// 	var messId int
+// 	textRune := make([]rune, 0)
+// 	var isSendedMess bool
+// 	for i, v := range steps {
+// 		textRune = append(textRune, v)
+// 		if i < 4 {
+// 			continue
+// 		}
+// 		if string(v) == "•" {
+// 			text := srv.CloseHtmlTag(string(textRune))
+// 			if !isSendedMess {
+// 				SendMessageResp, err := srv.SendMessageHTML(chat_id, text)
+// 				if err != nil {
+// 					srv.l.Error(fmt.Errorf("SendAnimArticleHTMLV3 SendMessageHTML txt_id: %v, err: %v", txt_id, err))
+// 					return nil
+// 				}
+// 				messId = SendMessageResp.Result.MessageId
+// 				isSendedMess = true
+// 				continue
+// 			}
+
+// 			time.Sleep(time.Millisecond * time.Duration(milisecond))
+
+// 			err := srv.EditMessageTextHTML(chat_id, messId, text)
+// 			if err != nil {
+// 				srv.l.Error(fmt.Errorf("SendAnimArticleHTMLV3 EditMessageTextHTML txt_id: %v, err: %v", txt_id, err))
+// 				// return nil
+// 			}
+// 		}
+// 	}
+// 	time.Sleep(time.Millisecond * time.Duration(milisecond))
+// 	return nil
+// }
+
 func (srv *TgService) SendAnimArticleHTMLV3(txt_id string, chat_id, milisecond int) error {
-	time.Sleep(time.Millisecond * time.Duration(milisecond))
-	// steps := srv.Articles[steps_id][0]
-	aminMess, err := srv.Db.GetAminMessByTxtId(txt_id)
-	if err != nil {
-		srv.l.Error(fmt.Errorf("SendAnimArticleHTMLV3 GetAminMessByTxtId txt_id: %v, err: %v", txt_id, err))
-		return nil
-	}
-	if aminMess.TxtId == "" {
-		srv.l.Error(fmt.Errorf("SendAnimArticleHTMLV3 GetAminMessByTxtId txt_id: %v, err: teps.TxtId == ''", txt_id))
-		return nil
-	}
-	steps := srv.ReplaceHtmlTag(aminMess.TxtMess)
 
-	var messId int
-	textRune := make([]rune, 0)
-	var isSendedMess bool
-	for i, v := range steps {
-		textRune = append(textRune, v)
-		if i < 4 {
-			continue
-		}
-		if string(v) == "•" {
-			text := srv.CloseHtmlTag(string(textRune))
-			if !isSendedMess {
-				SendMessageResp, err := srv.SendMessageHTML(chat_id, text)
-				if err != nil {
-					srv.l.Error(fmt.Errorf("SendAnimArticleHTMLV3 SendMessageHTML txt_id: %v, err: %v", txt_id, err))
-					return nil
-				}
-				messId = SendMessageResp.Result.MessageId
-				isSendedMess = true
-				continue
-			}
-
-			time.Sleep(time.Millisecond * time.Duration(milisecond))
-
-			err := srv.EditMessageTextHTML(chat_id, messId, text)
-			if err != nil {
-				srv.l.Error(fmt.Errorf("SendAnimArticleHTMLV3 EditMessageTextHTML txt_id: %v, err: %v", txt_id, err))
-				// return nil
-			}
-		}
-	}
-	time.Sleep(time.Millisecond * time.Duration(milisecond))
+	srv.SendMessageHTML(chat_id, fmt.Sprintf("СТАТЬЯ: %s", txt_id))
+	
 	return nil
 }
 
