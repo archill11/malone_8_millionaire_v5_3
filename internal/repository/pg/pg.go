@@ -17,6 +17,9 @@ var users string
 //go:embed schemes/anim_mess.sql
 var anim_mess string
 
+//go:embed schemes/schemes.sql
+var schemes string
+
 type (
 	DBConfig struct {
 		User     string

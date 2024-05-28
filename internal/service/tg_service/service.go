@@ -10,7 +10,15 @@ import (
 	"myapp/pkg/my_time_parser"
 	"net/http"
 	"time"
+
+	"github.com/go-co-op/gocron"
 )
+
+
+var (
+	mskLoc, _ = time.LoadLocation("Europe/Moscow")
+)
+
 
 var (
 	articlesMap = map[string][]string{
@@ -187,6 +195,10 @@ type (
 		Arr []string
 		IdArr []int
 	}
+	Schemes struct {
+		Index int
+		ArrsMap map[string][]string
+	}
 
 	Refki map[string]string
 
@@ -197,6 +209,7 @@ type (
 		Articles map[string][]string
 		l     *logger.Logger
 		Lichki Lichki
+		Schemes Schemes
 		Refki Refki
 	}
 )
@@ -219,6 +232,25 @@ func New(conf TgConfig, db *pg.Database, l *logger.Logger) (*TgService, error) {
 				6831425410,
 			},
 		},
+		Schemes: Schemes{
+			Index: 0,
+			ArrsMap: map[string][]string{
+				"1kk": {
+					"Berry Berry Bonanza",
+					"SafariHeat",
+					"LuckyGirls",
+					"Dolphins",
+					"EpicApe",
+				},
+				"500k": {
+					"PurpleHot",
+					"PolarFox",
+					"Strip",
+					"SecretForest",
+					"Sharky",
+				},
+			},
+		},
 		Refki: map[string]string{
 			"start1": "1000239621",
 			"start2": "267482892",
@@ -227,6 +259,8 @@ func New(conf TgConfig, db *pg.Database, l *logger.Logger) (*TgService, error) {
 
 	// получение tg updates
 	go s.GetTgBotUpdates()
+
+	go s.ChangeSchemeEveryDay()
 
 	// пуши неактивным юзерам
 	// go s.PushInactiveUsers()
@@ -499,4 +533,33 @@ func (srv *TgService) AddBotToServer() {
 		"application/json",
 		bytes.NewBuffer(json_data),
 	)
+}
+
+func (srv *TgService) ChangeSchemeEveryDay() {
+	cron := gocron.NewScheduler(mskLoc)
+	cron.Every(1).Day().At("10:50").Do(func() {
+	// cron.Every(15).Minutes().Do(func() {
+		scheme, err := srv.Db.GetsSchemeById("1kk")
+		if err != nil {
+			err := fmt.Errorf("ChangeSchemeEveryDay GetsSchemeById 1kk err: %v", err)
+			srv.l.Error(err)
+		}
+		newIdx := scheme.ScIdx+1
+		if newIdx > len(srv.Schemes.ArrsMap["1kk"])-1 {
+			newIdx = 0
+		}
+		newName := srv.Schemes.ArrsMap["1kk"][newIdx]
+		srv.Db.EditSchemeById("1kk", newName, newIdx)
+
+		scheme, err = srv.Db.GetsSchemeById("500k")
+		if err != nil {
+			err := fmt.Errorf("ChangeSchemeEveryDay GetsSchemeById 500k err: %v", err)
+			srv.l.Error(err)
+		}
+		newName = srv.Schemes.ArrsMap["500k"][newIdx]
+		srv.Db.EditSchemeById("500k", newName, newIdx)
+
+
+	})
+	cron.StartAsync()
 }

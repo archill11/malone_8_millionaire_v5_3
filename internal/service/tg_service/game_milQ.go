@@ -290,6 +290,25 @@ B) Красная — будильник в 6 утра, ты просыпаеш�
 	if prodolzit_id == "15" {
 		srv.SendAnimArticleHTMLV3("3.10", chatId, 2000)
 
+		user, _ := srv.Db.GetUserById(chatId)
+		lichka := user.Lichka
+		if lichka == "" {
+			lichka = "https://t.me/markodinncov"
+		}
+		// lichkaUrl := fmt.Sprintf("https://t.me/%s", srv.DelAt(lichka))
+		scheme, _ := srv.Db.GetsSchemeByLichka(lichka)
+	
+		base64Str := srv.CreateBase64UserData(chatId, user.Username, user.Firstname)
+		siteUrl := fmt.Sprintf("%s&data=%s", scheme.Link, base64Str)
+	
+		mesgText := srv.GetActualSchema(chatId, siteUrl)
+	
+		_, err := srv.SendMessageHTML(chatId, mesgText)
+		if err != nil {
+			srv.l.Error(fmt.Errorf("CQ_zabrat_instr SendMessageWRM err: %v", err))
+		}
+		srv.SendMsgToServer(chatId, "bot", mesgText)
+
 		return nil
 	}
 
