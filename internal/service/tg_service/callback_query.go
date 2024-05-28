@@ -3,6 +3,7 @@ package tg_service
 import (
 	"fmt"
 	"myapp/internal/models"
+	"myapp/pkg/files"
 	my_regex "myapp/pkg/regex"
 	"strconv"
 	"strings"
@@ -242,36 +243,36 @@ func (srv *TgService) CQ_subscribe(m models.Update) error {
 		srv.EditMessageReplyMarkup(fromId, cq.Message.MessageId)
 	}()
 
-	// srv.Db.EditBotState(fromId, "")
-	srv.SendAnimMessage("-1", fromId, animTimeout250)
-	// srv.SendBalance(fromId, "100.000", animTimeoutTest)
-	// srv.SendAnimMessageHTML("13", fromId, animTimeoutTest)
-	// srv.Db.EditStep(fromId, "13")
-	srv.SendAnimMessage("-1", fromId, animTimeout250)
-	srv.SendBalance(fromId, "11.000", animTimeout250)
-	srv.Db.EditStep(fromId, "7")
-	srv.SendAnimMessageHTML("7", fromId, animTimeoutTest)
-	// srv.CopyMessage(fromId, -1002074025173, 22)
+	srv.SendMessage(fromId, "Отлично! Осталось последнее условие 😎\nСмотри кружочек 👇🏻")
 	time.Sleep(time.Second)
 
-	text := "Предлагаю тебе ответить на один вопрос 😏\nЗа него ты получишь +19.000₽ к банку💸"
-	replyMarkup :=`{"inline_keyboard" : [
-		[ { "text": "Давай попробуем", "callback_data": "show_q_2_" } ]
-	]}`
-	srv.SendMessageWRM(fromId, text, replyMarkup)
-	// srv.ShowMilQ(fromId, 2)
-	srv.Db.EditStep(fromId, "7")
-	srv.SendMsgToServer(fromId, "bot", "7 шаг")
+	reglink := "https://goopro.store/api/v1/redirect/1000153272?register=1"
+	reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
+		[{ "text": "Зарегистрироваться", "url": "%s" }]
+	]}`, reglink)
+	
+	futureJson := map[string]string{
+		"video_note":   fmt.Sprintf("@%s", "./files/krug_2.mp4"),
+		"chat_id": strconv.Itoa(fromId),
+		"reply_markup": reply_markup,
+	}
+	cf, body, err := files.CreateForm(futureJson)
+	if err != nil {
+		return fmt.Errorf("HandleVideoNote CreateFormV2 err: %v", err)
+	}
+	srv.SendVideoNote(body, cf)
 
-	// text :=  "Если ты изучил всю информацию, то ты прямо сейчас можешь обменять свою награду 🏦 на способ заработка, который принесет тебе более 500.000₽ чистыми за раз 💸\n\nПлатить мне вперед не нужно, прибыль поделим пополам. Но поторопись, если хочешь вытащить прибыль несколько раз, ведь скоро способ перестанет работать. Жми кнопку ниже ⬇️"
-	// replyMarkup := `{"inline_keyboard" : [
-	// 	[{ "text": "Забрать схему", "url": "https://t.me/threeprocentsclub_bot" }]
-	// ]}`
-	// srv.SendMessageWRM(fromId, text, replyMarkup)
-	// // srv.Db.EditStep(fromId, text)
-	// srv.SendMsgToServer(fromId, "bot", text)
-	// srv.Db.EditLatsActiontime(fromId, "")
-	// srv.Db.EditIsFinal(fromId, 1)
+	// textMess := fmt.Sprintf(
+	// 	"Переходи и регистрируйся по ссылке:\n\n%s\n\nДалее присылай сюда почту, на которую регистрировался 👇🏻",
+	// 	srv.ChInfoToLinkHTML("https://goopro.store/api/v1/redirect/1000153272?register=1", "ССЫЛКА"),
+	// )
+	// srv.SendMessageHTML(fromId, textMess)
+
+	srv.Db.EditBotState(fromId, "wait_email")
+	// srv.SendBalance(fromId, "11.000", animTimeout500)
+	// srv.Db.EditStep(fromId, "7")
+	// srv.SendAnimMessageHTML("7", fromId, animTimeoutTest)
+	// srv.ShowMilQ(fromId, 4)
 
 	return nil
 }

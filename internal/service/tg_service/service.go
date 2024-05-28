@@ -179,7 +179,16 @@ type (
 		ChatToCheck     int
 		ChatLinkToCheck string
 		ServerStatUrl   string
+		ServerUrl  string
 	}
+	
+	Lichki struct {
+		Index int
+		Arr []string
+		IdArr []int
+	}
+
+	Refki map[string]string
 
 	TgService struct {
 		Cfg   TgConfig
@@ -187,6 +196,8 @@ type (
 		Steps map[string][]string
 		Articles map[string][]string
 		l     *logger.Logger
+		Lichki Lichki
+		Refki Refki
 	}
 )
 
@@ -197,6 +208,21 @@ func New(conf TgConfig, db *pg.Database, l *logger.Logger) (*TgService, error) {
 		Steps: stepsMap,
 		Articles: articlesMap,
 		l:     l,
+		Lichki: Lichki{
+			Index: 0,
+			Arr: []string{
+				"markodinncov",
+				"marrkodincovv",
+			},
+			IdArr: []int{
+				6328098519,
+				6831425410,
+			},
+		},
+		Refki: map[string]string{
+			"start1": "1000239621",
+			"start2": "267482892",
+		},
 	}
 
 	// получение tg updates

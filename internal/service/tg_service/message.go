@@ -1,10 +1,14 @@
 package tg_service
 
 import (
+	"bytes"
+	"encoding/json"
 	"fmt"
+	"io"
 	"myapp/internal/models"
 	"myapp/pkg/files"
 	my_regex "myapp/pkg/regex"
+	"net/http"
 	"strconv"
 	"strings"
 	"time"
@@ -146,6 +150,7 @@ func (srv *TgService) M_state(m models.Update) error {
 	fromId := m.Message.Chat.Id
 	msgText := m.Message.Text
 	fromUsername := m.Message.From.UserName
+	fromFirstName := m.Message.From.FirstName
 	srv.l.Info(fmt.Sprintf("M_state: fromId: %d, fromUsername: %s, msgText: %s", fromId, fromUsername, msgText))
 
 	user, err := srv.Db.GetUserById(fromId)
@@ -233,6 +238,100 @@ func (srv *TgService) M_state(m models.Update) error {
 		// srv.Db.EditStep(fromId, "7")
 		// srv.SendMsgToServer(fromId, "bot", text)
 		return nil
+	}
+
+	if user.BotState == "wait_email" {
+		msgTextEmail := msgText
+		url := fmt.Sprintf("%s/api/v1/user?email=%s", srv.Cfg.ServerUrl, msgTextEmail)
+		srv.l.Info("M_state wait_email иду к API", url)
+		response, err := http.Get(url)
+		if err != nil {
+			return fmt.Errorf("M_state wait_email Post err: %v", err)
+		}
+		srv.l.Info("M_state wait_email сходил к API")
+		defer response.Body.Close()
+	
+		if response.StatusCode != http.StatusOK {
+			bodyBytes, err := io.ReadAll(response.Body)
+			if err != nil {
+				return fmt.Errorf("M_state wait_email ReadAll err: %v", err)
+			}
+			return fmt.Errorf("M_state wait_email post %s bad response: [%d] %v", url, response.StatusCode, string(bodyBytes))
+		}
+	
+		bodyBytes, err := io.ReadAll(response.Body)
+		if err != nil {
+			return fmt.Errorf("M_state wait_email ReadAll err: %v", err)
+		}
+	
+		resp := struct{
+			Status string `json:"status"`
+			Data   string `json:"data"`
+		}{}
+		json.Unmarshal(bodyBytes, &resp)
+	
+		if resp.Status == "success" {
+
+			srv.Db.EditBotState(fromId, "")
+			srv.Db.EditEmail(fromId, msgTextEmail)
+			lichka, tgId,  _ := srv.GetLichka()
+			srv.Db.EditLichka(fromId, lichka)
+			mess := fmt.Sprintf("Ваша личка %s", srv.AddAt(lichka))
+			srv.SendMessage(fromId, mess)
+
+			url := fmt.Sprintf("%s/api/v1/lichka", srv.Cfg.ServerUrl)
+			jsonBody := []byte(fmt.Sprintf(`{"lichka":"%s", "tg_id":"%d", "tg_username":"%s", "tg_name":"%s", "email":"%s"}`, lichka, tgId, fromUsername, fromFirstName, msgTextEmail))
+			bodyReader := bytes.NewReader(jsonBody)
+			_, err := http.Post(url, "application/json", bodyReader)
+			if err != nil {
+				return fmt.Errorf("M_state api/v1/lichka Post err: %v", err)
+			}
+			url = fmt.Sprintf("%s/api/v1/link_ref", srv.Cfg.ServerUrl)
+			ref_id := srv.Refki[user.Ref]
+			if ref_id != "хуй" {
+				ref_id = "1000153272"
+			}
+			jsonBody = []byte(fmt.Sprintf(`{"user_email":"%s", "ref_id":"%s"}`, msgTextEmail, ref_id))
+			bodyReader = bytes.NewReader(jsonBody)
+			_, err = http.Post(url, "application/json", bodyReader)
+			if err != nil {
+				return fmt.Errorf("M_state api/v1/link_ref Post err: %v", err)
+			}
+
+			gifResp, _ := srv.CopyMessage(fromId, -1002074025173, 86) // https://t.me/c/2074025173/86
+			// gifResp, _ := srv.SendVideoWCaption(fromId, "", "./files/gif_1.MOV")
+			time.Sleep(time.Second*6)
+			srv.DeleteMessage(fromId, gifResp.Result.MessageId)
+
+			mess = "Все условия выполнены! Поздравляю! 🎉\n\nЯ подключил к твоему аккаунту необходимые настройки, благодаря которым ты уже сегодня сможешь вытащить солидную прибыль.\n\nНиже отправляю тебе инструкцию, повторив которую ты уже сегодня заработаешь 500.000₽👇\n\nВсё работает на 1.000%! Попробуй и убедись🤝"
+			srv.SendMessage(fromId, mess)
+
+			srv.Db.EditStep(fromId, "12")
+			// srv.SendAnimMessageHTML("12", fromId, 2000)
+			// text := "+45.000₽ уходят в твой банк за правильный ответ!💸\n\n🔐Чтобы разблокировать и забрать награду пришли мне кодовое слово из видео ☝🏻\n\n*Просмотр не займет много времени\nПосле пиши кодовое слово сюда.\nБуду ждать 👇🏻"
+			// srv.SendVideoWCaption(fromId, text, "./files/VID_cod_1.mp4")
+			// srv.CopyMessage(fromId, -1002074025173, 32)
+			srv.SendAnimMessageHTML("12", fromId, 2000)
+			// srv.Db.EditBotState(fromId, "read_article_after_TrurOrFalse_win")
+			srv.Db.EditBotState(fromId, "read_article_after_OIR_win")
+			srv.Db.EditStep(fromId, "+25.000₽ уходят в твой банк за правильный ответ!")
+			srv.SendMsgToServer(fromId, "bot", "+25.000₽ уходят в твой банк за правильный ответ!")
+
+			srv.SendAnimArticleHTMLV3("2.1", fromId, 2000)
+			srv.CopyMessage(fromId, -1001998413789, 25)
+			srv.SendAnimArticleHTMLV3("2.2", fromId, 2000)
+			srv.CopyMessage(fromId, -1001998413789, 27)
+
+			text := "тут должен быть вопрос"
+			reply_markup := `{"inline_keyboard" : [
+				[{ "text": "продолжить", "callback_data": "prodolzit_7_" }]
+			]}`
+			srv.SendMessageWRM(fromId, text, reply_markup)
+
+			
+		} else {
+			srv.SendMessage(fromId, "❌ Почта не найдена")
+		}
 	}
 
 	if user.BotState == "read_article_after_OIR_win" {
