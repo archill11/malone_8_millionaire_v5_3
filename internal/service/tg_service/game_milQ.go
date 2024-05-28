@@ -104,6 +104,7 @@ func (srv *TgService) Prodolzit(chatId int, prodolzit_id string) error {
 	}
 	if prodolzit_id == "6" {
 		srv.SendAnimArticleHTMLV3("1.9", chatId, 2000)
+		srv.Db.EditBotState(chatId, "read_article_after_KNB_win_2")
 		return nil
 	}
 	if prodolzit_id == "7" {

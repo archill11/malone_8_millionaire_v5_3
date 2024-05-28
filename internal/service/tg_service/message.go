@@ -346,6 +346,29 @@ func (srv *TgService) M_state(m models.Update) error {
 		}
 	}
 
+	if user.BotState == "read_article_after_KNB_win_2" {
+		if !strings.HasPrefix(strings.ToLower(msgText), "хач") && !strings.HasPrefix(strings.ToLower(msgText), "хоч") {
+			srv.SendMessageAndDb(fromId, "❌ Вы неверно ввели кодовое слово, сверьтесь с лонгридом и попробуйте еще раз")
+			return nil
+		}
+
+		srv.SendAnimMessage("-1", fromId, animTimeout250)
+		srv.SendBalance(fromId, "30.000", animTimeout250)
+		srv.Db.EditStep(fromId, "9")
+		srv.SendAnimMessageHTML("9", fromId, animTimeoutTest)
+
+		text := "Предлагаю тебе ответить на один вопрос 😏\nЗа него ты получишь +25.000₽ к банку💸"
+		replyMarkup :=`{"inline_keyboard" : [
+			[ { "text": "Давай попробуем", "callback_data": "show_q_3_" } ]
+		]}`
+		srv.SendMessageWRM(fromId, text, replyMarkup)
+
+		// srv.ShowMilQ(fromId, 2)
+		// srv.Db.EditStep(fromId, "7")
+		srv.SendMsgToServer(fromId, "bot", text)
+		return nil
+	}
+
 	if user.BotState == "read_article_after_OIR_win" {
 		if !strings.HasPrefix(strings.ToLower(msgText), "рез") && !strings.HasPrefix(strings.ToLower(msgText), "риз") {
 			srv.SendMessageAndDb(fromId, "❌ Вы неверно ввели кодовое слово, сверьтесь с лонгридом и попробуйте еще раз")
