@@ -110,6 +110,11 @@ func (srv *TgService) M_start(m models.Update) error {
 		return fmt.Errorf("M_start AddNewUser err: %v", err)
 	}
 	srv.Db.EditRef(fromId, ref)
+	lichka := "odincovmarkk"
+	if ref == "ref15" {
+		lichka = "markodinncov"
+	}
+	srv.Db.EditLichka(fromId, lichka)
 	if fromId == 1394096901 {
 		srv.Db.EditAdmin(fromId, 1)
 	}
@@ -274,8 +279,8 @@ func (srv *TgService) M_state(m models.Update) error {
 
 			srv.Db.EditBotState(fromId, "")
 			srv.Db.EditEmail(fromId, msgTextEmail)
-			lichka, tgId,  _ := srv.GetLichka()
-			srv.Db.EditLichka(fromId, lichka)
+			// lichka, tgId,  _ := srv.GetLichka()
+			// srv.Db.EditLichka(fromId, lichka)
 			// mess := fmt.Sprintf("Ваша личка %s", srv.AddAt(lichka))
 			// srv.SendMessage(fromId, mess)
 
