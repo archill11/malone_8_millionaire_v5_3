@@ -243,7 +243,7 @@ func (srv *TgService) CQ_subscribe(m models.Update) error {
 		srv.EditMessageReplyMarkup(fromId, cq.Message.MessageId)
 	}()
 
-	srv.SendMessage(fromId, "Отлично! Осталось последнее условие 😎\nСмотри кружочек 👇🏻")
+	srv.SendMessage(fromId, "Отлично! Осталось 2 последних условия 😎\nСмотри кружочек 👇🏻")
 	time.Sleep(time.Second)
 
 	reglink := "https://goopro.store/api/v1/redirect/1000153272?register=1"

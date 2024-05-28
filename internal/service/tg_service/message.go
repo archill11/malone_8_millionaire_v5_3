@@ -221,7 +221,7 @@ func (srv *TgService) M_state(m models.Update) error {
 		// srv.Db.EditStep(fromId, "9")
 		// srv.SendAnimMessageHTML("9", fromId, animTimeoutTest)
 
-		text := "Ну что, поехали, ответь правильно на 3 вопроса и уже сегодня сможешь заработать 500.000₽ 😏"
+		text := "Ну что, поехали, ответь правильно на 3 вопроса и уже сегодня сможешь заработать от 500.000₽ 😏"
 		srv.SendMessage(fromId, text)
 		err = srv.ShowMilQ(fromId, 1)
 		if err != nil {
