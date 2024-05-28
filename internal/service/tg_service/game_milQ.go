@@ -254,9 +254,14 @@ D) Находиться в офисе Москва-Сити`
 		srv.SendAnimArticleHTMLV3("3.5", chatId, 2000)
 		srv.CopyMessage(chatId, -1001998413789, 55)
 		
-		text := fmt.Sprintf("тут должен быть вопрос %d", prodolzitIdInt+1)
-		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
-			[{ "text": "продолжить", "callback_data": "prodolzit_%d_" }]
+		text := `Благодаря чему Алина так преуспела, как оказаться на её месте?
+
+A) Алина обладает выделяющимся талантом и сверх умом .
+B) У неё богатейший опыт позади и большой круг связей.
+C) Алине просто повезло.
+D) Желание жить не так, как все, внимательный подход к игре, умеренный риск, отсутствие лудоманства и отсебятины`
+		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [bad_answer_article
+			[ { "text": "A", "callback_data": "bad_answer_article" }, { "text": "B", "callback_data": "bad_answer_article" }, { "text": "C", "callback_data": "" }, { "text": "D", "callback_data": "prodolzit_%d_" }]
 		]}`, prodolzitIdInt+1)
 		srv.SendMessageWRM(chatId, text, reply_markup)
 		return nil
