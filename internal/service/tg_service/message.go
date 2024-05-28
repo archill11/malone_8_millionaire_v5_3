@@ -210,7 +210,7 @@ func (srv *TgService) M_state(m models.Update) error {
 	}
 
 	if user.BotState == "read_article_after_KNB_win" { // Го, ко, коу, гоу, гэу
-		if !strings.HasPrefix(strings.ToLower(msgText), "гоу") && !strings.HasPrefix(strings.ToLower(msgText), "го") && !strings.HasPrefix(strings.ToLower(msgText), "ко") && !strings.HasPrefix(strings.ToLower(msgText), "коу") && !strings.HasPrefix(strings.ToLower(msgText), "гэу") && !strings.HasPrefix(strings.ToLower(msgText), "go") {
+		if !strings.HasPrefix(strings.ToLower(msgText), "го") && !strings.HasPrefix(strings.ToLower(msgText), "ко") && !strings.HasPrefix(strings.ToLower(msgText), "гэ") && !strings.HasPrefix(strings.ToLower(msgText), "go") {
 			srv.SendMessageAndDb(fromId, "❌ Вы неверно ввели кодовое слово, сверьтесь с лонгридом и попробуйте еще раз")
 			return nil
 		}
