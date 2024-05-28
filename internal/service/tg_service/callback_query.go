@@ -19,7 +19,7 @@ func (srv *TgService) HandleCallbackQuery(m models.Update) error {
 	srv.SendMsgToServer(fromId, "user", fmt.Sprintf("кнопка: %s", cq.Data))
 
 	if cq.Data == "bad_answer_article" {
-		srv.SendMessage(fromId, "Ответ неверный ❌\nК сожалению, ты ошибся, но шанс еще есть!")
+		srv.SendMessage(fromId, "❌ Ответ неверный, перечитай текст выше и попробуй еще раз")
 		return nil
 	}
 
