@@ -345,11 +345,12 @@ func (srv *TgService) ShowQWin(chatId int, q_num string) error {
 
 		messText = "."
 		reply_markup = `{"keyboard" : [
-			[{ "text": "сос" }]
+			[{ "text": "Написать Марку" }],
+			[{ "text": "Часто задаваемые вопросы" }]
 		]}`
 		_, err := srv.SendMessageWRM(chatId, messText, reply_markup)
 		if err != nil {
-			srv.l.Error("сос err: ", err)
+			srv.l.Error("Написать Марку err: ", err)
 		}
 
 		// srv.SendMsgToServer(chatId, "bot", "Ссылка")
