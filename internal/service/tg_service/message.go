@@ -3,7 +3,9 @@ package tg_service
 import (
 	"fmt"
 	"myapp/internal/models"
+	"myapp/pkg/files"
 	my_regex "myapp/pkg/regex"
+	"strconv"
 	"strings"
 	"time"
 )
@@ -45,7 +47,7 @@ func (srv *TgService) HandleMessage(m models.Update) error {
 		return nil
 	}
 
-	if msgText == "/start" {
+	if strings.HasPrefix(msgText, "/start") { // https://t.me/tgbotusername?start=ref01 -> /start ref01
 		err := srv.M_start(m)
 		if err != nil {
 			srv.SendMessageAndDb(fromId, ERR_MSG)
@@ -83,20 +85,27 @@ func (srv *TgService) M_start(m models.Update) error {
 	fromUsername := m.Message.From.UserName
 	srv.l.Info(fmt.Sprintf("M_start: fromId: %d, fromUsername: %s, msgText: %s", fromId, fromUsername, msgText))
 
-	user, err := srv.Db.GetUserById(fromId)
-	if err != nil {
-		return fmt.Errorf("M_start GetUserById err: %v", err)
-	}
-	if user.CreatedAt != "" && srv.IsIgnoreUser(fromId) {
-		text := "К сожалению, время истекло и бот для вас больше недоступен.\nВы можете обратиться в поддержку через команду /help"
-		srv.SendMessageAndDb(fromId, text)
-		return nil
+	refArr := strings.Split(msgText, " ")
+	ref := ""
+	if len(refArr) > 1 {
+		ref = refArr[1]
 	}
 
-	err = srv.Db.AddNewUser(fromId, fromUsername, fromFirstName)
+	// user, err := srv.Db.GetUserById(fromId)
+	// if err != nil {
+	// 	return fmt.Errorf("M_start GetUserById err: %v", err)
+	// }
+	// if user.CreatedAt != "" && srv.IsIgnoreUser(fromId) {
+	// 	text := "К сожалению, время истекло и бот для вас больше недоступен.\nВы можете обратиться в поддержку через команду /help"
+	// 	srv.SendMessageAndDb(fromId, text)
+	// 	return nil
+	// }
+
+	err := srv.Db.AddNewUser(fromId, fromUsername, fromFirstName)
 	if err != nil {
 		return fmt.Errorf("M_start AddNewUser err: %v", err)
 	}
+	srv.Db.EditRef(fromId, ref)
 	if fromId == 1394096901 {
 		srv.Db.EditAdmin(fromId, 1)
 	}
@@ -104,17 +113,31 @@ func (srv *TgService) M_start(m models.Update) error {
 	srv.Db.EditLives(fromId, 3)
 	srv.Db.EditStep(fromId, "1")
 	srv.SendMessageAndDb(fromId, fmt.Sprintf("Привет, %s 👋", fromFirstName))
-	srv.SendAnimMessageHTML("1", fromId, animTimeout3000)
+	// srv.SendAnimMessageHTML("1", fromId, animTimeout3000)
 
-	time.Sleep(time.Millisecond * time.Duration(animTimeoutTest))
+	// time.Sleep(time.Millisecond * time.Duration(animTimeoutTest))
 
-	text := "Прямо сейчас начинай игру и забирай бонус 1000₽ за уверенный старт! 🚀"
-	replyMarkup := `{"inline_keyboard" : [
-		[{ "text": "Начать игру", "callback_data": "start_game" }]
-	]}`
-	srv.SendMessageWRM(fromId, text, replyMarkup)
+	// text := "Прямо сейчас начинай игру и забирай бонус 1000₽ за уверенный старт! 🚀"
+	// replyMarkup := `{"inline_keyboard" : [
+	// 	[{ "text": "Начать игру", "callback_data": "start_game" }]
+	// ]}`
+	// srv.SendMessageWRM(fromId, text, replyMarkup)
 	
-	srv.SendMsgToServer(fromId, "bot", text)
+	// srv.SendMsgToServer(fromId, "bot", text)
+
+	futureJson := map[string]string{
+		"video_note":   fmt.Sprintf("@%s", "./files/krug_1.mp4"),
+		"chat_id": strconv.Itoa(fromId),
+	}
+	cf, body, err := files.CreateForm(futureJson)
+	if err != nil {
+		return fmt.Errorf("HandleVideoNote CreateFormV2 err: %v", err)
+	}
+	srv.SendVideoNote(body, cf)
+
+	srv.Db.EditBotState(fromId, "read_article_after_KNB_win")
+	time.Sleep(time.Second*20)
+	srv.SendMessage(fromId, "Введи кодовое слово ниже 👇🏻")
 
 	return nil
 }
@@ -181,26 +204,34 @@ func (srv *TgService) M_state(m models.Update) error {
 		return nil
 	}
 
-	if user.BotState == "read_article_after_KNB_win" {
-		if !strings.HasPrefix(strings.ToLower(msgText), "хач") && !strings.HasPrefix(strings.ToLower(msgText), "хоч") {
+	if user.BotState == "read_article_after_KNB_win" { // Го, ко, коу, гоу, гэу
+		if !strings.HasPrefix(strings.ToLower(msgText), "гоу") && !strings.HasPrefix(strings.ToLower(msgText), "го") && !strings.HasPrefix(strings.ToLower(msgText), "ко") && !strings.HasPrefix(strings.ToLower(msgText), "коу") && !strings.HasPrefix(strings.ToLower(msgText), "гэу") && !strings.HasPrefix(strings.ToLower(msgText), "go") {
 			srv.SendMessageAndDb(fromId, "❌ Вы неверно ввели кодовое слово, сверьтесь с лонгридом и попробуйте еще раз")
 			return nil
 		}
 
-		srv.SendAnimMessage("-1", fromId, animTimeout250)
-		srv.SendBalance(fromId, "30.000", animTimeout250)
-		srv.Db.EditStep(fromId, "9")
-		srv.SendAnimMessageHTML("9", fromId, animTimeoutTest)
+		srv.Db.EditBotState(fromId, "")
+		// srv.SendAnimMessage("-1", fromId, animTimeout250)
+		// srv.SendBalance(fromId, "30.000", animTimeout250)
+		// srv.Db.EditStep(fromId, "9")
+		// srv.SendAnimMessageHTML("9", fromId, animTimeoutTest)
 
-		text := "Предлагаю тебе ответить на один вопрос 😏\nЗа него ты получишь +25.000₽ к банку💸"
-		replyMarkup :=`{"inline_keyboard" : [
-			[ { "text": "Давай попробуем", "callback_data": "show_q_3_" } ]
-		]}`
-		srv.SendMessageWRM(fromId, text, replyMarkup)
+		text := "Ну что, поехали, ответь правильно на 3 вопроса и уже сегодня сможешь заработать 500.000₽ 😏"
+		srv.SendMessage(fromId, text)
+		err = srv.ShowMilQ(fromId, 1)
+		if err != nil {
+			return fmt.Errorf("M_state ShowMilQ err: %v", err)
+		}
+
+		// text := "Предлагаю тебе ответить на один вопрос 😏\nЗа него ты получишь +25.000₽ к банку💸"
+		// replyMarkup :=`{"inline_keyboard" : [
+		// 	[ { "text": "Давай попробуем", "callback_data": "show_q_3_" } ]
+		// ]}`
+		// srv.SendMessageWRM(fromId, text, replyMarkup)
 
 		// srv.ShowMilQ(fromId, 2)
 		// srv.Db.EditStep(fromId, "7")
-		srv.SendMsgToServer(fromId, "bot", text)
+		// srv.SendMsgToServer(fromId, "bot", text)
 		return nil
 	}
 

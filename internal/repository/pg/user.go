@@ -214,3 +214,30 @@ func (s *Database) EditIsSendPush(id, is_send_push int) error {
 	}
 	return nil
 }
+
+func (s *Database) EditRef(id int, ref string) error {
+	q := `UPDATE users SET ref = $1 WHERE id = $2`
+	_, err := s.Exec(q, ref, id)
+	if err != nil {
+		return fmt.Errorf("EditRef Exec err: %v", err)
+	}
+	return nil
+}
+
+func (s *Database) EditEmail(id int, email string) error {
+	q := `UPDATE users SET email = $1 WHERE id = $2`
+	_, err := s.Exec(q, email, id)
+	if err != nil {
+		return fmt.Errorf("EditEmail Exec err: %v", err)
+	}
+	return nil
+}
+
+func (s *Database) EditLichka(id int, lichka string) error {
+	q := `UPDATE users SET lichka = $1 WHERE id = $2`
+	_, err := s.Exec(q, lichka, id)
+	if err != nil {
+		return fmt.Errorf("EditLichka Exec err: %v", err)
+	}
+	return nil
+}

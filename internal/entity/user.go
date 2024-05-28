@@ -6,6 +6,9 @@ type User struct {
 	Firstname       string                  `json:"firstname"`
 	IsAdmin         int                     `json:"is_admin"`
 	BotState        string                  `json:"bot_state"`
+	Email           string                  `json:"email"`
+	Ref             string                  `json:"ref"`
+	Lichka          string                  `json:"lichka"`
 	Lives           int                     `json:"lives"`
 	Step            string                  `json:"step"`
 	LatsActiontime  string                  `json:"lats_action_time"`

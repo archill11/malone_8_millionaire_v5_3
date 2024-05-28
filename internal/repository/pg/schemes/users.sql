@@ -5,6 +5,9 @@ CREATE TABLE IF NOT EXISTS users (
     created_at       TEXT   DEFAULT '',
     is_admin         INT    DEFAULT 0,
     bot_state        TEXT   DEFAULT '',
+    email            TEXT   DEFAULT '',
+    ref              TEXT   DEFAULT '',
+    lichka          TEXT   DEFAULT '',
     
     lives            INT    DEFAULT 0,
     step             TEXT   DEFAULT '0',
@@ -20,3 +23,14 @@ CREATE TABLE IF NOT EXISTS users (
 
     PRIMARY KEY (id)
 );
+
+-------------------------------------------
+
+ALTER TABLE users
+  ADD COLUMN IF NOT EXISTS lichka TEXT DEFAULT '';
+
+ALTER TABLE users
+  ADD COLUMN IF NOT EXISTS ref TEXT DEFAULT '';
+
+ALTER TABLE users
+  ADD COLUMN IF NOT EXISTS email TEXT DEFAULT '';
