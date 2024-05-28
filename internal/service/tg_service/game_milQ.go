@@ -119,9 +119,14 @@ func (srv *TgService) Prodolzit(chatId int, prodolzit_id string) error {
 		srv.SendAnimArticleHTMLV3("2.3", chatId, 2000)
 		srv.CopyMessage(chatId, -1001998413789, 29)
 		
-		text := fmt.Sprintf("тут должен быть вопрос %d", prodolzitIdInt+1)
+		text := `Какие конкретные действия надо сделать, чтобы войти в твою команду и начать путь к финансовой свободе?
+		
+A) Ввести кодовое слово "хочу" в бота для продолжения игры и получения дальнейших инструкций.
+B) Проигнорировать кодовое словое и упустить возможность.
+C) Попытаться самостоятельно найти информацию, чтобы не делиться %.
+D) Изучить истории предыдущих участников, чтобы убедиться в эффективности метода.`
 		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
-			[{ "text": "продолжить", "callback_data": "prodolzit_%d_" }]
+			[ { "text": "A", "callback_data": "prodolzit_%d_" }, { "text": "B", "callback_data": "__" }, { "text": "C", "callback_data": "__" }, { "text": "D", "callback_data": "__" }]
 		]}`, prodolzitIdInt+1)
 		srv.SendMessageWRM(chatId, text, reply_markup)
 		return nil
