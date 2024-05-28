@@ -54,21 +54,6 @@ func (srv *TgService) Prodolzit(chatId int, prodolzit_id string) error {
 		srv.CopyMessage(chatId, -1001998413789, 13)
 
 
-		text := `Какова главная причина того, что люди выходят из игры до достижения серьёзных результатов? Всё же настолько просто. 
-		
-A) Недостаток мотивации и усердия.
-B) Отсутствие интереса к игре.
-C) Слишком сложные вопросы.
-D) Не хватает времени, чтобы играть.`
-		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
-			[ { "text": "A", "callback_data": "prodolzit_%d_" }, { "text": "B", "callback_data": "__" }, { "text": "C", "callback_data": "__" }, { "text": "D", "callback_data": "__" }]
-		]}`, prodolzitIdInt+1)
-		srv.SendMessageWRM(chatId, text, reply_markup)
-		return nil
-	}
-	if prodolzit_id == "2" {
-		srv.SendAnimArticleHTMLV3("1.5", chatId, 2000)
-		
 		text := `О каком инструменте речь?
 		
 A) Новая маркетинговая стратегия.
@@ -81,10 +66,8 @@ D) Своя технология`
 		srv.SendMessageWRM(chatId, text, reply_markup)
 		return nil
 	}
-	if prodolzit_id == "3" {
-		srv.CopyMessage(chatId, -1001998413789, 15)
-		srv.SendAnimArticleHTMLV3("1.6", chatId, 2000)
-		srv.CopyMessage(chatId, -1001998413789, 17)
+	if prodolzit_id == "2" {
+		srv.SendAnimArticleHTMLV3("1.5", chatId, 2000)
 		
 		text := `Каким образом игра, о которой говорится в тексте, способна сделать человека миллионером в такой короткий срок? 
 		
@@ -98,9 +81,10 @@ D) Игра предлагает секретные знания или конт
 		srv.SendMessageWRM(chatId, text, reply_markup)
 		return nil
 	}
-	if prodolzit_id == "4" {
-		srv.SendAnimArticleHTMLV3("1.7", chatId, 2000)
-		srv.CopyMessage(chatId, -1001998413789, 19)
+	if prodolzit_id == "3" {
+		srv.CopyMessage(chatId, -1001998413789, 15)
+		srv.SendAnimArticleHTMLV3("1.6", chatId, 2000)
+		srv.CopyMessage(chatId, -1001998413789, 17)
 		
 		text := `Что именно тебя побудило на переход от найма к своему делу, и что дало толчок к действию? 
 		
@@ -114,9 +98,9 @@ D) Осознание, что найм не приведёт к росту в д
 		srv.SendMessageWRM(chatId, text, reply_markup)
 		return nil
 	}
-	if prodolzit_id == "5" {
-		srv.SendAnimArticleHTMLV3("1.8", chatId, 2000)
-		srv.CopyMessage(chatId, -1001998413789, 21)
+	if prodolzit_id == "4" {
+		srv.SendAnimArticleHTMLV3("1.7", chatId, 2000)
+		srv.CopyMessage(chatId, -1001998413789, 19)
 		
 		text := `Какие возможности и ресурсы появились сейчас, хотя не были доступны тебе на начальном этапе?
 		
@@ -130,9 +114,10 @@ D) Осознание, что найм не приведёт к росту в д
 		srv.SendMessageWRM(chatId, text, reply_markup)
 		return nil
 	}
-	if prodolzit_id == "6" {
-		srv.SendAnimArticleHTMLV3("1.9", chatId, 2000)
-
+	if prodolzit_id == "5" {
+		srv.SendAnimArticleHTMLV3("1.8", chatId, 2000)
+		srv.CopyMessage(chatId, -1001998413789, 21)
+		
 		text := `Почему об этой возможности ещё не знают все, если всё так просто и ты тоже с этого заработаешь?
 		
 A) Маркетинговая команда для распространения ещё не собрана
@@ -145,10 +130,9 @@ D) Люди недостаточно знают или супер ленивые
 		srv.SendMessageWRM(chatId, text, reply_markup)
 		return nil
 	}
-	if prodolzit_id == "7" {
-		srv.SendAnimArticleHTMLV3("2.3", chatId, 2000)
-		srv.CopyMessage(chatId, -1001998413789, 29)
-		
+	if prodolzit_id == "6" {
+		srv.SendAnimArticleHTMLV3("1.9", chatId, 2000)
+
 		text := `Какие конкретные действия надо сделать, чтобы войти в твою команду и начать путь к финансовой свободе?
 		
 A) Ввести кодовое слово "хочу" в бота для продолжения игры и получения дальнейших инструкций.
@@ -161,9 +145,9 @@ D) Изучить истории предыдущих участников, чт
 		srv.SendMessageWRM(chatId, text, reply_markup)
 		return nil
 	}
-	if prodolzit_id == "8" {
-		srv.SendAnimArticleHTMLV3("2.4", chatId, 2000)
-		srv.CopyMessage(chatId, -1001998413789, 31)
+	if prodolzit_id == "7" {
+		srv.SendAnimArticleHTMLV3("2.3", chatId, 2000)
+		srv.CopyMessage(chatId, -1001998413789, 29)
 		
 		text := `Как можно будет узнать о новых перспективных возможностях, которые ускорят мой рост в деньгах и качестве жизни?
 
@@ -173,6 +157,22 @@ C) Присоединиться к моей команде, чтобы полу�
 D) Купить курс у блогера, который живет в Москва-Сити`
 		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
 			[ { "text": "A", "callback_data": "__" }, { "text": "B", "callback_data": "__" }, { "text": "C", "callback_data": "prodolzit_%d_" }, { "text": "D", "callback_data": "__" }]
+		]}`, prodolzitIdInt+1)
+		srv.SendMessageWRM(chatId, text, reply_markup)
+		return nil
+	}
+	if prodolzit_id == "8" {
+		srv.SendAnimArticleHTMLV3("2.4", chatId, 2000)
+		srv.CopyMessage(chatId, -1001998413789, 31)
+		
+		text := `Как не превратиться в азартного самонадеянного идиота?
+
+A) Чётко следовать инструкциям из канала и пополнять ровно на ту сумму, которую нужно
+B) Да чё этот Марк знает, больше крутану по схеме = больше заработаю
+C) Пытаться пополнить меньше нужной суммы и пробовать выбить приз с меньшими пополнениям
+D) Не читать инструкции подробно и терять депозит на реальном счете по невнимательности`
+		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
+			[ { "text": "A", "callback_data": "prodolzit_%d_" }, { "text": "B", "callback_data": "__" }, { "text": "C", "callback_data": "__" }, { "text": "D", "callback_data": "__" }]
 		]}`, prodolzitIdInt+1)
 		srv.SendMessageWRM(chatId, text, reply_markup)
 		return nil
