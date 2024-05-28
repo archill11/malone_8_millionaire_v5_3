@@ -61,7 +61,7 @@ B) Приложение или софт.
 C) Инсайдерская информация.
 D) Своя технология`
 		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
-			[ { "text": "A", "callback_data": "__" }, { "text": "B", "callback_data": "prodolzit_%d_" }, { "text": "C", "callback_data": "__" }, { "text": "D", "callback_data": "__" }]
+			[ { "text": "A", "callback_data": "bad_answer_article" }, { "text": "B", "callback_data": "prodolzit_%d_" }, { "text": "C", "callback_data": "bad_answer_article" }, { "text": "D", "callback_data": "bad_answer_article" }]
 		]}`, prodolzitIdInt+1)
 		srv.SendMessageWRM(chatId, text, reply_markup)
 		return nil
@@ -76,7 +76,7 @@ B) Игра обучает навыкам инвестирования и фин
 C) После прохождения игры участникам выплачивается крупный денежный приз.
 D) Игра предлагает секретные знания или контакты для старта собственного дела.`
 		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
-			[ { "text": "A", "callback_data": "__" }, { "text": "B", "callback_data": "__" }, { "text": "C", "callback_data": "prodolzit_%d_" }, { "text": "D", "callback_data": "__" }]
+			[ { "text": "A", "callback_data": "bad_answer_article" }, { "text": "B", "callback_data": "bad_answer_article" }, { "text": "C", "callback_data": "prodolzit_%d_" }, { "text": "D", "callback_data": "bad_answer_article" }]
 		]}`, prodolzitIdInt+1)
 		srv.SendMessageWRM(chatId, text, reply_markup)
 		return nil
@@ -93,7 +93,7 @@ B) Стремление к финансовой свободе и возможн
 C) Вдохновился историями успеха других людей из неблагополучных семей.
 D) Осознание, что найм не приведёт к росту в деньгах и качества жизни`
 		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
-			[ { "text": "A", "callback_data": "__" }, { "text": "B", "callback_data": "prodolzit_%d_" }, { "text": "C", "callback_data": "__" }, { "text": "D", "callback_data": "__" }]
+			[ { "text": "A", "callback_data": "bad_answer_article" }, { "text": "B", "callback_data": "prodolzit_%d_" }, { "text": "C", "callback_data": "bad_answer_article" }, { "text": "D", "callback_data": "bad_answer_article" }]
 		]}`, prodolzitIdInt+1)
 		srv.SendMessageWRM(chatId, text, reply_markup)
 		return nil
@@ -109,7 +109,7 @@ D) Осознание, что найм не приведёт к росту в д
 3) Сервисы и приложения для сетевого взаимодействия и нетворкинга.
 4) Уникальный софт, обходящий систему онлайн-казино или букмекерской конторы`
 		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
-			[ { "text": "A", "callback_data": "__" }, { "text": "B", "callback_data": "__" }, { "text": "C", "callback_data": "__" }, { "text": "D", "callback_data": "prodolzit_%d_" }]
+			[ { "text": "A", "callback_data": "bad_answer_article" }, { "text": "B", "callback_data": "bad_answer_article" }, { "text": "C", "callback_data": "bad_answer_article" }, { "text": "D", "callback_data": "prodolzit_%d_" }]
 		]}`, prodolzitIdInt+1)
 		srv.SendMessageWRM(chatId, text, reply_markup)
 		return nil
@@ -125,7 +125,7 @@ B) Люди относятся скептически к такой возмож
 C) С резким увеличением числа людей обход системы может быть обнаружен и устранен.
 D) Люди недостаточно знают или супер ленивые.`
 		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
-			[ { "text": "A", "callback_data": "__" }, { "text": "B", "callback_data": "prodolzit_%d_" }, { "text": "C", "callback_data": "__" }, { "text": "D", "callback_data": "__" }]
+			[ { "text": "A", "callback_data": "bad_answer_article" }, { "text": "B", "callback_data": "prodolzit_%d_" }, { "text": "C", "callback_data": "bad_answer_article" }, { "text": "D", "callback_data": "bad_answer_article" }]
 		]}`, prodolzitIdInt+1)
 		srv.SendMessageWRM(chatId, text, reply_markup)
 		return nil
@@ -140,7 +140,7 @@ B) Проигнорировать кодовое словое и упустит�
 C) Попытаться самостоятельно найти информацию, чтобы не делиться %.
 D) Изучить истории предыдущих участников, чтобы убедиться в эффективности метода.`
 		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
-			[ { "text": "A", "callback_data": "prodolzit_%d_" }, { "text": "B", "callback_data": "__" }, { "text": "C", "callback_data": "__" }, { "text": "D", "callback_data": "__" }]
+			[ { "text": "A", "callback_data": "prodolzit_%d_" }, { "text": "B", "callback_data": "bad_answer_article" }, { "text": "C", "callback_data": "bad_answer_article" }, { "text": "D", "callback_data": "bad_answer_article" }]
 		]}`, prodolzitIdInt+1)
 		srv.SendMessageWRM(chatId, text, reply_markup)
 		return nil
@@ -156,7 +156,7 @@ B) Пытаться самому найти информацию в ютубе
 C) Присоединиться к моей команде, чтобы получать актуальные схемы
 D) Купить курс у блогера, который живет в Москва-Сити`
 		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
-			[ { "text": "A", "callback_data": "__" }, { "text": "B", "callback_data": "__" }, { "text": "C", "callback_data": "prodolzit_%d_" }, { "text": "D", "callback_data": "__" }]
+			[ { "text": "A", "callback_data": "bad_answer_article" }, { "text": "B", "callback_data": "bad_answer_article" }, { "text": "C", "callback_data": "prodolzit_%d_" }, { "text": "D", "callback_data": "bad_answer_article" }]
 		]}`, prodolzitIdInt+1)
 		srv.SendMessageWRM(chatId, text, reply_markup)
 		return nil
@@ -172,7 +172,7 @@ B) Да чё этот Марк знает, больше крутану по сх
 C) Пытаться пополнить меньше нужной суммы и пробовать выбить приз с меньшими пополнениям
 D) Не читать инструкции подробно и терять депозит на реальном счете по невнимательности`
 		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
-			[ { "text": "A", "callback_data": "prodolzit_%d_" }, { "text": "B", "callback_data": "bad_answer_article" }, { "text": "C", "callback_data": "__" }, { "text": "D", "callback_data": "__" }]
+			[ { "text": "A", "callback_data": "prodolzit_%d_" }, { "text": "B", "callback_data": "bad_answer_article" }, { "text": "C", "callback_data": "bad_answer_article" }, { "text": "D", "callback_data": "bad_answer_article" }]
 		]}`, prodolzitIdInt+1)
 		srv.SendMessageWRM(chatId, text, reply_markup)
 		return nil
@@ -190,7 +190,7 @@ B) Я регулярно общаюсь с ключевыми игроками �
 C) Я анализирую прошлые тренды и пытаюсь спрогнозировать тему сам
 D) Я ускоряю свой путь и следую по протоптанной дороге, заходя к тебе в команду`
 		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
-			[ { "text": "A", "callback_data": "__" }, { "text": "B", "callback_data": "__" }, { "text": "C", "callback_data": "__" }, { "text": "D", "callback_data": "prodolzit_%d_" }]
+			[ { "text": "A", "callback_data": "bad_answer_article" }, { "text": "B", "callback_data": "bad_answer_article" }, { "text": "C", "callback_data": "bad_answer_article" }, { "text": "D", "callback_data": "prodolzit_%d_" }]
 		]}`, prodolzitIdInt+1)
 		srv.SendMessageWRM(chatId, text, reply_markup)
 		return nil
@@ -208,7 +208,7 @@ D) Я ускоряю свой путь и следую по протоптанн
 		C) Успешные игроки родились в богатой семье и располагают лучшими условиями.
 		D) У успешных игроков изначально были полезные контакты`
 		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
-			[ { "text": "A", "callback_data": ""prodolzit_%d_" }, { "text": "B", "callback_data": "__" }, { "text": "C", "callback_data": "__" }, { "text": "D", "callback_data": __" }]
+			[ { "text": "A", "callback_data": ""prodolzit_%d_" }, { "text": "B", "callback_data": "bad_answer_article" }, { "text": "C", "callback_data": "bad_answer_article" }, { "text": "D", "callback_data": bad_answer_article" }]
 		]}`, prodolzitIdInt+1)
 		srv.SendMessageWRM(chatId, text, reply_markup)
 		return nil
@@ -220,9 +220,14 @@ D) Я ускоряю свой путь и следую по протоптанн
 		srv.CopyMessage(chatId, -1001998413789, 43)
 		srv.SendAnimArticleHTMLV3("2.11", chatId, 2000)
 
-		text := fmt.Sprintf("тут должен быть вопрос %d", prodolzitIdInt+1)
+		text := `Какие риски меня ждут?
+
+A) Резко обрубится интернет и результат будет потерян
+B) Я не смогу пройти игру, проиграю, потеряю время и надежду
+C) Абсолютно безрисковая история, когда следуешь чётко по инструкции и не занимаешься отсебятиной
+D) Я не разберусь с интерфейсом сайта`
 		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
-			[{ "text": "продолжить", "callback_data": "prodolzit_%d_" }]
+			[ { "text": "A", "callback_data": "bad_answer_article" }, { "text": "B", "callback_data": "bad_answer_article" }, { "text": "C", "callback_data": "prodolzit_%d_" }, { "text": "D", "callback_data": "bad_answer_article" }]
 		]}`, prodolzitIdInt+1)
 		srv.SendMessageWRM(chatId, text, reply_markup)
 		return nil
