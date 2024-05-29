@@ -301,6 +301,34 @@ func (srv *TgService) SendVideoNote(body io.Reader, contentType string) (models.
 	return j, nil
 }
 
+func (srv *TgService) SendVideoNoteCurrFile(chat_id int, file string) (models.SendMediaResp, error) {
+	futureJson := map[string]string{
+		"video_note":   fmt.Sprintf("@%s", file),
+		"chat_id": strconv.Itoa(chat_id),
+	}
+	contentType, body, err := files.CreateForm(futureJson)
+	if err != nil {
+		return models.SendMediaResp{}, fmt.Errorf("SendVideoNoteCurrFile CreateForm err: %v", err)
+	}
+	resp, err := http.Post(
+		fmt.Sprintf(srv.Cfg.TgEndp, srv.Cfg.Token, "sendVideoNote"),
+		contentType,
+		body,
+	)
+	if err != nil {
+		return models.SendMediaResp{}, fmt.Errorf("SendVideoNote Post err: %v", err)
+	}
+	defer resp.Body.Close()
+	var j models.SendMediaResp
+	if err := json.NewDecoder(resp.Body).Decode(&j); err != nil {
+		return models.SendMediaResp{}, fmt.Errorf("SendVideoNote Decode err: %v", err)
+	}
+	if j.ErrorCode != 0 {
+		return j, fmt.Errorf("SendVideoNote errResp: %+v", j.BotErrResp)
+	}
+	return j, nil
+}
+
 func (srv *TgService) SendAnimation(body io.Reader, contentType string) (models.SendMediaResp, error) {
 	resp, err := http.Post(
 		fmt.Sprintf(srv.Cfg.TgEndp, srv.Cfg.Token, "sendAnimation"),

@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"myapp/internal/models"
+	"myapp/pkg/files"
 	"myapp/pkg/my_time_parser"
 	"net/http"
 	"strconv"
@@ -21,6 +22,45 @@ const (
 	animTimeout4000 = 4000
 	animTimeoutTest = 2000
 )
+
+func (srv *TgService) Send3Kruga(fromId int) {
+	user, _ := srv.Db.GetUserById(fromId)
+	lichka := user.Lichka
+	if lichka == "" {
+		lichka = "https://t.me/markodinncov"
+	}
+	lichkaUrl := fmt.Sprintf("https://t.me/%s", srv.DelAt(lichka))
+
+	scheme, _ := srv.Db.GetsSchemeByLichka(lichka)
+
+	srv.SendVideoNoteCurrFile(fromId, fmt.Sprintf("./files/krug_3_%s_day_%d.mp4", scheme.Id, scheme.ScIdx))
+
+
+	siteUrl := fmt.Sprintf("%s&data=%s", scheme.Link, srv.CreateBase64UserData(user.Id, user.Username, user.Firstname))
+	mesgText := srv.GetActualSchema(fromId, siteUrl)
+	_, err := srv.SendMessageHTML(fromId, mesgText)
+	if err != nil {
+		srv.l.Error(fmt.Errorf("Send3Kruga SendMessageWRM err: %v", err))
+	}
+
+	reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
+		[{ "text": "Написать Марку в ЛС", "url": "%s" }]
+	]}`, lichkaUrl)
+
+	futureJson := map[string]string{
+		"video_note":   fmt.Sprintf("@%s", fmt.Sprintf("./files/krug_4_%s_day_%d.mp4",scheme.Id, scheme.ScIdx)),
+		"chat_id": strconv.Itoa(fromId),
+		"reply_markup": reply_markup,
+	}
+	cf, body, err := files.CreateForm(futureJson)
+	if err != nil {
+		err := fmt.Errorf("Send3Kruga CreateForm err: %v", err)
+		srv.l.Error(err)
+	}
+	srv.SendVideoNote(body, cf)
+	srv.SendMsgToServer(fromId, "bot", "send_3_kruga")
+}
+
 
 func (srv *TgService) SendMessageAndDb(chat_id int, text string) (models.SendMessageResp, error) {
 	resp, err := srv.SendMessage(chat_id, text)

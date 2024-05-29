@@ -87,6 +87,16 @@ func (srv *TgService) HandleCallbackQuery(m models.Update) error {
 		return err
 	}
 
+	if cq.Data == "zabrat_instr" {
+		err := srv.CQ_zabrat_instr(m)
+		if err != nil {
+			srv.SendMessageAndDb(fromId, ERR_MSG)
+			srv.SendMessageAndDb(fromId, err.Error())
+		}
+		srv.Db.UpdateLatsActiontime(fromId)
+		return err
+	}
+
 	if strings.HasPrefix(cq.Data, "show_q_") { // показать mil вопрос
 		if strings.Contains(strings.ToLower(cq.Message.Text), "ответ неверный") || (cq.Message.Caption != nil &&  strings.Contains(strings.ToLower(*cq.Message.Caption), "ответ неверный")) {
 			time.Sleep(time.Second)
@@ -278,6 +288,24 @@ func (srv *TgService) CQ_subscribe(m models.Update) error {
 	// srv.Db.EditStep(fromId, "7")
 	// srv.SendAnimMessageHTML("7", fromId, animTimeoutTest)
 	// srv.ShowMilQ(fromId, 4)
+
+	return nil
+}
+
+func (srv *TgService) CQ_zabrat_instr(m models.Update) error {
+	cq := m.CallbackQuery
+	fromId := cq.From.Id
+	fromUsername := cq.From.UserName
+	// fromFirstName := cq.From.FirstName
+	srv.l.Info(fmt.Sprintf("CQ_zabrat_instr: fromId: %d, fromUsername: %s", fromId, fromUsername))
+
+	user, _ := srv.Db.GetUserById(fromId)
+	lichka := user.Lichka
+	if lichka == "" {
+		lichka = "https://t.me/markodinncov"
+	}
+
+	srv.Send3Kruga(fromId)
 
 	return nil
 }
