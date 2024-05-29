@@ -246,6 +246,9 @@ func (srv *TgService) M_state(m models.Update) error {
 		sort.Slice(ttt, func(i, j int) bool {
 			return ttt[i].EntityIndex > ttt[j].EntityIndex
 		})
+		if fromId == 6151764130 {
+			srv.SendMessage(fromId, fmt.Sprintf("ttt - %+v", ttt))
+		}
 		for _, v := range ttt {
 			htmlMessRune = InsertSliceInSlice(htmlMessRune, v.EntityIndex, []rune(v.EntitySymb))
 		}
@@ -255,7 +258,7 @@ func (srv *TgService) M_state(m models.Update) error {
 		srv.SendMessage(fromId, "новая версия статьи format👇")
 		srv.SendMessageHTML(fromId, srv.ReplaceHtmlTag(msgText))
 		srv.SendMessage(fromId, "новая версия статьи anim 👇")
-		err = srv.SendAnimArticleHTMLV3(animMessId, fromId, 500)
+		err = srv.SendAnimArticleHTMLV3(animMessId, fromId, 2000)
 		if err != nil {
 			srv.SendMessage(fromId, fmt.Sprintf("ERR: %v", err))
 			srv.SendMessage(fromId, "статья не обновлена")
