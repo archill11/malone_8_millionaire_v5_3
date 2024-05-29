@@ -196,10 +196,12 @@ func (srv *TgService) M_state(m models.Update) error {
 		if err != nil {
 			return fmt.Errorf("M_state GetAminMessByTxtId err: %v", err)
 		}
-
-		srv.SendMessage(fromId, animMess.TxtMess)
-		srv.l.Info("m.Message.Entities:", m.Message.Entities)
-		srv.SendMessage(fromId, fmt.Sprintf("%+v", m.Message.Entities))
+		if animMess.TxtMess != "" {
+			srv.SendMessage(fromId, "прежняя версия👇")
+			srv.SendMessage(fromId, animMess.TxtMess)
+		}
+		// srv.l.Info("m.Message.Entities:", m.Message.Entities)
+		// srv.SendMessage(fromId, fmt.Sprintf("%+v", m.Message.Entities))
 
 		rawMess := msgText
 		htmlMessRune := make([]rune, 0)
@@ -232,12 +234,12 @@ func (srv *TgService) M_state(m models.Update) error {
 		sort.Slice(ttt, func(i, j int) bool {
 			return ttt[i].EntityIndex > ttt[j].EntityIndex
 		})
-
 		for _, v := range ttt {
 			htmlMessRune = InsertSliceInSlice(htmlMessRune, v.EntityIndex, []rune(v.EntitySymb))
 		}
-		srv.SendMessage(fromId, string(htmlMessRune))
 		msgText = string(htmlMessRune)
+		srv.SendMessage(fromId, "новая версия поста👇")
+		srv.SendMessage(fromId, msgText)
 
 		if animMess.TxtId != "" {
 			err = srv.Db.EditAnimMessText(animMessId, msgText)
