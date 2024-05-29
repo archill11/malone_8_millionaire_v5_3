@@ -264,14 +264,13 @@ func (srv *TgService) M_state(m models.Update) error {
 				return fmt.Errorf("M_state EditAnimMessText err: %v", err)
 			}
 			srv.SendMessage(fromId, "статья обновлена")
-			srv.Db.EditBotState(fromId, "")
-			return nil
+		} else {
+			err = srv.Db.AddNewAminMess(animMessId, msgText)
+			if err != nil {
+				return fmt.Errorf("M_state AddNewAminMess err: %v", err)
+			}
+			srv.SendMessage(fromId, "статья добавлена")
 		}
-		err = srv.Db.AddNewAminMess(animMessId, msgText)
-		if err != nil {
-			return fmt.Errorf("M_state AddNewAminMess err: %v", err)
-		}
-		srv.SendMessage(fromId, "статья добавлена")
 		srv.Db.EditBotState(fromId, "")
 
 		srv.SendMessage(fromId, "новая версия статьи anim 👇")
@@ -279,7 +278,6 @@ func (srv *TgService) M_state(m models.Update) error {
 		if err != nil {
 			srv.SendMessage(fromId, fmt.Sprintf("ERR: %v", err))
 			// srv.SendMessage(fromId, "статья не обновлена")
-			srv.Db.EditBotState(fromId, "")
 		}
 
 		return nil
