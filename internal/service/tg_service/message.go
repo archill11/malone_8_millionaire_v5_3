@@ -219,31 +219,25 @@ func (srv *TgService) M_state(m models.Update) error {
 			var entityStartSymb string
 			var entityEndSymb string
 			if entityType == "bold" {
-				entityStartSymb = "<b>"
-				entityEndSymb = "</b>"
+				entityStartSymb = "|<"
+				entityEndSymb = ">|"
 			}
 			if entityType == "underline" {
-				entityStartSymb = "<u>"
-				entityEndSymb = "</u>"
+				entityStartSymb = "_<"
+				entityEndSymb = ">_"
 			}
 			ttt = append(ttt, PushEntityFormat{EntityIndex: entityEnd, EntitySymb: []rune(entityEndSymb)})
 			ttt = append(ttt, PushEntityFormat{EntityIndex: entityStart, EntitySymb: []rune(entityStartSymb)})
-
-			// for i := len([]rune(msgText)); i > 0; i-- {
-			// 	if i == entityEnd 
-			// }
 		}
 		sort.Slice(ttt, func(i, j int) bool {
 			return ttt[i].EntityIndex > ttt[j].EntityIndex
 		})
 
 		for _, v := range ttt {
-			srv.SendMessage(fromId, fmt.Sprintf("%+v", v))
-			time.Sleep(time.Second)
 			htmlMessRune = InsertSliceInSlice(htmlMessRune, v.EntityIndex, []rune(v.EntitySymb))
-
 		}
 		srv.SendMessage(fromId, string(htmlMessRune))
+		animMessId = string(htmlMessRune)
 
 		if animMess.TxtId != "" {
 			err = srv.Db.EditAnimMessText(animMessId, msgText)
