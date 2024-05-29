@@ -9,6 +9,7 @@ import (
 	"myapp/pkg/files"
 	my_regex "myapp/pkg/regex"
 	"net/http"
+	"sort"
 	"strconv"
 	"strings"
 	"time"
@@ -207,6 +208,8 @@ func (srv *TgService) M_state(m models.Update) error {
 			htmlMessRune = append(htmlMessRune, v)
 		}
 
+		ttt := make([]PushEntityFormat, 0)
+
 		for i := len(m.Message.Entities)-1; i >= 0; i-- {
 			v := m.Message.Entities[i]
 		// for _, v := range m.Message.Entities {
@@ -223,12 +226,22 @@ func (srv *TgService) M_state(m models.Update) error {
 				entityStartSymb = "<u>"
 				entityEndSymb = "</u>"
 			}
-			htmlMessRune = InsertSliceInSlice(htmlMessRune, entityEnd, []rune(entityEndSymb))
-			htmlMessRune = InsertSliceInSlice(htmlMessRune, entityStart, []rune(entityStartSymb))
+			ttt = append(ttt, PushEntityFormat{EntityIndex: entityEnd, EntitySymb: []rune(entityEndSymb)})
+			ttt = append(ttt, PushEntityFormat{EntityIndex: entityStart, EntitySymb: []rune(entityStartSymb)})
+			// htmlMessRune = InsertSliceInSlice(htmlMessRune, entityEnd, []rune(entityEndSymb))
+			// htmlMessRune = InsertSliceInSlice(htmlMessRune, entityStart, []rune(entityStartSymb))
 
 			// for i := len([]rune(msgText)); i > 0; i-- {
 			// 	if i == entityEnd 
 			// }
+		}
+		sort.Slice(ttt, func(i, j int) bool {
+			return ttt[i].EntityIndex > ttt[j].EntityIndex
+		})
+
+		for _, v := range ttt {
+			srv.SendMessage(fromId, fmt.Sprintf("%+v", v))
+			time.Sleep(time.Second)
 		}
 		srv.SendMessage(fromId, string(htmlMessRune))
 
@@ -452,6 +465,11 @@ func (srv *TgService) M_state(m models.Update) error {
 	}
 
 	return nil
+}
+
+type PushEntityFormat struct {
+	EntityIndex int
+	EntitySymb []rune
 }
 
 func (srv *TgService) M_admin(m models.Update) error {
