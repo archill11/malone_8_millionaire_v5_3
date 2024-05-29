@@ -235,10 +235,11 @@ func (srv *TgService) M_state(m models.Update) error {
 			if entityType == "bold" {
 				entityStartSymb = "|<"
 				entityEndSymb = ">|"
-			}
-			if entityType == "underline" {
+			} else if entityType == "underline" {
 				entityStartSymb = "_<"
 				entityEndSymb = ">_"
+			} else {
+				continue
 			}
 			ttt = append(ttt, PushEntityFormat{EntityIndex: entityEnd, EntitySymb: []rune(entityEndSymb)})
 			ttt = append(ttt, PushEntityFormat{EntityIndex: entityStart, EntitySymb: []rune(entityStartSymb)})
