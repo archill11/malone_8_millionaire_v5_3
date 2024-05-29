@@ -54,12 +54,13 @@ func (srv *TgService) Prodolzit(chatId int, prodolzit_id string) error {
 		srv.CopyMessage(chatId, -1001998413789, 13)
 
 
-		text := `О каком инструменте речь?
+		// text := `О каком инструменте речь?
+		text := fmt.Sprintf("<b>О каком инструменте речь?</b>%s", `
 		
 A) Новая маркетинговая стратегия.
 B) Приложение или софт.
 C) Инсайдерская информация.
-D) Своя технология`
+D) Своя технология`)
 		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
 			[ { "text": "A", "callback_data": "bad_answer_article" }, { "text": "B", "callback_data": "prodolzit_%d_" }, { "text": "C", "callback_data": "bad_answer_article" }, { "text": "D", "callback_data": "bad_answer_article" }]
 		]}`, prodolzitIdInt+1)
