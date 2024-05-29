@@ -260,8 +260,7 @@ func (srv *TgService) CQ_subscribe(m models.Update) error {
 
 	messText := "Отлично! Осталось 2 последних условия 😎\nСмотри кружочек 👇🏻"
 	reply_markup := `{
-		"keyboard" : [[{ "text": "Написать Марку" }, { "text": "Часто задаваемые вопросы" }]],
-		"resize": true
+		"keyboard" : [[{ "text": "Написать Марку", "resize": true }, { "text": "Часто задаваемые вопросы", "resize": true }]]
 	}`
 	_, err = srv.SendMessageWRM(fromId, messText, reply_markup)
 	if err != nil {
