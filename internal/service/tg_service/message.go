@@ -210,21 +210,21 @@ func (srv *TgService) M_state(m models.Update) error {
 		for i := len(m.Message.Entities)-1; i >= 0; i-- {
 			v := m.Message.Entities[i]
 		// for _, v := range m.Message.Entities {
-			// entityType := v.Type
+			entityType := v.Type
 			entityStart := v.Offset
 			entityEnd := v.Offset + v.Length
-			// var entityStartSymb string
-			// var entityEndSymb string
-			// if entityType == "bold" {
-			// 	entityStartSymb = "<b>"
-			// 	entityEndSymb = "</b>"
-			// }
-			// if entityType == "underline" {
-			// 	entityStartSymb = "<u>"
-			// 	entityEndSymb = "</u>"
-			// }
-			htmlMessRune = InsertInSlice(htmlMessRune, entityEnd, '7')
-			htmlMessRune = InsertInSlice(htmlMessRune, entityStart, '7')
+			var entityStartSymb string
+			var entityEndSymb string
+			if entityType == "bold" {
+				entityStartSymb = "<b>"
+				entityEndSymb = "</b>"
+			}
+			if entityType == "underline" {
+				entityStartSymb = "<u>"
+				entityEndSymb = "</u>"
+			}
+			htmlMessRune = InsertSliceInSlice(htmlMessRune, entityEnd, []rune(entityEndSymb))
+			htmlMessRune = InsertSliceInSlice(htmlMessRune, entityStart, []rune(entityStartSymb))
 
 			// for i := len([]rune(msgText)); i > 0; i-- {
 			// 	if i == entityEnd 
@@ -536,5 +536,10 @@ func InsertInSlice(a []rune, index int, value rune) []rune {
     }
     a = append(a[:index+1], a[index:]...) // index < len(a)
     a[index] = value
+    return a
+}
+
+func InsertSliceInSlice(a []rune, index int, value []rune) []rune {
+    a = append(a[:index], append(value, a[index:]...)...)
     return a
 }
