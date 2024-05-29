@@ -224,9 +224,9 @@ func (srv *TgService) M_state(m models.Update) error {
 
 		ttt := make([]PushEntityFormat, 0)
 
+		// for _, v := range m.Message.Entities {
 		for i := len(m.Message.Entities)-1; i >= 0; i-- {
 			v := m.Message.Entities[i]
-		// for _, v := range m.Message.Entities {
 			entityType := v.Type
 			entityStart := v.Offset
 			entityEnd := v.Offset + v.Length
@@ -253,7 +253,7 @@ func (srv *TgService) M_state(m models.Update) error {
 		srv.SendMessage(fromId, "новая версия статьи👇")
 		srv.SendMessage(fromId, msgText)
 		srv.SendMessage(fromId, "новая версия статьи format👇")
-		srv.SendMessage(fromId, srv.ReplaceHtmlTag(msgText))
+		srv.SendMessageHTML(fromId, srv.ReplaceHtmlTag(msgText))
 		srv.SendMessage(fromId, "новая версия статьи anim 👇")
 		err = srv.SendAnimArticleHTMLV3(animMessId, fromId, 500)
 		if err != nil {
