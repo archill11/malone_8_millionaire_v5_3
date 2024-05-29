@@ -196,6 +196,7 @@ func (srv *TgService) M_state(m models.Update) error {
 			return fmt.Errorf("M_state GetAminMessByTxtId err: %v", err)
 		}
 
+		srv.SendMessage(fromId, animMess.TxtMess)
 		srv.l.Info("m.Message.Entities:", m.Message.Entities)
 		srv.SendMessage(fromId, fmt.Sprintf("%+v", m.Message.Entities))
 
