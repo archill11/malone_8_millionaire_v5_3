@@ -88,7 +88,7 @@ func (srv *TgService) HandleMessage(m models.Update) error {
 	if strings.HasPrefix(msgText, "add_am_") { // add_am_1.1_
 		animMessId := my_regex.GetStringInBetween(msgText, "add_am_", "_")
 		if animMessId == "" {
-			return fmt.Errorf("некоректный animMessId")
+			return fmt.Errorf("некоректный Id статьи")
 		}
 		srv.Db.EditBotState(fromId, msgText)
 		
@@ -100,10 +100,10 @@ func (srv *TgService) HandleMessage(m models.Update) error {
 			srv.SendMessage(fromId, "прежняя версия👇")
 			srv.SendMessage(fromId, animMess.TxtMess)
 		} else {
-			srv.SendMessage(fromId, "в базе еще нет этого поста")
+			srv.SendMessage(fromId, "в базе еще нет этой статьи")
 		}
 
-		srv.SendMessage(fromId, fmt.Sprintf("Ожидание поста для animMessId %v", animMessId))
+		srv.SendMessage(fromId, fmt.Sprintf("Ожидание поста для статьи %v", animMessId))
 		return nil
 	}
 
@@ -250,7 +250,7 @@ func (srv *TgService) M_state(m models.Update) error {
 			htmlMessRune = InsertSliceInSlice(htmlMessRune, v.EntityIndex, []rune(v.EntitySymb))
 		}
 		msgText = string(htmlMessRune)
-		srv.SendMessage(fromId, "новая версия поста👇")
+		srv.SendMessage(fromId, "новая версия статьи👇")
 		srv.SendMessage(fromId, msgText)
 
 		if animMess.TxtId != "" {
@@ -258,7 +258,7 @@ func (srv *TgService) M_state(m models.Update) error {
 			if err != nil {
 				return fmt.Errorf("M_state EditAnimMessText err: %v", err)
 			}
-			srv.SendMessage(fromId, "пост обновлен")
+			srv.SendMessage(fromId, "статья обновлена")
 			srv.Db.EditBotState(fromId, "")
 			return nil
 		}
@@ -266,7 +266,7 @@ func (srv *TgService) M_state(m models.Update) error {
 		if err != nil {
 			return fmt.Errorf("M_state AddNewAminMess err: %v", err)
 		}
-		srv.SendMessage(fromId, "пост добавлен")
+		srv.SendMessage(fromId, "статья добавлена")
 		srv.Db.EditBotState(fromId, "")
 		return nil
 	}
