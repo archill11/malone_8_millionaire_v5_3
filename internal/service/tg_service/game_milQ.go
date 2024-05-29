@@ -284,7 +284,7 @@ D) Желание жить не так, как все, внимательный 
 A) Синяя — новая жизнь, свобода, изобилие, достаток
 B) Красная — будильник в 6 утра, ты просыпаешься в холодном поту, это был сон, тебе пора на РАБоту`
 		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
-			[ { "text": "A", "callback_data": "prodolzit_%d_" } { "text": "B", "callback_data": "bad_answer_article" }]
+			[ { "text": "A", "callback_data": "prodolzit_%d_" }, { "text": "B", "callback_data": "bad_answer_article" }]
 		]}`, prodolzitIdInt+1)
 		srv.SendMessageWRM(chatId, text, reply_markup)
 		
