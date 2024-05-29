@@ -143,7 +143,7 @@ func (srv *TgService) M_start(m models.Update) error {
 	srv.Db.EditBotState(fromId, "")
 	srv.Db.EditLives(fromId, 3)
 	srv.Db.EditStep(fromId, "1")
-	srv.SendMessageAndDb(fromId, fmt.Sprintf("Привет, %s 👋", fromFirstName))
+	// srv.SendMessageAndDb(fromId, fmt.Sprintf("Привет, %s 👋", fromFirstName))
 	// srv.SendAnimMessageHTML("1", fromId, animTimeout3000)
 
 	// time.Sleep(time.Millisecond * time.Duration(animTimeoutTest))
