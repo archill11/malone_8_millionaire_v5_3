@@ -47,6 +47,25 @@ func (srv *TgService) Prodolzit(chatId int, prodolzit_id string) error {
 	time.Sleep(time.Second * 2)
 	prodolzitIdInt, _ := strconv.Atoi(prodolzit_id)
 
+	if prodolzit_id == "0" {
+		srv.SendAnimArticleHTMLV3("1.1", chatId, 2000)
+			srv.CopyMessage(chatId, -1001998413789, 4) // https://t.me/c/1998413789/4
+			srv.SendAnimArticleHTMLV3("1.2", chatId, 2000)
+			srv.CopyMessage(chatId, -1001998413789, 9)
+
+		// text := `О каком инструменте речь?
+		text := fmt.Sprintf("<b>Какова главная причина того, что люди выходят из игры до достижения серьёзных результатов?</b>%s", `
+		
+A) Недостаток мотивации и усердия.
+B) Отсутствие интереса к игре.
+C) Слишком сложные вопросы.
+D) Не хватает времени, чтобы играть.`)
+		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
+			[ { "text": "A", "callback_data": "prodolzit_%d_" }, { "text": "B", "callback_data": "bad_answer_article" }, { "text": "C", "callback_data": "bad_answer_article" }, { "text": "D", "callback_data": "bad_answer_article" }]
+		]}`, prodolzitIdInt+1)
+		srv.SendMessageWRM(chatId, text, reply_markup)
+		return nil
+	}
 	if prodolzit_id == "1" {
 		srv.SendAnimArticleHTMLV3("1.3", chatId, 2000)
 		srv.CopyMessage(chatId, -1001998413789, 11)
