@@ -91,6 +91,18 @@ func (srv *TgService) HandleMessage(m models.Update) error {
 			return fmt.Errorf("некоректный animMessId")
 		}
 		srv.Db.EditBotState(fromId, msgText)
+		
+		animMess, err := srv.Db.GetAminMessByTxtId(animMessId)
+		if err != nil {
+			return fmt.Errorf("M_state GetAminMessByTxtId err: %v", err)
+		}
+		if animMess.TxtMess != "" {
+			srv.SendMessage(fromId, "прежняя версия👇")
+			srv.SendMessage(fromId, animMess.TxtMess)
+		} else {
+			srv.SendMessage(fromId, "в базе еще нет этого поста")
+		}
+
 		srv.SendMessage(fromId, fmt.Sprintf("Ожидание поста для animMessId %v", animMessId))
 		return nil
 	}
@@ -196,10 +208,10 @@ func (srv *TgService) M_state(m models.Update) error {
 		if err != nil {
 			return fmt.Errorf("M_state GetAminMessByTxtId err: %v", err)
 		}
-		if animMess.TxtMess != "" {
-			srv.SendMessage(fromId, "прежняя версия👇")
-			srv.SendMessage(fromId, animMess.TxtMess)
-		}
+		// if animMess.TxtMess != "" {
+		// 	srv.SendMessage(fromId, "прежняя версия👇")
+		// 	srv.SendMessage(fromId, animMess.TxtMess)
+		// }
 		// srv.l.Info("m.Message.Entities:", m.Message.Entities)
 		// srv.SendMessage(fromId, fmt.Sprintf("%+v", m.Message.Entities))
 
