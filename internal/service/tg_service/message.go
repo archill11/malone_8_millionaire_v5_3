@@ -98,7 +98,7 @@ func (srv *TgService) HandleMessage(m models.Update) error {
 		}
 		if animMess.TxtMess != "" {
 			srv.SendMessage(fromId, "прежняя версия👇")
-			srv.SendMessage(fromId, srv.ReplaceHtmlTag(animMess.TxtMess))
+			srv.SendMessageHTML(fromId, srv.ReplaceHtmlTag(animMess.TxtMess))
 		} else {
 			srv.SendMessage(fromId, "в базе еще нет этой статьи")
 		}
