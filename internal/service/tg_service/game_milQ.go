@@ -266,7 +266,7 @@ B) У неё богатейший опыт позади и большой кру
 C) Алине просто повезло.
 D) Желание жить не так, как все, внимательный подход к игре, умеренный риск, отсутствие лудоманства и отсебятины`
 		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
-			[ { "text": "A", "callback_data": "bad_answer_article" }, { "text": "B", "callback_data": "bad_answer_article" }, { "text": "C", "callback_data": "bad_answer_article" }, { "text": "D", "callback_data": "prodolzit_%d_" }]
+			[ { "text": "A", "callback_data": "prodolzit_%d_" }, { "text": "B", "callback_data": "prodolzit_%d_" }, { "text": "C", "callback_data": "prodolzit_%d_" }, { "text": "D", "callback_data": "prodolzit_%d_" }]
 		]}`, prodolzitIdInt+1)
 		srv.SendMessageWRM(chatId, text, reply_markup)
 		return nil
