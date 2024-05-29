@@ -237,7 +237,7 @@ func (srv *TgService) M_state(m models.Update) error {
 			htmlMessRune = InsertSliceInSlice(htmlMessRune, v.EntityIndex, []rune(v.EntitySymb))
 		}
 		srv.SendMessage(fromId, string(htmlMessRune))
-		animMessId = string(htmlMessRune)
+		msgText = string(htmlMessRune)
 
 		if animMess.TxtId != "" {
 			err = srv.Db.EditAnimMessText(animMessId, msgText)
