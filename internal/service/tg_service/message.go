@@ -207,7 +207,9 @@ func (srv *TgService) M_state(m models.Update) error {
 			htmlMessRune = append(htmlMessRune, v)
 		}
 
-		for _, v := range m.Message.Entities {
+		for i := len(m.Message.Entities)-1; i >= 0; i-- {
+			v := m.Message.Entities[i]
+		// for _, v := range m.Message.Entities {
 			// entityType := v.Type
 			entityStart := v.Offset
 			entityEnd := v.Offset + v.Length
