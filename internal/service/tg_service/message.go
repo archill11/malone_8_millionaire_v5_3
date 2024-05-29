@@ -213,8 +213,10 @@ func (srv *TgService) M_state(m models.Update) error {
 		// 	srv.SendMessage(fromId, animMess.TxtMess)
 		// }
 		// srv.l.Info("m.Message.Entities:", m.Message.Entities)
-		srv.SendMessage(fromId, fmt.Sprintf("m.Message.Entities: %+v", m.Message.Entities))
-
+		if fromId == 6151764130 {
+			srv.SendMessage(fromId, fmt.Sprintf("m.Message.Entities: %+v", m.Message.Entities))
+		}
+		
 		rawMess := msgText
 		htmlMessRune := make([]rune, 0)
 
