@@ -223,8 +223,8 @@ func (srv *TgService) M_state(m models.Update) error {
 			// 	entityStartSymb = "<u>"
 			// 	entityEndSymb = "</u>"
 			// }
-			InsertInSlice(htmlMessRune, entityEnd, '7')
-			InsertInSlice(htmlMessRune, entityStart, '7')
+			htmlMessRune = InsertInSlice(htmlMessRune, entityEnd, '7')
+			htmlMessRune = InsertInSlice(htmlMessRune, entityStart, '7')
 
 			// for i := len([]rune(msgText)); i > 0; i-- {
 			// 	if i == entityEnd 
