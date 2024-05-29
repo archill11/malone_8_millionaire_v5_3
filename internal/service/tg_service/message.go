@@ -258,12 +258,6 @@ func (srv *TgService) M_state(m models.Update) error {
 		srv.SendMessage(fromId, "новая версия статьи format👇")
 		srv.SendMessageHTML(fromId, srv.ReplaceHtmlTag(msgText))
 		srv.SendMessage(fromId, "новая версия статьи anim 👇")
-		err = srv.SendAnimArticleHTMLV3(animMessId, fromId, 2000)
-		if err != nil {
-			srv.SendMessage(fromId, fmt.Sprintf("ERR: %v", err))
-			srv.SendMessage(fromId, "статья не обновлена")
-			srv.Db.EditBotState(fromId, "")
-		}
 
 		if animMess.TxtId != "" {
 			err = srv.Db.EditAnimMessText(animMessId, msgText)
@@ -280,6 +274,14 @@ func (srv *TgService) M_state(m models.Update) error {
 		}
 		srv.SendMessage(fromId, "статья добавлена")
 		srv.Db.EditBotState(fromId, "")
+
+		err = srv.SendAnimArticleHTMLV3(animMessId, fromId, 2000)
+		if err != nil {
+			srv.SendMessage(fromId, fmt.Sprintf("ERR: %v", err))
+			// srv.SendMessage(fromId, "статья не обновлена")
+			srv.Db.EditBotState(fromId, "")
+		}
+		
 		return nil
 	}
 
