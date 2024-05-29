@@ -287,7 +287,7 @@ C) Алине просто повезло.
 D) Желание жить не так, как все, внимательный подход к игре, умеренный риск, отсутствие лудоманства и отсебятины`)
 		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
 			[ { "text": "A", "callback_data": "prodolzit_%d_" }, { "text": "B", "callback_data": "prodolzit_%d_" }, { "text": "C", "callback_data": "prodolzit_%d_" }, { "text": "D", "callback_data": "prodolzit_%d_" }]
-		]}`, prodolzitIdInt+1)
+		]}`, prodolzitIdInt+1, prodolzitIdInt+1, prodolzitIdInt+1, prodolzitIdInt+1)
 		srv.SendMessageWRM(chatId, text, reply_markup)
 		return nil
 	}
@@ -318,24 +318,24 @@ B) Красная — будильник в 6 утра, ты просыпаеш�
 		reply_markup := `{"inline_keyboard" : [ [{ "text": "Забрать инструкцию", "callback_data": "zabrat_instr" }]]}`
 		srv.SendMessageWRM(chatId, messText, reply_markup)
 
-		user, _ := srv.Db.GetUserById(chatId)
-		lichka := user.Lichka
-		if lichka == "" {
-			lichka = "https://t.me/markodinncov"
-		}
-		// lichkaUrl := fmt.Sprintf("https://t.me/%s", srv.DelAt(lichka))
-		scheme, _ := srv.Db.GetsSchemeByLichka(lichka)
+		// user, _ := srv.Db.GetUserById(chatId)
+		// lichka := user.Lichka
+		// if lichka == "" {
+		// 	lichka = "https://t.me/markodinncov"
+		// }
+		// // lichkaUrl := fmt.Sprintf("https://t.me/%s", srv.DelAt(lichka))
+		// scheme, _ := srv.Db.GetsSchemeByLichka(lichka)
 	
-		base64Str := srv.CreateBase64UserData(chatId, user.Username, user.Firstname)
-		siteUrl := fmt.Sprintf("%s&data=%s", scheme.Link, base64Str)
+		// base64Str := srv.CreateBase64UserData(chatId, user.Username, user.Firstname)
+		// siteUrl := fmt.Sprintf("%s&data=%s", scheme.Link, base64Str)
 	
-		mesgText := srv.GetActualSchema(chatId, siteUrl)
+		// mesgText := srv.GetActualSchema(chatId, siteUrl)
 	
-		_, err := srv.SendMessageHTML(chatId, mesgText)
-		if err != nil {
-			srv.l.Error(fmt.Errorf("CQ_zabrat_instr SendMessageWRM err: %v", err))
-		}
-		srv.SendMsgToServer(chatId, "bot", mesgText)
+		// _, err := srv.SendMessageHTML(chatId, mesgText)
+		// if err != nil {
+		// 	srv.l.Error(fmt.Errorf("CQ_zabrat_instr SendMessageWRM err: %v", err))
+		// }
+		// srv.SendMsgToServer(chatId, "bot", mesgText)
 
 		return nil
 	}
