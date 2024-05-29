@@ -258,11 +258,19 @@ func (srv *TgService) CQ_subscribe(m models.Update) error {
 		srv.EditMessageReplyMarkup(fromId, cq.Message.MessageId)
 	}()
 
-	srv.SendMessage(fromId, "Отлично! Осталось 2 последних условия 😎\nСмотри кружочек 👇🏻")
+	messText := "Отлично! Осталось 2 последних условия 😎\nСмотри кружочек 👇🏻"
+	reply_markup := `{"keyboard" : [
+		[{ "text": "Написать Марку" }],
+		[{ "text": "Часто задаваемые вопросы" }]
+	]}`
+	_, err = srv.SendMessageWRM(fromId, messText, reply_markup)
+	if err != nil {
+		srv.l.Error("Написать Марку err: ", err)
+	}
 	time.Sleep(time.Second)
 
 	reglink := "https://goopro.store/api/v1/redirect/1000153272?register=1"
-	reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
+	reply_markup = fmt.Sprintf(`{"inline_keyboard" : [
 		[{ "text": "Зарегистрироваться", "url": "%s" }]
 	]}`, reglink)
 	
