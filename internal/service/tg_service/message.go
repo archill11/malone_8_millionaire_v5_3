@@ -243,7 +243,7 @@ func (srv *TgService) M_state(m models.Update) error {
 			srv.SendMessage(fromId, fmt.Sprintf("%+v", v))
 			time.Sleep(time.Second)
 		}
-		srv.SendMessage(fromId, string(htmlMessRune))
+		// srv.SendMessage(fromId, string(htmlMessRune))
 
 		if animMess.TxtId != "" {
 			err = srv.Db.EditAnimMessText(animMessId, msgText)
