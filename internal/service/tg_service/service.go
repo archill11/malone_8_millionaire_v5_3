@@ -414,52 +414,58 @@ func (srv *TgService) PushInactiveUsers() {
 			if user.LatsActiontime == "" || user.IsFinal == 1 {
 				continue
 			}
-			if srv.IsIgnoreUser(user.Id) {
-				continue
-			}
+			// if srv.IsIgnoreUser(user.Id) {
+			// 	continue
+			// }
 			latsActiontime, err := my_time_parser.ParseInLocation(user.LatsActiontime, my_time_parser.Msk)
 			if err != nil {
 				srv.l.Error(fmt.Errorf("FeedbacksToInactiveUsers ParseInLocation user: %v | %v, err: %v", user.Id, user.Username, err))
 				continue
 			}
 			
-			if time.Now().In(my_time_parser.Msk).After(latsActiontime.Add(time.Minute * 15)) {
+			if time.Now().In(my_time_parser.Msk).After(latsActiontime.Add(time.Hour * 10)) {
 				if user.Lives == 3 {
-					if user.IsSendPush == 1 {
-						srv.SendPush(user.Id, 1)
-						continue
-					}
-					srv.SendPrePush(user.Id, 1)
+					textMess := "Ты долго бездействуешь 😔\nПродолжай проходить бота, осталось совсем чуть-чуть для получения награды 🤑"
+					srv.SendMessage(user.Id, textMess)
+					srv.Db.EditLives(user.Id, 2)
 					continue
 				}
-				if user.Lives == 2 {
-					if user.IsSendPush == 1 {
-						srv.SendPush(user.Id, 2)
-						continue
-					}
-					srv.SendPrePush(user.Id, 2)
-					continue
-				}
-				if user.Lives == 1 {
-					if user.IsSendPush == 1 {
-						srv.SendPush(user.Id, 3)
-						continue
-					}
-					srv.SendPrePush(user.Id, 3)
-					continue
-				}
+				// if user.Lives == 3 {
+				// 	if user.IsSendPush == 1 {
+				// 		srv.SendPush(user.Id, 1)
+				// 		continue
+				// 	}
+				// 	srv.SendPrePush(user.Id, 1)
+				// 	continue
+				// }
+				// if user.Lives == 2 {
+				// 	if user.IsSendPush == 1 {
+				// 		srv.SendPush(user.Id, 2)
+				// 		continue
+				// 	}
+				// 	srv.SendPrePush(user.Id, 2)
+				// 	continue
+				// }
+				// if user.Lives == 1 {
+				// 	if user.IsSendPush == 1 {
+				// 		srv.SendPush(user.Id, 3)
+				// 		continue
+				// 	}
+				// 	srv.SendPrePush(user.Id, 3)
+				// 	continue
+				// }
 			}
 
-			if user.IsLastPush == 0 {
-				if user.Lives == 0 {
-					huersStr, _ := srv.GetUserLeftTime(user.Id)
-					if huersStr == "" {
-						srv.LastPush(user.Id)
-						srv.Db.EditIsLastPush(user.Id, 1)
-						continue
-					}
-				}
-			}
+			// if user.IsLastPush == 0 {
+			// 	if user.Lives == 0 {
+			// 		huersStr, _ := srv.GetUserLeftTime(user.Id)
+			// 		if huersStr == "" {
+			// 			srv.LastPush(user.Id)
+			// 			srv.Db.EditIsLastPush(user.Id, 1)
+			// 			continue
+			// 		}
+			// 	}
+			// }
 
 		}
 	}
