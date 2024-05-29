@@ -228,8 +228,6 @@ func (srv *TgService) M_state(m models.Update) error {
 			}
 			ttt = append(ttt, PushEntityFormat{EntityIndex: entityEnd, EntitySymb: []rune(entityEndSymb)})
 			ttt = append(ttt, PushEntityFormat{EntityIndex: entityStart, EntitySymb: []rune(entityStartSymb)})
-			// htmlMessRune = InsertSliceInSlice(htmlMessRune, entityEnd, []rune(entityEndSymb))
-			// htmlMessRune = InsertSliceInSlice(htmlMessRune, entityStart, []rune(entityStartSymb))
 
 			// for i := len([]rune(msgText)); i > 0; i-- {
 			// 	if i == entityEnd 
@@ -242,8 +240,10 @@ func (srv *TgService) M_state(m models.Update) error {
 		for _, v := range ttt {
 			srv.SendMessage(fromId, fmt.Sprintf("%+v", v))
 			time.Sleep(time.Second)
+			htmlMessRune = InsertSliceInSlice(htmlMessRune, v.EntityIndex, []rune(v.EntitySymb))
+
 		}
-		// srv.SendMessage(fromId, string(htmlMessRune))
+		srv.SendMessage(fromId, string(htmlMessRune))
 
 		if animMess.TxtId != "" {
 			err = srv.Db.EditAnimMessText(animMessId, msgText)
