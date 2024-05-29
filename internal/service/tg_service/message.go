@@ -252,6 +252,8 @@ func (srv *TgService) M_state(m models.Update) error {
 		msgText = string(htmlMessRune)
 		srv.SendMessage(fromId, "новая версия статьи👇")
 		srv.SendMessage(fromId, msgText)
+		srv.SendMessage(fromId, "новая версия статьи format👇")
+		srv.SendMessage(fromId, srv.ReplaceHtmlTag(msgText))
 
 		if animMess.TxtId != "" {
 			err = srv.Db.EditAnimMessText(animMessId, msgText)
