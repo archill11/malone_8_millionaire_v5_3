@@ -210,7 +210,7 @@ D) Я ускоряю свой путь и следую по протоптанн
 		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
 			[ { "text": "A", "callback_data": ""prodolzit_%d_" }, { "text": "B", "callback_data": "bad_answer_article" }, { "text": "C", "callback_data": "bad_answer_article" }, { "text": "D", "callback_data": bad_answer_article" }]
 		]}`, prodolzitIdInt+1)
-		err := srv.SendMessageWRM(chatId, text, reply_markup)
+		_, err := srv.SendMessageWRM(chatId, text, reply_markup)
 		if err != nil {
 			srv.l.Error(fmt.Sprintf("Prodolzit SendMessageWRM prodolzit_id:%s, err: %v", prodolzit_id, err))
 		}
