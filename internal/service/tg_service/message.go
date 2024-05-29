@@ -200,24 +200,34 @@ func (srv *TgService) M_state(m models.Update) error {
 		srv.l.Info("m.Message.Entities:", m.Message.Entities)
 		srv.SendMessage(fromId, fmt.Sprintf("%+v", m.Message.Entities))
 
-		// for _, v := range m.Message.Entities {
-		// 	entityType := v.Type
-		// 	entityStart := v.Offset
-		// 	entityEnd := v.Offset + v.Length
-		// 	var entityStartSymb string
-		// 	var entityEndSymb string
-		// 	if entityType == "bold" {
-		// 		entityStartSymb = "<b>"
-		// 		entityEndSymb = "</b>"
-		// 	}
-		// 	if entityType == "underline" {
-		// 		entityStartSymb = "<u>"
-		// 		entityEndSymb = "</u>"
-		// 	}
-		// 	for i := len([]rune(msgText)); i > 0; i-- {
-		// 		if i == entityEnd 
-		// 	}
-		// }
+		rawMess := msgText
+		htmlMessRune := make([]rune, 0)
+
+		for _, v := range rawMess {
+			htmlMessRune = append(htmlMessRune, v)
+		}
+
+		for _, v := range m.Message.Entities {
+			// entityType := v.Type
+			entityStart := v.Offset
+			entityEnd := v.Offset + v.Length
+			// var entityStartSymb string
+			// var entityEndSymb string
+			// if entityType == "bold" {
+			// 	entityStartSymb = "<b>"
+			// 	entityEndSymb = "</b>"
+			// }
+			// if entityType == "underline" {
+			// 	entityStartSymb = "<u>"
+			// 	entityEndSymb = "</u>"
+			// }
+			InsertInSlice(htmlMessRune, entityStart, '7')
+			InsertInSlice(htmlMessRune, entityEnd, '7')
+
+			// for i := len([]rune(msgText)); i > 0; i-- {
+			// 	if i == entityEnd 
+			// }
+		}
 
 		if animMess.TxtId != "" {
 			err = srv.Db.EditAnimMessText(animMessId, msgText)
@@ -515,4 +525,13 @@ func (srv *TgService) CQ_frequently_questions_btn(m models.Update) error {
 	}
 
 	return nil
+}
+
+func InsertInSlice(a []rune, index int, value rune) []rune {
+    if len(a) == index { // nil or empty slice or after last element
+        return append(a, value)
+    }
+    a = append(a[:index+1], a[index:]...) // index < len(a)
+    a[index] = value
+    return a
 }
