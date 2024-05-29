@@ -228,6 +228,7 @@ func (srv *TgService) M_state(m models.Update) error {
 			// 	if i == entityEnd 
 			// }
 		}
+		srv.SendMessage(fromId, string(htmlMessRune))
 
 		if animMess.TxtId != "" {
 			err = srv.Db.EditAnimMessText(animMessId, msgText)
