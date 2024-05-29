@@ -208,7 +208,7 @@ D) Я ускоряю свой путь и следую по протоптанн
 		C) Успешные игроки родились в богатой семье и располагают лучшими условиями.
 		D) У успешных игроков изначально были полезные контакты`
 		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
-			[ { "text": "A", "callback_data": ""prodolzit_%d_" }, { "text": "B", "callback_data": "bad_answer_article" }, { "text": "C", "callback_data": "bad_answer_article" }, { "text": "D", "callback_data": bad_answer_article" }]
+			[ { "text": "A", "callback_data": "prodolzit_%d_" }, { "text": "B", "callback_data": "bad_answer_article" }, { "text": "C", "callback_data": "bad_answer_article" }, { "text": "D", "callback_data": "bad_answer_article" }]
 		]}`, prodolzitIdInt+1)
 		_, err := srv.SendMessageWRM(chatId, text, reply_markup)
 		if err != nil {
@@ -264,7 +264,7 @@ B) У неё богатейший опыт позади и большой кру
 C) Алине просто повезло.
 D) Желание жить не так, как все, внимательный подход к игре, умеренный риск, отсутствие лудоманства и отсебятины`
 		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [bad_answer_article
-			[ { "text": "A", "callback_data": "bad_answer_article" }, { "text": "B", "callback_data": "bad_answer_article" }, { "text": "C", "callback_data": "" }, { "text": "D", "callback_data": "prodolzit_%d_" }]
+			[ { "text": "A", "callback_data": "bad_answer_article" }, { "text": "B", "callback_data": "bad_answer_article" }, { "text": "C", "callback_data": "bad_answer_article" }, { "text": "D", "callback_data": "prodolzit_%d_" }]
 		]}`, prodolzitIdInt+1)
 		srv.SendMessageWRM(chatId, text, reply_markup)
 		return nil
