@@ -56,7 +56,7 @@ func (srv *TgService) Prodolzit(chatId int, prodolzit_id string) error {
 		srv.SendAnimArticleHTMLV3("1.2", chatId, 2000)
 		srv.CopyMessage(chatId, -1001998413789, 9)
 
-		text := "Выбери правильный ответ 👇"
+		text := fmt.Sprintf("Вопрос %d из 15\n\nВыбери правильный ответ 👇", prodolzitIdInt+1)
 		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
 			[ { "text": "A", "callback_data": "bad_answer_article" }, { "text": "B", "callback_data": "prodolzit_%d_" }, { "text": "C", "callback_data": "bad_answer_article" }, { "text": "D", "callback_data": "bad_answer_article" }]
 		]}`, prodolzitIdInt+1)
@@ -71,7 +71,7 @@ func (srv *TgService) Prodolzit(chatId int, prodolzit_id string) error {
 		srv.CopyMessage(chatId, -1001998413789, 13)
 
 
-		text := "Выбери правильный ответ 👇"
+		text := fmt.Sprintf("Вопрос %d из 15\n\nВыбери правильный ответ 👇", prodolzitIdInt+1)
 		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
 			[ { "text": "A", "callback_data": "bad_answer_article" }, { "text": "B", "callback_data": "bad_answer_article" }, { "text": "C", "callback_data": "prodolzit_%d_" }, { "text": "D", "callback_data": "bad_answer_article" }]
 		]}`, prodolzitIdInt+1)
@@ -82,7 +82,7 @@ func (srv *TgService) Prodolzit(chatId int, prodolzit_id string) error {
 	if prodolzit_id == "2" {
 		srv.SendAnimArticleHTMLV3("1.5", chatId, 2000)
 		
-		text := "Выбери правильный ответ 👇"
+		text := fmt.Sprintf("Вопрос %d из 15\n\nВыбери правильный ответ 👇", prodolzitIdInt+1)
 		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
 			[ { "text": "A", "callback_data": "prodolzit_%d_" }, { "text": "B", "callback_data": "bad_answer_article" }, { "text": "C", "callback_data": "bad_answer_article" }, { "text": "D", "callback_data": "bad_answer_article" }]
 		]}`, prodolzitIdInt+1)
@@ -95,7 +95,7 @@ func (srv *TgService) Prodolzit(chatId int, prodolzit_id string) error {
 		srv.SendAnimArticleHTMLV3("1.6", chatId, 2000)
 		srv.CopyMessage(chatId, -1001998413789, 17)
 		
-		text := "Выбери правильный ответ 👇"
+		text := fmt.Sprintf("Вопрос %d из 15\n\nВыбери правильный ответ 👇", prodolzitIdInt+1)
 		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
 			[ { "text": "A", "callback_data": "bad_answer_article" }, { "text": "B", "callback_data": "prodolzit_%d_" }, { "text": "C", "callback_data": "bad_answer_article" }, { "text": "D", "callback_data": "bad_answer_article" }]
 		]}`, prodolzitIdInt+1)
@@ -107,7 +107,7 @@ func (srv *TgService) Prodolzit(chatId int, prodolzit_id string) error {
 		srv.SendAnimArticleHTMLV3("1.7", chatId, 2000)
 		srv.CopyMessage(chatId, -1001998413789, 19)
 		
-		text := "Выбери правильный ответ 👇"
+		text := fmt.Sprintf("Вопрос %d из 15\n\nВыбери правильный ответ 👇", prodolzitIdInt+1)
 		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
 			[ { "text": "A", "callback_data": "prodolzit_%d_" }, { "text": "B", "callback_data": "bad_answer_article" }, { "text": "C", "callback_data": "bad_answer_article" }, { "text": "D", "callback_data": "bad_answer_article" }]
 		]}`, prodolzitIdInt+1)
@@ -119,7 +119,7 @@ func (srv *TgService) Prodolzit(chatId int, prodolzit_id string) error {
 		srv.SendAnimArticleHTMLV3("1.8", chatId, 2000)
 		srv.CopyMessage(chatId, -1001998413789, 21)
 		
-		text := "Выбери правильный ответ 👇"
+		text := fmt.Sprintf("Вопрос %d из 15\n\nВыбери правильный ответ 👇", prodolzitIdInt+1)
 		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
 			[ { "text": "A", "callback_data": "bad_answer_article" }, { "text": "B", "callback_data": "prodolzit_%d_" }, { "text": "C", "callback_data": "bad_answer_article" }, { "text": "D", "callback_data": "bad_answer_article" }]
 		]}`, prodolzitIdInt+1)
@@ -130,7 +130,7 @@ func (srv *TgService) Prodolzit(chatId int, prodolzit_id string) error {
 	if prodolzit_id == "6" {
 		srv.SendAnimArticleHTMLV3("1.9", chatId, 2000)
 
-		text := "Выбери правильный ответ 👇"
+		text := fmt.Sprintf("Вопрос %d из 15\n\nВыбери правильный ответ 👇", prodolzitIdInt+1)
 		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
 			[ { "text": "A", "callback_data": "bad_answer_article" }, { "text": "B", "callback_data": "bad_answer_article" }, { "text": "C", "callback_data": "prodolzit_%d_" }, { "text": "D", "callback_data": "bad_answer_article" }]
 		]}`, prodolzitIdInt+1)
@@ -144,7 +144,7 @@ func (srv *TgService) Prodolzit(chatId int, prodolzit_id string) error {
 		srv.SendAnimArticleHTMLV3("2.3", chatId, 2000)
 		srv.CopyMessage(chatId, -1001998413789, 29)
 		
-		text := "Выбери правильный ответ 👇"
+		text := fmt.Sprintf("Вопрос %d из 15\n\nВыбери правильный ответ 👇", prodolzitIdInt+1)
 		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
 			[ { "text": "A", "callback_data": "bad_answer_article" }, { "text": "B", "callback_data": "prodolzit_%d_" }, { "text": "C", "callback_data": "bad_answer_article" }, { "text": "D", "callback_data": "bad_answer_article" }]
 		]}`, prodolzitIdInt+1)
@@ -156,7 +156,7 @@ func (srv *TgService) Prodolzit(chatId int, prodolzit_id string) error {
 		srv.SendAnimArticleHTMLV3("2.4", chatId, 2000)
 		srv.CopyMessage(chatId, -1001998413789, 31)
 		
-		text := "Выбери правильный ответ 👇"
+		text := fmt.Sprintf("Вопрос %d из 15\n\nВыбери правильный ответ 👇", prodolzitIdInt+1)
 		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
 			[ { "text": "A", "callback_data": "bad_answer_article" }, { "text": "B", "callback_data": "prodolzit_%d_" }, { "text": "C", "callback_data": "bad_answer_article" }, { "text": "D", "callback_data": "bad_answer_article" }]
 		]}`, prodolzitIdInt+1)
@@ -170,7 +170,7 @@ func (srv *TgService) Prodolzit(chatId int, prodolzit_id string) error {
 		srv.SendAnimArticleHTMLV3("2.6", chatId, 2000)
 		srv.CopyMessage(chatId, -1001998413789, 35)
 		
-		text := "Выбери правильный ответ 👇"
+		text := fmt.Sprintf("Вопрос %d из 15\n\nВыбери правильный ответ 👇", prodolzitIdInt+1)
 		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
 			[ { "text": "A", "callback_data": "bad_answer_article" }, { "text": "B", "callback_data": "prodolzit_%d_" }, { "text": "C", "callback_data": "bad_answer_article" }, { "text": "D", "callback_data": "bad_answer_article" }]
 		]}`, prodolzitIdInt+1)
@@ -184,7 +184,7 @@ func (srv *TgService) Prodolzit(chatId int, prodolzit_id string) error {
 		srv.SendAnimArticleHTMLV3("2.8", chatId, 2000)
 		srv.CopyMessage(chatId, -1001998413789, 39)
 		
-		text := "Выбери правильный ответ 👇"
+		text := fmt.Sprintf("Вопрос %d из 15\n\nВыбери правильный ответ 👇", prodolzitIdInt+1)
 		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
 			[ { "text": "A", "callback_data": "prodolzit_%d_" }, { "text": "B", "callback_data": "bad_answer_article" }, { "text": "C", "callback_data": "bad_answer_article" }, { "text": "D", "callback_data": "bad_answer_article" }]
 		]}`, prodolzitIdInt+1)
@@ -199,7 +199,7 @@ func (srv *TgService) Prodolzit(chatId int, prodolzit_id string) error {
 		srv.CopyMessage(chatId, -1001998413789, 43)
 		srv.SendAnimArticleHTMLV3("2.11", chatId, 2000)
 
-		text := "Выбери правильный ответ 👇"
+		text := fmt.Sprintf("Вопрос %d из 15\n\nВыбери правильный ответ 👇", prodolzitIdInt+1)
 		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
 			[ { "text": "A", "callback_data": "prodolzit_%d_" }, { "text": "B", "callback_data": "bad_answer_article" }, { "text": "C", "callback_data": "bad_answer_article" }, { "text": "D", "callback_data": "bad_answer_article" }]
 		]}`, prodolzitIdInt+1)
@@ -211,7 +211,7 @@ func (srv *TgService) Prodolzit(chatId int, prodolzit_id string) error {
 		srv.SendAnimArticleHTMLV3("3.3", chatId, 2000)
 		srv.CopyMessage(chatId, -1001998413789, 51)
 		
-		text := "Выбери правильный ответ 👇"
+		text := fmt.Sprintf("Вопрос %d из 15\n\nВыбери правильный ответ 👇", prodolzitIdInt+1)
 		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
 			[ { "text": "A", "callback_data": "bad_answer_article" }, { "text": "B", "callback_data": "prodolzit_%d_" }, { "text": "C", "callback_data": "bad_answer_article" }, { "text": "D", "callback_data": "bad_answer_article" }]
 		]}`, prodolzitIdInt+1)
@@ -225,7 +225,7 @@ func (srv *TgService) Prodolzit(chatId int, prodolzit_id string) error {
 		srv.SendAnimArticleHTMLV3("3.5", chatId, 2000)
 		srv.CopyMessage(chatId, -1001998413789, 55)
 		
-		text := "Выбери правильный ответ 👇"
+		text := fmt.Sprintf("Вопрос %d из 15\n\nВыбери правильный ответ 👇", prodolzitIdInt+1)
 		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
 			[ { "text": "A", "callback_data": "bad_answer_article" }, { "text": "B", "callback_data": "bad_answer_article" }, { "text": "C", "callback_data": "prodolzit_%d_" }, { "text": "D", "callback_data": "bad_answer_article" }]
 		]}`, prodolzitIdInt+1)
@@ -243,7 +243,7 @@ func (srv *TgService) Prodolzit(chatId int, prodolzit_id string) error {
 		srv.SendAnimArticleHTMLV3("3.9", chatId, 2000)
 		srv.CopyMessage(chatId, -1001998413789, 66)
 		
-		text := "Выбери правильный ответ 👇"
+		text := fmt.Sprintf("Вопрос %d из 15\n\nВыбери правильный ответ 👇", prodolzitIdInt+1)
 		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
 			[ { "text": "A", "callback_data": "prodolzit_%d_" }, { "text": "B", "callback_data": "bad_answer_article_" } ]
 		]}`, prodolzitIdInt+1)
