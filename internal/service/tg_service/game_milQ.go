@@ -243,19 +243,20 @@ func (srv *TgService) Prodolzit(chatId int, prodolzit_id string) error {
 		srv.SendAnimArticleHTMLV3("3.9", chatId, 2000)
 		srv.CopyMessage(chatId, -1001998413789, 66)
 		
-		text := fmt.Sprintf("Вопрос %d из 15\n\nВыбери правильный ответ 👇", prodolzitIdInt+1)
-		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
-			[ { "text": "A", "callback_data": "prodolzit_%d_" }, { "text": "B", "callback_data": "bad_answer_article_" } ]
-		]}`, prodolzitIdInt+1)
-		fileName := fmt.Sprintf("./files/article_q_%d.jpg", prodolzitIdInt+1)
-		srv.SendPhotoWCaptionWRM(chatId, text, fileName, reply_markup)
+		// text := fmt.Sprintf("Вопрос %d из 15\n\nВыбери правильный ответ 👇", prodolzitIdInt+1)
+		// reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
+		// 	[ { "text": "A", "callback_data": "prodolzit_%d_" }, { "text": "B", "callback_data": "bad_answer_article_" } ]
+		// ]}`, prodolzitIdInt+1)
+		// fileName := fmt.Sprintf("./files/article_q_%d.jpg", prodolzitIdInt+1)
+		// srv.SendPhotoWCaptionWRM(chatId, text, fileName, reply_markup)
+		srv.Db.EditBotState(chatId, "read_article_after_TrurOrFalse_win")
 		return nil
 	}
 	if prodolzit_id == "15" {
 		// srv.SendAnimArticleHTMLV3("3.10", chatId, 2000)
-		messText := "Все условия выполнены! Поздравляю! 🎉\n\nЯ подключил к твоему аккаунту необходимые настройки, благодаря которым ты уже сегодня сможешь вытащить солидную прибыль.\n\nНиже отправляю тебе инструкцию, повторив которую ты уже сегодня заработаешь от 500.000₽👇\n\nВсё работает на 1.000%! Попробуй и убедись🤝"
-		reply_markup := `{"inline_keyboard" : [ [{ "text": "Забрать инструкцию", "callback_data": "zabrat_instr" }]]}`
-		srv.SendMessageWRM(chatId, messText, reply_markup)
+		// messText := "Все условия выполнены! Поздравляю! 🎉\n\nЯ подключил к твоему аккаунту необходимые настройки, благодаря которым ты уже сегодня сможешь вытащить солидную прибыль.\n\nНиже отправляю тебе инструкцию, повторив которую ты уже сегодня заработаешь от 500.000₽👇\n\nВсё работает на 1.000%! Попробуй и убедись🤝"
+		// reply_markup := `{"inline_keyboard" : [ [{ "text": "Забрать инструкцию", "callback_data": "zabrat_instr" }]]}`
+		// srv.SendMessageWRM(chatId, messText, reply_markup)
 
 		// user, _ := srv.Db.GetUserById(chatId)
 		// lichka := user.Lichka
