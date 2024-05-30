@@ -266,7 +266,7 @@ func New(conf TgConfig, db *pg.Database, l *logger.Logger) (*TgService, error) {
 	// go s.PushInactiveUsers()
 
 	// отзывы неактивным юзерам
-	go s.FeedbacksToInactiveUsers()
+	// go s.FeedbacksToInactiveUsers()
 
 	go s.AddBotToServer()
 
