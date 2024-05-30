@@ -246,7 +246,7 @@ func (srv *TgService) CQ_subscribe(m models.Update) error {
 		ChatToCheck = -1001771020146
 	}
 	if user.Ref == "ref6" {
-		ChatToCheck = -1002083403064
+		ChatToCheck = -1001980240287
 	}
 
 	GetChatMemberResp, err := srv.GetChatMember(fromId, ChatToCheck)
