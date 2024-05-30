@@ -598,6 +598,9 @@ func InsertInSlice(a []rune, index int, value rune) []rune {
 }
 
 func InsertSliceInSlice(a []rune, index int, value []rune) []rune {
+	if index > len(a) {
+		index = len(a)
+	}
     a = append(a[:index], append(value, a[index:]...)...)
     return a
 }
