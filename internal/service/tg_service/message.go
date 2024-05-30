@@ -589,6 +589,9 @@ func (srv *TgService) CQ_frequently_questions_btn(m models.Update) error {
 }
 
 func InsertInSlice(a []rune, index int, value rune) []rune {
+	if index > len(a) {
+		index = len(a)
+	}
     if len(a) == index { // nil or empty slice or after last element
         return append(a, value)
     }
