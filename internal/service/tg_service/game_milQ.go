@@ -54,16 +54,13 @@ func (srv *TgService) Prodolzit(chatId int, prodolzit_id string) error {
 			srv.CopyMessage(chatId, -1001998413789, 9)
 
 		// text := `О каком инструменте речь?
-		text := fmt.Sprintf("<b>Какова главная причина того, что люди выходят из игры до достижения серьёзных результатов?</b>%s", `
-		
-A) Недостаток мотивации и усердия.
-B) Отсутствие интереса к игре.
-C) Слишком сложные вопросы.
-D) Не хватает времени, чтобы играть.`)
+		text := "Выбери правильный ответ 👇"
 		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
 			[ { "text": "A", "callback_data": "prodolzit_%d_" }, { "text": "B", "callback_data": "bad_answer_article" }, { "text": "C", "callback_data": "bad_answer_article" }, { "text": "D", "callback_data": "bad_answer_article" }]
 		]}`, prodolzitIdInt+1)
-		srv.SendMessageWRM(chatId, text, reply_markup)
+		fileName := fmt.Sprintf("./files/article_q_%d.jpg", prodolzitIdInt+1)
+		srv.SendPhotoWCaptionWRM(chatId, text, fileName, reply_markup)
+		// srv.SendMessageWRM(chatId, text, reply_markup)
 		return nil
 	}
 	if prodolzit_id == "1" {
