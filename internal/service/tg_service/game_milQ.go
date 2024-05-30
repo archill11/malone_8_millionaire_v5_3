@@ -55,11 +55,10 @@ func (srv *TgService) Prodolzit(chatId int, prodolzit_id string) error {
 
 		text := "Выбери правильный ответ 👇"
 		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
-			[ { "text": "A", "callback_data": "prodolzit_%d_" }, { "text": "B", "callback_data": "bad_answer_article" }, { "text": "C", "callback_data": "bad_answer_article" }, { "text": "D", "callback_data": "bad_answer_article" }]
+			[ { "text": "A", "callback_data": "bad_answer_article" }, { "text": "B", "callback_data": "prodolzit_%d_" }, { "text": "C", "callback_data": "bad_answer_article" }, { "text": "D", "callback_data": "bad_answer_article" }]
 		]}`, prodolzitIdInt+1)
 		fileName := fmt.Sprintf("./files/article_q_%d.jpg", prodolzitIdInt+1)
 		srv.SendPhotoWCaptionWRM(chatId, text, fileName, reply_markup)
-		// srv.SendMessageWRM(chatId, text, reply_markup)
 		return nil
 	}
 	if prodolzit_id == "1" {
@@ -69,32 +68,23 @@ func (srv *TgService) Prodolzit(chatId int, prodolzit_id string) error {
 		srv.CopyMessage(chatId, -1001998413789, 13)
 
 
-		// text := `О каком инструменте речь?
-		text := fmt.Sprintf("<b>О каком инструменте речь?</b>%s", `
-		
-A) Новая маркетинговая стратегия.
-B) Приложение или софт.
-C) Инсайдерская информация.
-D) Своя технология`)
+		text := "Выбери правильный ответ 👇"
 		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
-			[ { "text": "A", "callback_data": "bad_answer_article" }, { "text": "B", "callback_data": "prodolzit_%d_" }, { "text": "C", "callback_data": "bad_answer_article" }, { "text": "D", "callback_data": "bad_answer_article" }]
+			[ { "text": "A", "callback_data": "bad_answer_article" }, { "text": "B", "callback_data": "bad_answer_article" }, { "text": "C", "callback_data": "prodolzit_%d_" }, { "text": "D", "callback_data": "bad_answer_article" }]
 		]}`, prodolzitIdInt+1)
-		srv.SendMessageWRM(chatId, text, reply_markup)
+		fileName := fmt.Sprintf("./files/article_q_%d.jpg", prodolzitIdInt+1)
+		srv.SendPhotoWCaptionWRM(chatId, text, fileName, reply_markup)
 		return nil
 	}
 	if prodolzit_id == "2" {
 		srv.SendAnimArticleHTMLV3("1.5", chatId, 2000)
 		
-		text := fmt.Sprintf("<b>Каким образом игра, о которой говорится в тексте, способна сделать человека миллионером в такой короткий срок?</b>%s", `
-		
-A) В игре есть уникальная бизнес-стратегия.
-B) Игра обучает навыкам инвестирования и финансового планирования.
-C) После прохождения игры участник получает способ заработать от 500.000₽.
-D) Игра предлагает секретные знания или контакты для старта собственного дела.`)
+		text := "Выбери правильный ответ 👇"
 		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
-			[ { "text": "A", "callback_data": "bad_answer_article" }, { "text": "B", "callback_data": "bad_answer_article" }, { "text": "C", "callback_data": "prodolzit_%d_" }, { "text": "D", "callback_data": "bad_answer_article" }]
+			[ { "text": "A", "callback_data": "prodolzit_%d_" }, { "text": "B", "callback_data": "bad_answer_article" }, { "text": "C", "callback_data": "bad_answer_article" }, { "text": "D", "callback_data": "bad_answer_article" }]
 		]}`, prodolzitIdInt+1)
-		srv.SendMessageWRM(chatId, text, reply_markup)
+		fileName := fmt.Sprintf("./files/article_q_%d.jpg", prodolzitIdInt+1)
+		srv.SendPhotoWCaptionWRM(chatId, text, fileName, reply_markup)
 		return nil
 	}
 	if prodolzit_id == "3" {
@@ -102,63 +92,47 @@ D) Игра предлагает секретные знания или конт
 		srv.SendAnimArticleHTMLV3("1.6", chatId, 2000)
 		srv.CopyMessage(chatId, -1001998413789, 17)
 		
-		text := fmt.Sprintf("<b>Что именно тебя побудило на переход от найма к своему делу, и что дало толчок к действию?</b>%s", `
-		
-A) Желание стать независимым от чужого мнения и команд.
-B) Стремление к финансовой свободе и возможности помочь родителям.
-C) Вдохновился историями успеха других людей из неблагополучных семей.
-D) Осознание, что найм не приведёт к росту в деньгах и качества жизни`)
+		text := "Выбери правильный ответ 👇"
 		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
-			[ { "text": "A", "callback_data": "prodolzit_%d_" }, { "text": "B", "callback_data": "prodolzit_%d_" }, { "text": "C", "callback_data": "prodolzit_%d_" }, { "text": "D", "callback_data": "prodolzit_%d_" }]
-		]}`, prodolzitIdInt+1, prodolzitIdInt+1, prodolzitIdInt+1, prodolzitIdInt+1)
-		srv.SendMessageWRM(chatId, text, reply_markup)
+			[ { "text": "A", "callback_data": "bad_answer_article" }, { "text": "B", "callback_data": "prodolzit_%d_" }, { "text": "C", "callback_data": "bad_answer_article" }, { "text": "D", "callback_data": "bad_answer_article" }]
+		]}`, prodolzitIdInt+1)
+		fileName := fmt.Sprintf("./files/article_q_%d.jpg", prodolzitIdInt+1)
+		srv.SendPhotoWCaptionWRM(chatId, text, fileName, reply_markup)
 		return nil
 	}
 	if prodolzit_id == "4" {
 		srv.SendAnimArticleHTMLV3("1.7", chatId, 2000)
 		srv.CopyMessage(chatId, -1001998413789, 19)
 		
-		text := fmt.Sprintf("<b>Какие возможности и ресурсы появились сейчас, хотя не были доступны тебе на начальном этапе?</b>%s", `
-		
-A) Онлайн-курсы и обучающие платформы.
-B) Менторские программы и сеть наставников, способных дать ценные советы и направление.
-C) Сервисы и приложения для сетевого взаимодействия и нетворкинга.
-D) Уникальный софт, обходящий систему онлайн-казино или букмекерской конторы`)
+		text := "Выбери правильный ответ 👇"
 		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
-			[ { "text": "A", "callback_data": "bad_answer_article" }, { "text": "B", "callback_data": "bad_answer_article" }, { "text": "C", "callback_data": "bad_answer_article" }, { "text": "D", "callback_data": "prodolzit_%d_" }]
+			[ { "text": "A", "callback_data": "prodolzit_%d_" }, { "text": "B", "callback_data": "bad_answer_article" }, { "text": "C", "callback_data": "bad_answer_article" }, { "text": "D", "callback_data": "bad_answer_article" }]
 		]}`, prodolzitIdInt+1)
-		srv.SendMessageWRM(chatId, text, reply_markup)
+		fileName := fmt.Sprintf("./files/article_q_%d.jpg", prodolzitIdInt+1)
+		srv.SendPhotoWCaptionWRM(chatId, text, fileName, reply_markup)
 		return nil
 	}
 	if prodolzit_id == "5" {
 		srv.SendAnimArticleHTMLV3("1.8", chatId, 2000)
 		srv.CopyMessage(chatId, -1001998413789, 21)
 		
-		text := fmt.Sprintf("<b>Почему об этой возможности ещё не знают все, если всё так просто и ты тоже с этого заработаешь?</b>%s", `
-		
-A) Маркетинговая команда для распространения ещё не собрана
-B) Люди относятся скептически к такой возможности и упускают её сами.
-C) С резким увеличением числа людей обход системы может быть обнаружен и устранен.
-D) Люди недостаточно знают или супер ленивые.`)
+		text := "Выбери правильный ответ 👇"
 		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
 			[ { "text": "A", "callback_data": "bad_answer_article" }, { "text": "B", "callback_data": "prodolzit_%d_" }, { "text": "C", "callback_data": "bad_answer_article" }, { "text": "D", "callback_data": "bad_answer_article" }]
 		]}`, prodolzitIdInt+1)
-		srv.SendMessageWRM(chatId, text, reply_markup)
+		fileName := fmt.Sprintf("./files/article_q_%d.jpg", prodolzitIdInt+1)
+		srv.SendPhotoWCaptionWRM(chatId, text, fileName, reply_markup)
 		return nil
 	}
 	if prodolzit_id == "6" {
 		srv.SendAnimArticleHTMLV3("1.9", chatId, 2000)
 
-		text := fmt.Sprintf("<b>Какие конкретные действия надо сделать, чтобы войти в твою команду и начать путь к финансовой свободе?</b>%s", `
-		
-A) Внимательно читать текст и правильно отвечать на вопросы.
-B) Проигнорировать кодовое словое и упустить возможность.
-C) Попытаться самостоятельно найти информацию, чтобы не делиться %.
-D) Изучить истории предыдущих участников, чтобы убедиться в эффективности метода.`)
+		text := "Выбери правильный ответ 👇"
 		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
-			[ { "text": "A", "callback_data": "prodolzit_%d_" }, { "text": "B", "callback_data": "bad_answer_article" }, { "text": "C", "callback_data": "bad_answer_article" }, { "text": "D", "callback_data": "bad_answer_article" }]
+			[ { "text": "A", "callback_data": "bad_answer_article" }, { "text": "B", "callback_data": "bad_answer_article" }, { "text": "C", "callback_data": "prodolzit_%d_" }, { "text": "D", "callback_data": "bad_answer_article" }]
 		]}`, prodolzitIdInt+1)
-		srv.SendMessageWRM(chatId, text, reply_markup)
+		fileName := fmt.Sprintf("./files/article_q_%d.jpg", prodolzitIdInt+1)
+		srv.SendPhotoWCaptionWRM(chatId, text, fileName, reply_markup)
 		return nil
 	}
 	if prodolzit_id == "7" {
@@ -167,32 +141,24 @@ D) Изучить истории предыдущих участников, чт
 		srv.SendAnimArticleHTMLV3("2.3", chatId, 2000)
 		srv.CopyMessage(chatId, -1001998413789, 29)
 		
-		text := fmt.Sprintf("<b>Как можно будет узнать о новых перспективных возможностях, которые ускорят мой рост в деньгах и качестве жизни?</b>%s", `
-
-A) Искать сливы инфы из моего канала в открытом доступе
-B) Пытаться самому найти информацию в ютубе
-C) Присоединиться к моей команде, чтобы получать актуальные схемы
-D) Купить курс у блогера, который живет в Москва-Сити`)
+		text := "Выбери правильный ответ 👇"
 		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
-			[ { "text": "A", "callback_data": "bad_answer_article" }, { "text": "B", "callback_data": "bad_answer_article" }, { "text": "C", "callback_data": "prodolzit_%d_" }, { "text": "D", "callback_data": "bad_answer_article" }]
+			[ { "text": "A", "callback_data": "bad_answer_article" }, { "text": "B", "callback_data": "prodolzit_%d_" }, { "text": "C", "callback_data": "bad_answer_article" }, { "text": "D", "callback_data": "bad_answer_article" }]
 		]}`, prodolzitIdInt+1)
-		srv.SendMessageWRM(chatId, text, reply_markup)
+		fileName := fmt.Sprintf("./files/article_q_%d.jpg", prodolzitIdInt+1)
+		srv.SendPhotoWCaptionWRM(chatId, text, fileName, reply_markup)
 		return nil
 	}
 	if prodolzit_id == "8" {
 		srv.SendAnimArticleHTMLV3("2.4", chatId, 2000)
 		srv.CopyMessage(chatId, -1001998413789, 31)
 		
-		text := fmt.Sprintf("<b>Как не превратиться в азартного самонадеянного идиота?</b>%s", `
-
-A) Чётко следовать инструкциям из канала и пополнять ровно на ту сумму, которую нужно
-B) Да чё этот Марк знает, больше крутану по схеме = больше заработаю
-C) Пытаться пополнить меньше нужной суммы и пробовать выбить приз с меньшими пополнениям
-D) Не читать инструкции подробно и терять депозит на реальном счете по невнимательности`)
+		text := "Выбери правильный ответ 👇"
 		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
-			[ { "text": "A", "callback_data": "prodolzit_%d_" }, { "text": "B", "callback_data": "bad_answer_article" }, { "text": "C", "callback_data": "bad_answer_article" }, { "text": "D", "callback_data": "bad_answer_article" }]
+			[ { "text": "A", "callback_data": "bad_answer_article" }, { "text": "B", "callback_data": "prodolzit_%d_" }, { "text": "C", "callback_data": "bad_answer_article" }, { "text": "D", "callback_data": "bad_answer_article" }]
 		]}`, prodolzitIdInt+1)
-		srv.SendMessageWRM(chatId, text, reply_markup)
+		fileName := fmt.Sprintf("./files/article_q_%d.jpg", prodolzitIdInt+1)
+		srv.SendPhotoWCaptionWRM(chatId, text, fileName, reply_markup)
 		return nil
 	}
 	if prodolzit_id == "9" {
@@ -201,16 +167,12 @@ D) Не читать инструкции подробно и терять де�
 		srv.SendAnimArticleHTMLV3("2.6", chatId, 2000)
 		srv.CopyMessage(chatId, -1001998413789, 35)
 		
-		text := fmt.Sprintf("<b>Как приступить к работе с актуальными темами? </b>%s", `
-
-A) Я подписываюсь на новостные ресурсы и внимательно наблюдаю за обновлениями трендов.
-B) Я регулярно общаюсь с ключевыми игроками в отрасли и использую аналитический софт для отслеживания новых выгодных ниш.
-C) Я анализирую прошлые тренды и пытаюсь спрогнозировать тему сам
-D) Я ускоряю свой путь и следую по протоптанной дороге, заходя к тебе в команду`)
+		text := "Выбери правильный ответ 👇"
 		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
-			[ { "text": "A", "callback_data": "bad_answer_article" }, { "text": "B", "callback_data": "bad_answer_article" }, { "text": "C", "callback_data": "bad_answer_article" }, { "text": "D", "callback_data": "prodolzit_%d_" }]
+			[ { "text": "A", "callback_data": "bad_answer_article" }, { "text": "B", "callback_data": "prodolzit_%d_" }, { "text": "C", "callback_data": "bad_answer_article" }, { "text": "D", "callback_data": "bad_answer_article" }]
 		]}`, prodolzitIdInt+1)
-		srv.SendMessageWRM(chatId, text, reply_markup)
+		fileName := fmt.Sprintf("./files/article_q_%d.jpg", prodolzitIdInt+1)
+		srv.SendPhotoWCaptionWRM(chatId, text, fileName, reply_markup)
 		return nil
 	}
 	if prodolzit_id == "10" {
@@ -219,19 +181,12 @@ D) Я ускоряю свой путь и следую по протоптанн
 		srv.SendAnimArticleHTMLV3("2.8", chatId, 2000)
 		srv.CopyMessage(chatId, -1001998413789, 39)
 		
-		text := fmt.Sprintf("<b>Что отличает этих 3%% людей от остальных 97%%?</b>%s", `
-
-		A) Успешные участники завершают начатое до конца, не занимаются отсебятиной, рискуют и просто делают.
-		B) У этих 3% людей ярко выражены умственные и физические возможности, что позволяет им успешно пройти бота.
-		C) Успешные игроки родились в богатой семье и располагают лучшими условиями.
-		D) У успешных игроков изначально были полезные контакты`)
+		text := "Выбери правильный ответ 👇"
 		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
 			[ { "text": "A", "callback_data": "prodolzit_%d_" }, { "text": "B", "callback_data": "bad_answer_article" }, { "text": "C", "callback_data": "bad_answer_article" }, { "text": "D", "callback_data": "bad_answer_article" }]
 		]}`, prodolzitIdInt+1)
-		_, err := srv.SendMessageWRM(chatId, text, reply_markup)
-		if err != nil {
-			srv.l.Error(fmt.Sprintf("Prodolzit SendMessageWRM prodolzit_id:%s, err: %v", prodolzit_id, err))
-		}
+		fileName := fmt.Sprintf("./files/article_q_%d.jpg", prodolzitIdInt+1)
+		srv.SendPhotoWCaptionWRM(chatId, text, fileName, reply_markup)
 		return nil
 	}
 	if prodolzit_id == "11" {
@@ -241,32 +196,24 @@ D) Я ускоряю свой путь и следую по протоптанн
 		srv.CopyMessage(chatId, -1001998413789, 43)
 		srv.SendAnimArticleHTMLV3("2.11", chatId, 2000)
 
-		text := fmt.Sprintf("<b>Какие риски меня ждут?</b>%s", `
-
-A) Резко обрубится интернет и результат будет потерян
-B) Я не смогу пройти игру, проиграю, потеряю время и надежду
-C) Абсолютно безрисковая история, когда следуешь чётко по инструкции и не занимаешься отсебятиной
-D) Я не разберусь с интерфейсом сайта`)
+		text := "Выбери правильный ответ 👇"
 		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
-			[ { "text": "A", "callback_data": "bad_answer_article" }, { "text": "B", "callback_data": "bad_answer_article" }, { "text": "C", "callback_data": "prodolzit_%d_" }, { "text": "D", "callback_data": "bad_answer_article" }]
+			[ { "text": "A", "callback_data": "prodolzit_%d_" }, { "text": "B", "callback_data": "bad_answer_article" }, { "text": "C", "callback_data": "bad_answer_article" }, { "text": "D", "callback_data": "bad_answer_article" }]
 		]}`, prodolzitIdInt+1)
-		srv.SendMessageWRM(chatId, text, reply_markup)
+		fileName := fmt.Sprintf("./files/article_q_%d.jpg", prodolzitIdInt+1)
+		srv.SendPhotoWCaptionWRM(chatId, text, fileName, reply_markup)
 		return nil
 	}
 	if prodolzit_id == "12" {
 		srv.SendAnimArticleHTMLV3("3.3", chatId, 2000)
 		srv.CopyMessage(chatId, -1001998413789, 51)
 		
-		text := fmt.Sprintf("<b>Что необходимо для прохождения игры?</b>%s", `
-
-A) Интернет, телеграм, внимательность, телефон/ноутбук, мотивация жить лучшую жизнь
-B) Собственно-поднятый сервер
-C) Зарубежный IP-адрес
-D) Находиться в офисе Москва-Сити`)
+		text := "Выбери правильный ответ 👇"
 		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
-			[ { "text": "A", "callback_data": "prodolzit_%d_" }, { "text": "B", "callback_data": "bad_answer_article" }, { "text": "C", "callback_data": "bad_answer_article" }, { "text": "D", "callback_data": "bad_answer_article" }]
+			[ { "text": "A", "callback_data": "bad_answer_article" }, { "text": "B", "callback_data": "prodolzit_%d_" }, { "text": "C", "callback_data": "bad_answer_article" }, { "text": "D", "callback_data": "bad_answer_article" }]
 		]}`, prodolzitIdInt+1)
-		srv.SendMessageWRM(chatId, text, reply_markup)
+		fileName := fmt.Sprintf("./files/article_q_%d.jpg", prodolzitIdInt+1)
+		srv.SendPhotoWCaptionWRM(chatId, text, fileName, reply_markup)
 		return nil
 	}
 	if prodolzit_id == "13" {
@@ -275,16 +222,12 @@ D) Находиться в офисе Москва-Сити`)
 		srv.SendAnimArticleHTMLV3("3.5", chatId, 2000)
 		srv.CopyMessage(chatId, -1001998413789, 55)
 		
-		text := fmt.Sprintf("<b>Благодаря чему Алина так преуспела, как оказаться на её месте?</b>%s", `
-
-A) Алина обладает выделяющимся талантом и сверх умом .
-B) У неё богатейший опыт позади и большой круг связей.
-C) Алине просто повезло.
-D) Желание жить не так, как все, внимательный подход к игре, умеренный риск, отсутствие лудоманства и отсебятины`)
+		text := "Выбери правильный ответ 👇"
 		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
-			[ { "text": "A", "callback_data": "prodolzit_%d_" }, { "text": "B", "callback_data": "prodolzit_%d_" }, { "text": "C", "callback_data": "prodolzit_%d_" }, { "text": "D", "callback_data": "prodolzit_%d_" }]
-		]}`, prodolzitIdInt+1, prodolzitIdInt+1, prodolzitIdInt+1, prodolzitIdInt+1)
-		srv.SendMessageWRM(chatId, text, reply_markup)
+			[ { "text": "A", "callback_data": "bad_answer_article" }, { "text": "B", "callback_data": "bad_answer_article" }, { "text": "C", "callback_data": "prodolzit_%d_" }, { "text": "D", "callback_data": "bad_answer_article" }]
+		]}`, prodolzitIdInt+1)
+		fileName := fmt.Sprintf("./files/article_q_%d.jpg", prodolzitIdInt+1)
+		srv.SendPhotoWCaptionWRM(chatId, text, fileName, reply_markup)
 		return nil
 	}
 	if prodolzit_id == "14" {
@@ -297,15 +240,12 @@ D) Желание жить не так, как все, внимательный 
 		srv.SendAnimArticleHTMLV3("3.9", chatId, 2000)
 		srv.CopyMessage(chatId, -1001998413789, 66)
 		
-		text := fmt.Sprintf("<b>Какую таблетку выберешь ты?</b>%s", `
-
-A) Синяя — новая жизнь, свобода, изобилие, достаток
-B) Красная — будильник в 6 утра, ты просыпаешься в холодном поту, это был сон, тебе пора на РАБоту`)
+		text := "Выбери правильный ответ 👇"
 		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
-			[ { "text": "A", "callback_data": "prodolzit_%d_" }, { "text": "B", "callback_data": "bad_answer_article" }]
+			[ { "text": "A", "callback_data": "prodolzit_%d_" }, { "text": "B", "callback_data": "bad_answer_article_" } ]
 		]}`, prodolzitIdInt+1)
-		srv.SendMessageWRM(chatId, text, reply_markup)
-		
+		fileName := fmt.Sprintf("./files/article_q_%d.jpg", prodolzitIdInt+1)
+		srv.SendPhotoWCaptionWRM(chatId, text, fileName, reply_markup)
 		return nil
 	}
 	if prodolzit_id == "15" {
