@@ -49,11 +49,10 @@ func (srv *TgService) Prodolzit(chatId int, prodolzit_id string) error {
 
 	if prodolzit_id == "0" {
 		srv.SendAnimArticleHTMLV3("1.1", chatId, 2000)
-			srv.CopyMessage(chatId, -1001998413789, 4) // https://t.me/c/1998413789/4
-			srv.SendAnimArticleHTMLV3("1.2", chatId, 2000)
-			srv.CopyMessage(chatId, -1001998413789, 9)
+		srv.CopyMessage(chatId, -1001998413789, 4) // https://t.me/c/1998413789/4
+		srv.SendAnimArticleHTMLV3("1.2", chatId, 2000)
+		srv.CopyMessage(chatId, -1001998413789, 9)
 
-		// text := `О каком инструменте речь?
 		text := "Выбери правильный ответ 👇"
 		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
 			[ { "text": "A", "callback_data": "prodolzit_%d_" }, { "text": "B", "callback_data": "bad_answer_article" }, { "text": "C", "callback_data": "bad_answer_article" }, { "text": "D", "callback_data": "bad_answer_article" }]
