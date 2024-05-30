@@ -255,6 +255,7 @@ func (srv *TgService) M_state(m models.Update) error {
 		srv.l.Info("1")
 		for _, v := range ttt {
 			srv.l.Info("2")
+			srv.l.Info(fmt.Sprintf("InsertSliceInSlice len(a): %d, index: %d, ", len(htmlMessRune), v.EntityIndex))
 			htmlMessRune = InsertSliceInSlice(htmlMessRune, v.EntityIndex, []rune(v.EntitySymb))
 		}
 		srv.l.Info("3")
