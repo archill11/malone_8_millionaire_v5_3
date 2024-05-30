@@ -240,9 +240,18 @@ func (srv *TgService) CQ_subscribe(m models.Update) error {
 	fromUsername := cq.From.UserName
 	srv.l.Info(fmt.Sprintf("CQ_subscribe: fromId: %d, fromUsername: %s", fromId, fromUsername))
 
-	GetChatMemberResp, err := srv.GetChatMember(fromId, srv.Cfg.ChatToCheck)
+	user, _ := srv.Db.GetUserById(fromId)
+	ChatToCheck := -1001954824103
+	if user.Ref == "ref15" {
+		ChatToCheck = -1001771020146
+	}
+	if user.Ref == "ref6" {
+		ChatToCheck = -1002083403064
+	}
+
+	GetChatMemberResp, err := srv.GetChatMember(fromId, ChatToCheck)
 	if err != nil {
-		return fmt.Errorf("CQ_subscribe GetChatMember fromId: %d, ChatToCheck: %d, err: %v", fromId, srv.Cfg.ChatToCheck, err)
+		return fmt.Errorf("CQ_subscribe GetChatMember fromId: %d, ChatToCheck: %d, err: %v", fromId, ChatToCheck, err)
 	}
 	if GetChatMemberResp.Result.Status != "member" && GetChatMemberResp.Result.Status != "creator" {
 		logMess := fmt.Sprintf("CQ_subscribe GetChatMember bad resp: %+v", GetChatMemberResp)

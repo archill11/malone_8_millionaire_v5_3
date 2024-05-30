@@ -34,7 +34,7 @@ func (srv *TgService) Send3Kruga(fromId int) {
 	scheme, _ := srv.Db.GetsSchemeByLichka(lichka)
 	schemeLink := scheme.Link
 	if user.Ref == "ref6" {
-		schemeLink := "https://goopro.store/api/v1/redirect/1000021904?register=1"
+		schemeLink = "https://goopro.store/api/v1/redirect/1000021904?register=1"
 	}
 
 	srv.SendVideoNoteCurrFile(fromId, fmt.Sprintf("./files/krug_3_%s_day_%d.mp4", scheme.Id, scheme.ScIdx))

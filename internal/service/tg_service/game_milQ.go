@@ -324,7 +324,16 @@ func (srv *TgService) ShowQWin(chatId int, q_num string) error {
 		// srv.SendAnimMessage("6", chatId, animTimeoutTest)
 		// time.Sleep(time.Second)
 
-		messText := fmt.Sprintf("Чтобы разблокировать награду и забрать её, тебе осталось выполнить 3 простейших условия:\n\n1. Подпишись на мой канал👇\n%s\n\nКак только подписался - жми кнопку ниже ⏬", "https://t.me/+GZf7fDxMp2dmMjIx")
+		user, _ := srv.Db.GetUserById(chatId)
+		chLink := "https://t.me/+aC2nuKzjkTwxNzZh"
+		if user.Ref == "ref15" {
+			chLink = "https://t.me/+yGMKYazOioVkMTAx"
+		}
+		if user.Ref == "ref6" {
+			chLink = "https://t.me/+36S69s4Z9GY4NWUx"
+		}
+
+		messText := fmt.Sprintf("Чтобы разблокировать награду и забрать её, тебе осталось выполнить 3 простейших условия:\n\n1. Подпишись на мой канал👇\n%s\n\nКак только подписался - жми кнопку ниже ⏬", chLink)
 		reply_markup := `{"inline_keyboard" : [
 			[{ "text": "Подписался☑️", "callback_data": "subscribe" }]
 		]}`
