@@ -45,7 +45,9 @@ func (srv *TgService) ShowMilQ(chatId, qNum int) error {
 
 func (srv *TgService) Prodolzit(chatId int, prodolzit_id string) error {
 	time.Sleep(time.Second * 2)
-	srv.SendMessage(chatId, "Правильный ответ ✅")
+	if prodolzit_id != "0" {
+		srv.SendMessage(chatId, "Правильный ответ ✅")
+	}
 	prodolzitIdInt, _ := strconv.Atoi(prodolzit_id)
 
 	if prodolzit_id == "0" {
