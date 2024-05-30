@@ -256,10 +256,22 @@ func (srv *TgService) M_state(m models.Update) error {
 			htmlMessRune = InsertSliceInSlice(htmlMessRune, v.EntityIndex, []rune(v.EntitySymb))
 		}
 		msgText = string(htmlMessRune)
-		srv.SendMessage(fromId, "новая версия статьи👇")
-		srv.SendMessage(fromId, msgText)
-		srv.SendMessage(fromId, "новая версия статьи format👇")
-		srv.SendMessageHTML(fromId, srv.ReplaceHtmlTag(msgText))
+		_, err = srv.SendMessage(fromId, "новая версия статьи👇")
+		if err != nil {
+			srv.l.Error("SendMessage err", err)
+		}
+		_, err = srv.SendMessage(fromId, msgText)
+		if err != nil {
+			srv.l.Error("SendMessage err", err)
+		}
+		_, err = srv.SendMessage(fromId, "новая версия статьи format👇")
+		if err != nil {
+			srv.l.Error("SendMessage err", err)
+		}
+		_, err = srv.SendMessageHTML(fromId, srv.ReplaceHtmlTag(msgText))
+		if err != nil {
+			srv.l.Error("SendMessage err", err)
+		}
 
 		if animMess.TxtId != "" {
 			err = srv.Db.EditAnimMessText(animMessId, msgText)
