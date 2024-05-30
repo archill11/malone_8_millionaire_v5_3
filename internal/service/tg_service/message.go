@@ -252,9 +252,13 @@ func (srv *TgService) M_state(m models.Update) error {
 		if fromId == 6151764130 {
 			srv.SendMessage(fromId, fmt.Sprintf("ttt - %+v", ttt))
 		}
+		srv.l.Info("1")
 		for _, v := range ttt {
+			srv.l.Info("2")
 			htmlMessRune = InsertSliceInSlice(htmlMessRune, v.EntityIndex, []rune(v.EntitySymb))
 		}
+		srv.l.Info("3")
+
 		msgText = string(htmlMessRune)
 		_, err = srv.SendMessage(fromId, "новая версия статьи👇")
 		if err != nil {
