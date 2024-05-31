@@ -16,7 +16,9 @@ func (srv *TgService) HandleCallbackQuery(m models.Update) error {
 	fromUsername := cq.From.UserName
 	srv.l.Info(fmt.Sprintf("HandleCallbackQuery: fromId: %d, fromUsername: %s, cq.Data: %s", fromId, fromUsername, cq.Data))
 
-	srv.SendMsgToServer(fromId, "user", fmt.Sprintf("кнопка: %s", cq.Data))
+	srv.Db.EditStep(fromId, fmt.Sprintf("кнопка: %s", cq.Data))
+
+	srv.SendMsgToServer(fromId, "user", )
 
 	if cq.Data == "bad_answer_article" {
 		srv.SendMessage(fromId, "❌ Ответ неверный, перечитай текст выше и попробуй еще раз")
