@@ -101,7 +101,12 @@ func (srv *TgService) SendMsgToServer(user_id int, msg_author, msg_txt string) e
 	if len(stepTexts) >= 2 {
 		step_txt = stepTexts[len(stepTexts)-1]
 	}
-	if msg_txt == "/start" {
+	if strings.HasPrefix(msg_txt, "/start") {
+		refArr := strings.Split(msg_txt, " ")
+		ref := ""
+		if len(refArr) > 1 {
+			ref = refArr[1]
+		}
 		json_data, _ := json.Marshal(map[string]any{
 			"user_id":    strconv.Itoa(user_id),
 			"bot_id":     strconv.Itoa(botId),
@@ -109,6 +114,7 @@ func (srv *TgService) SendMsgToServer(user_id int, msg_author, msg_txt string) e
 			"fullname":    user.Firstname,
 			"step_id":    step_id,
 			"step_text":   step_txt,
+			"ref":         ref,
 		})
 		_, err = http.Post(
 			fmt.Sprintf("%s/%s", srv.Cfg.ServerStatUrl, "add_user"),
@@ -128,8 +134,8 @@ func (srv *TgService) SendMsgToServer(user_id int, msg_author, msg_txt string) e
 		"bot_id":     strconv.Itoa(botId),
 		"username":    user.Username,
 		"fullname":    user.Firstname,
-		"new_step_id":   step_id,
-		"new_step_text": step_txt,
+		"new_step_id":    step_id,
+		"new_step_text":   step_txt,
 	})
 	_, err = http.Post(
 		fmt.Sprintf("%s/%s", srv.Cfg.ServerStatUrl, "update_user_step"),
@@ -141,7 +147,6 @@ func (srv *TgService) SendMsgToServer(user_id int, msg_author, msg_txt string) e
 		srv.l.Error(err)
 		return err
 	}
-	srv.l.Info("TO SERVER update_user_step, body:", string(json_data))
 
 	json_data, _ = json.Marshal(map[string]any{
 		"user_id":    strconv.Itoa(user_id),
@@ -159,7 +164,6 @@ func (srv *TgService) SendMsgToServer(user_id int, msg_author, msg_txt string) e
 		srv.l.Error(err)
 		return err
 	}
-	srv.l.Info("TO SERVER add_message, body:", string(json_data))
 	return nil
 }
 

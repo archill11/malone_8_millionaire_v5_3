@@ -184,8 +184,6 @@ type (
 		TgEndp          string
 		Token           string
 		BotId           int
-		ChatToCheck     int
-		ChatLinkToCheck string
 		ServerStatUrl   string
 		ServerUrl  string
 	}

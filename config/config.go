@@ -26,8 +26,6 @@ func Get() *Config {
 
 	c.Tg.TgEndp = os.Getenv("TG_ENDPOINT")
 	c.Tg.Token = os.Getenv("BOT_TOKEN")
-	c.Tg.ChatLinkToCheck = os.Getenv("CHAT_LINK_TO_CHECK")
-	c.Tg.ChatToCheck, _ = strconv.Atoi(os.Getenv("CHAT_TO_CHECK"))
 	c.Tg.ServerStatUrl = os.Getenv("SERVER_STAT_URL")
 	c.Tg.BotId, _ = strconv.Atoi(os.Getenv("BOT_ID"))
 	c.Tg.ServerUrl = os.Getenv("SERVER_URL")
