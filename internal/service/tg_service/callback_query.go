@@ -278,10 +278,19 @@ func (srv *TgService) CQ_subscribe(m models.Update) error {
 	}
 	time.Sleep(time.Second)
 
-	reglink := "https://goopro.store/api/v1/redirect/1000153272?register=1"
+	lichka := user.Lichka
+	if lichka == "" {
+		lichka = "https://t.me/markodinncov"
+	}
+	scheme, _ := srv.Db.GetsSchemeByLichka(lichka)
+	schemeLink := scheme.Link
+	if user.Ref == "ref6" {
+		schemeLink = "https://goopro.store/api/v1/redirect/1000021904?register=1"
+	}
+
 	reply_markup = fmt.Sprintf(`{"inline_keyboard" : [
 		[{ "text": "Зарегистрироваться", "url": "%s" }]
-	]}`, reglink)
+	]}`, schemeLink)
 	
 	futureJson := map[string]string{
 		"video_note":   fmt.Sprintf("@%s", "./files/krug_2.mp4"),
