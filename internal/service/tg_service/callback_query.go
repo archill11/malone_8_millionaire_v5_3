@@ -25,13 +25,13 @@ func (srv *TgService) HandleCallbackQuery(m models.Update) error {
 		return nil
 	}
 
-	// go func() {
-	// 	if cq.Data != "subscribe" {
-	// 		// time.Sleep(time.Second)
-	// 		srv.EditMessageReplyMarkup(fromId, cq.Message.MessageId)
-	// 		srv.Db.UpdateLatsActiontime(fromId)
-	// 	}
-	// }()
+	go func() {
+		if cq.Data != "subscribe" {
+			time.Sleep(time.Second)
+			srv.EditMessageReplyMarkup(fromId, cq.Message.MessageId)
+			srv.Db.UpdateLatsActiontime(fromId)
+		}
+	}()
 
 	// user, err := srv.Db.GetUserById(fromId)
 	// if err != nil {
