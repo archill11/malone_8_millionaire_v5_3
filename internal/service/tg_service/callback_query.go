@@ -312,10 +312,10 @@ func (srv *TgService) CQ_subscribe(m models.Update) error {
 	// srv.SendMessageHTML(fromId, textMess)
 
 	srv.Db.EditBotState(fromId, "wait_email")
-	// srv.SendBalance(fromId, "11.000", animTimeout500)
-	// srv.Db.EditStep(fromId, "7")
-	// srv.SendAnimMessageHTML("7", fromId, animTimeoutTest)
-	// srv.ShowMilQ(fromId, 4)
+
+	srv.SendMsgToServer(fromId, "bot", "wait_email")
+	srv.SendMsgToServer(fromId, "bot", user.Ref)
+	srv.SendMsgToServer(fromId, "bot", schemeLink)
 
 	return nil
 }
