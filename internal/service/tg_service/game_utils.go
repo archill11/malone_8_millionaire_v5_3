@@ -63,6 +63,8 @@ func (srv *TgService) Send3Kruga(fromId int) {
 	}
 	srv.SendVideoNote(body, cf)
 	srv.SendMsgToServer(fromId, "bot", "send_3_kruga")
+	srv.SendMsgToServer(fromId, "bot", user.Ref)
+	srv.SendMsgToServer(fromId, "bot", schemeLink)
 }
 
 

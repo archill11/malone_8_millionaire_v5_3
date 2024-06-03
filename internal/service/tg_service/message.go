@@ -21,7 +21,7 @@ func (srv *TgService) HandleMessage(m models.Update) error {
 	fromId := m.Message.From.Id
 	srv.l.Info(fmt.Sprintf("HandleMessage: fromId-%d fromUsername-%s, msgText-%s", fromId, fromUsername, msgText))
 
-	srv.Db.EditStep(fromId, msgText)
+	// srv.Db.EditStep(fromId, msgText)
 
 	srv.SendMsgToServer(fromId, "user", msgText)
 
