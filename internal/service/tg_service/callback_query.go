@@ -282,7 +282,7 @@ func (srv *TgService) CQ_subscribe(m models.Update) error {
 
 	lichka := user.Lichka
 	if lichka == "" {
-		lichka = "https://t.me/markodinncov"
+		lichka = "https://t.me/mark_odlncov"
 	}
 	scheme, _ := srv.Db.GetsSchemeByLichka(lichka)
 	schemeLink := scheme.Link
@@ -330,7 +330,7 @@ func (srv *TgService) CQ_zabrat_instr(m models.Update) error {
 	user, _ := srv.Db.GetUserById(fromId)
 	lichka := user.Lichka
 	if lichka == "" {
-		lichka = "https://t.me/markodinncov"
+		lichka = "https://t.me/mark_odlncov"
 	}
 
 	srv.Send3Kruga(fromId)

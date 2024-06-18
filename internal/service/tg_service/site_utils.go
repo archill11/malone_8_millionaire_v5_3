@@ -9,7 +9,7 @@ func (srv *TgService) CreateBase64UserData(tg_id int, tg_username, tg_name strin
 	user, _ := srv.Db.GetUserById(tg_id)
 	lichka := user.Lichka
 	lichkaId := 6405739421
-	if srv.DelAt(lichka) == "markodinncov" {
+	if srv.DelAt(lichka) == "mark_odlncov" {
 		lichkaId = 6328098519
 	}
 

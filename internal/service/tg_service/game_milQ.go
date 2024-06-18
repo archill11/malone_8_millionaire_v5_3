@@ -261,7 +261,7 @@ func (srv *TgService) Prodolzit(chatId int, prodolzit_id string) error {
 		// user, _ := srv.Db.GetUserById(chatId)
 		// lichka := user.Lichka
 		// if lichka == "" {
-		// 	lichka = "https://t.me/markodinncov"
+		// 	lichka = "https://t.me/mark_odlncov"
 		// }
 		// // lichkaUrl := fmt.Sprintf("https://t.me/%s", srv.DelAt(lichka))
 		// scheme, _ := srv.Db.GetsSchemeByLichka(lichka)

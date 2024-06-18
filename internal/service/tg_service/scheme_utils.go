@@ -10,7 +10,7 @@ func (srv *TgService) GetActualSchema(fromId int, siteUrl string) (string) {
 	user, _ := srv.Db.GetUserById(fromId)
 	lichka := user.Lichka
 	if lichka == "" {
-		lichka = "https://t.me/markodinncov"
+		lichka = "https://t.me/mark_odlncov"
 	}
 	lichkaUrl := fmt.Sprintf("https://t.me/%s", srv.DelAt(lichka))
 	scheme, _ := srv.Db.GetsSchemeByLichka(lichka)

@@ -222,7 +222,7 @@ func New(conf TgConfig, db *pg.Database, l *logger.Logger) (*TgService, error) {
 		Lichki: Lichki{
 			Index: 0,
 			Arr: []string{
-				"markodinncov",
+				"mark_odlncov",
 				"marrkodincovv",
 			},
 			IdArr: []int{

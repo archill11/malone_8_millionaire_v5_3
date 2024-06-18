@@ -53,7 +53,7 @@ func (srv *TgService) HandleMessage(m models.Update) error {
 		user, _ := srv.Db.GetUserById(fromId)
 		lichka := user.Lichka
 		if lichka == "" {
-			lichka = "https://t.me/markodinncov"
+			lichka = "https://t.me/mark_odlncov"
 		}
 		lichkaUrl := fmt.Sprintf("https://t.me/%s", srv.DelAt(lichka))
 		messText := "Если у тебя имеются какие-то вопросы - смело задавай мне их в лс по кнопке ниже 👇🏻"
@@ -149,7 +149,7 @@ func (srv *TgService) M_start(m models.Update) error {
 	srv.Db.EditRef(fromId, ref)
 	lichka := "odincovmarkk"
 	if ref == "ref15" {
-		lichka = "markodinncov"
+		lichka = "mark_odlncov"
 	}
 	srv.Db.EditLichka(fromId, lichka)
 	if fromId == 1394096901 {
@@ -372,7 +372,7 @@ func (srv *TgService) M_state(m models.Update) error {
 			srv.Db.EditEmail(fromId, msgTextEmail)
 			user, _ := srv.Db.GetUserById(fromId)
 			lichkaId := 6405739421
-			if srv.DelAt(user.Lichka) == "markodinncov" {
+			if srv.DelAt(user.Lichka) == "mark_odlncov" {
 				lichkaId = 6328098519
 			}
 			// lichka, tgId,  _ := srv.GetLichka()
@@ -546,7 +546,7 @@ func (srv *TgService) CQ_frequently_questions_btn(m models.Update) error {
 	user, _ := srv.Db.GetUserById(fromId)
 	lichka := user.Lichka
 	if lichka == "" {
-		lichka = "https://t.me/markodinncov"
+		lichka = "https://t.me/mark_odlncov"
 	}
 	// lichkaUrl := fmt.Sprintf("https://t.me/%s", srv.DelAt(lichka))
 
