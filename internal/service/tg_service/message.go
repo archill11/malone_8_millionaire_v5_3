@@ -373,7 +373,7 @@ func (srv *TgService) M_state(m models.Update) error {
 			user, _ := srv.Db.GetUserById(fromId)
 			lichkaId := 6405739421
 			if srv.DelAt(user.Lichka) == "mark_odlncov" {
-				lichkaId = 6328098519
+				lichkaId = 6865167980
 			}
 			// lichka, tgId,  _ := srv.GetLichka()
 			// srv.Db.EditLichka(fromId, lichka)

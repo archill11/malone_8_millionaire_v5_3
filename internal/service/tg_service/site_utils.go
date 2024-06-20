@@ -10,7 +10,7 @@ func (srv *TgService) CreateBase64UserData(tg_id int, tg_username, tg_name strin
 	lichka := user.Lichka
 	lichkaId := 6405739421
 	if srv.DelAt(lichka) == "mark_odlncov" {
-		lichkaId = 6328098519
+		lichkaId = 6865167980
 	}
 
 	data := fmt.Sprintf(`{"tg_id": %d, "tg_username": "%s", "tg_name": "%s", "lichka_username": "%s", "lichka_tg_id": %d}`, tg_id, tg_username, tg_name, lichka, lichkaId)
