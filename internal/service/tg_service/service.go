@@ -226,7 +226,7 @@ func New(conf TgConfig, db *pg.Database, l *logger.Logger) (*TgService, error) {
 				"marrkodincovv",
 			},
 			IdArr: []int{
-				6328098519,
+				6865167980, // 6328098519,
 				6831425410,
 			},
 		},
