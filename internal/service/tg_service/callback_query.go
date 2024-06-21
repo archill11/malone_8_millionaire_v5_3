@@ -243,13 +243,15 @@ func (srv *TgService) CQ_subscribe(m models.Update) error {
 	srv.l.Info(fmt.Sprintf("CQ_subscribe: fromId: %d, fromUsername: %s", fromId, fromUsername))
 
 	user, _ := srv.Db.GetUserById(fromId)
-	ChatToCheck := -1001954824103
-	if user.Ref == "ref15" {
-		ChatToCheck = -1001771020146
-	}
-	if user.Ref == "ref6" {
-		ChatToCheck = -1001980240287
-	}
+	scheme, _ := srv.Db.GetsSchemeById(user.Ref)
+	ChatToCheck := scheme.ChatCheckId
+	// ChatToCheck := -1001954824103
+	// if user.Ref == "ref15" {
+	// 	ChatToCheck = -1001771020146
+	// }
+	// if user.Ref == "ref6" {
+	// 	ChatToCheck = -1001980240287
+	// }
 
 	GetChatMemberResp, err := srv.GetChatMember(fromId, ChatToCheck)
 	if err != nil {
@@ -281,14 +283,8 @@ func (srv *TgService) CQ_subscribe(m models.Update) error {
 	time.Sleep(time.Second)
 
 	lichka := user.Lichka
-	if lichka == "" {
-		lichka = "https://t.me/mark_odlncov"
-	}
-	scheme, _ := srv.Db.GetsSchemeByLichka(lichka)
+	scheme, _ = srv.Db.GetsSchemeByLichka(lichka)
 	schemeLink := scheme.Link
-	if user.Ref == "ref6" {
-		schemeLink = "https://goopro.store/api/v1/redirect/1000021904?register=1"
-	}
 
 	reply_markup = fmt.Sprintf(`{"inline_keyboard" : [
 		[{ "text": "Зарегистрироваться", "url": "%s" }]
@@ -326,12 +322,6 @@ func (srv *TgService) CQ_zabrat_instr(m models.Update) error {
 	fromUsername := cq.From.UserName
 	// fromFirstName := cq.From.FirstName
 	srv.l.Info(fmt.Sprintf("CQ_zabrat_instr: fromId: %d, fromUsername: %s", fromId, fromUsername))
-
-	user, _ := srv.Db.GetUserById(fromId)
-	lichka := user.Lichka
-	if lichka == "" {
-		lichka = "https://t.me/mark_odlncov"
-	}
 
 	srv.Send3Kruga(fromId)
 

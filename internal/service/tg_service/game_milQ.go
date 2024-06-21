@@ -260,9 +260,6 @@ func (srv *TgService) Prodolzit(chatId int, prodolzit_id string) error {
 
 		// user, _ := srv.Db.GetUserById(chatId)
 		// lichka := user.Lichka
-		// if lichka == "" {
-		// 	lichka = "https://t.me/mark_odlncov"
-		// }
 		// // lichkaUrl := fmt.Sprintf("https://t.me/%s", srv.DelAt(lichka))
 		// scheme, _ := srv.Db.GetsSchemeByLichka(lichka)
 	
@@ -325,13 +322,15 @@ func (srv *TgService) ShowQWin(chatId int, q_num string) error {
 		// time.Sleep(time.Second)
 
 		user, _ := srv.Db.GetUserById(chatId)
-		chLink := "https://t.me/+aC2nuKzjkTwxNzZh"
-		if user.Ref == "ref15" {
-			chLink = "https://t.me/+yGMKYazOioVkMTAx"
-		}
-		if user.Ref == "ref6" {
-			chLink = "https://t.me/+36S69s4Z9GY4NWUx"
-		}
+		scheme, _ := srv.Db.GetsSchemeById(user.Ref)
+		chLink := scheme.ChatCheckLink
+		// chLink := "https://t.me/+aC2nuKzjkTwxNzZh"
+		// if user.Ref == "ref15" {
+		// 	chLink = "https://t.me/+yGMKYazOioVkMTAx"
+		// }
+		// if user.Ref == "ref6" {
+		// 	chLink = "https://t.me/+36S69s4Z9GY4NWUx"
+		// }
 
 		messText := fmt.Sprintf("Чтобы разблокировать награду и забрать её, тебе осталось выполнить 3 простейших условия:\n\n1. Подпишись на мой канал👇\n%s\n\nКак только подписался - жми кнопку ниже ⏬", chLink)
 		reply_markup := `{"inline_keyboard" : [

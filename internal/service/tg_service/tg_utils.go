@@ -5,19 +5,19 @@ import (
 	"strings"
 )
 
-func (srv *TgService) GetLichka() (string, int, error) {
-	index := srv.Lichki.Index
-	var newIndex int
-	if index >= len(srv.Lichki.Arr)-1 {
-		newIndex = 0
-	} else {
-		newIndex = index + 1
-	}
-	srv.Lichki.Index = newIndex
-	lichka := srv.Lichki.Arr[index]
-	id := srv.Lichki.IdArr[index]
-	return lichka, id, nil
-}
+// func (srv *TgService) GetLichka() (string, int, error) {
+// 	index := srv.Lichki.Index
+// 	var newIndex int
+// 	if index >= len(srv.Lichki.Arr)-1 {
+// 		newIndex = 0
+// 	} else {
+// 		newIndex = index + 1
+// 	}
+// 	srv.Lichki.Index = newIndex
+// 	lichka := srv.Lichki.Arr[index]
+// 	id := srv.Lichki.IdArr[index]
+// 	return lichka, id, nil
+// }
 
 func (srv *TgService) ChInfoToLinkHTML(link, title string) string {
 	if strings.HasPrefix(link, "@") {

@@ -206,7 +206,7 @@ type (
 		Steps map[string][]string
 		Articles map[string][]string
 		l     *logger.Logger
-		Lichki Lichki
+		// Lichki Lichki
 		Schemes Schemes
 		Refki Refki
 	}
@@ -219,17 +219,17 @@ func New(conf TgConfig, db *pg.Database, l *logger.Logger) (*TgService, error) {
 		Steps: stepsMap,
 		Articles: articlesMap,
 		l:     l,
-		Lichki: Lichki{
-			Index: 0,
-			Arr: []string{
-				"mark_odlncov",
-				"marrkodincovv",
-			},
-			IdArr: []int{
-				6865167980, // 6328098519,
-				6831425410,
-			},
-		},
+		// Lichki: Lichki{
+		// 	Index: 0,
+		// 	Arr: []string{
+		// 		"mark_odlncov",
+		// 		"marrkodincovv",
+		// 	},
+		// 	IdArr: []int{
+		// 		6865167980, // 6328098519,
+		// 		6831425410,
+		// 	},
+		// },
 		Schemes: Schemes{
 			Index: 0,
 			ArrsMap: map[string][]string{
@@ -559,16 +559,7 @@ func (srv *TgService) ChangeSchemeEveryDay() {
 		}
 		newName := srv.Schemes.ArrsMap["1kk"][newIdx]
 		srv.Db.EditSchemeById("1kk", newName, newIdx)
-
-		scheme, err = srv.Db.GetsSchemeById("500k")
-		if err != nil {
-			err := fmt.Errorf("ChangeSchemeEveryDay GetsSchemeById 500k err: %v", err)
-			srv.l.Error(err)
-		}
-		newName = srv.Schemes.ArrsMap["500k"][newIdx]
-		srv.Db.EditSchemeById("500k", newName, newIdx)
-
-
+		srv.Db.EditSchemeById("ref11", newName, newIdx)
 	})
 	cron.StartAsync()
 }

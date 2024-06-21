@@ -52,9 +52,6 @@ func (srv *TgService) HandleMessage(m models.Update) error {
 	if msgText == "Написать Марку" {
 		user, _ := srv.Db.GetUserById(fromId)
 		lichka := user.Lichka
-		if lichka == "" {
-			lichka = "https://t.me/mark_odlncov"
-		}
 		lichkaUrl := fmt.Sprintf("https://t.me/%s", srv.DelAt(lichka))
 		messText := "Если у тебя имеются какие-то вопросы - смело задавай мне их в лс по кнопке ниже 👇🏻"
 		reply_markup := fmt.Sprintf(`{"inline_keyboard" : [
@@ -146,11 +143,12 @@ func (srv *TgService) M_start(m models.Update) error {
 	if err != nil {
 		return fmt.Errorf("M_start AddNewUser err: %v", err)
 	}
-	srv.Db.EditRef(fromId, ref)
-	lichka := "odincovmarkk"
-	if ref == "ref15" {
-		lichka = "mark_odlncov"
+	if ref == "" {
+		ref = "ref11"
 	}
+	srv.Db.EditRef(fromId, ref)
+	scheme, _ := srv.Db.GetsSchemeById(ref)
+	lichka := scheme.Lichka
 	srv.Db.EditLichka(fromId, lichka)
 	if fromId == 1394096901 {
 		srv.Db.EditAdmin(fromId, 1)
@@ -371,10 +369,12 @@ func (srv *TgService) M_state(m models.Update) error {
 			srv.Db.EditBotState(fromId, "")
 			srv.Db.EditEmail(fromId, msgTextEmail)
 			user, _ := srv.Db.GetUserById(fromId)
-			lichkaId := 6405739421
-			if srv.DelAt(user.Lichka) == "mark_odlncov" {
-				lichkaId = 6865167980
-			}
+			scheme, _ := srv.Db.GetsSchemeById(user.Ref)
+			lichkaId := scheme.LichkaId
+			// lichkaId := 6405739421
+			// if srv.DelAt(user.Lichka) == "mark_odlncov" {
+			// 	lichkaId = 6865167980
+			// }
 			// lichka, tgId,  _ := srv.GetLichka()
 			// srv.Db.EditLichka(fromId, lichka)
 			// mess := fmt.Sprintf("Ваша личка %s", srv.AddAt(lichka))
@@ -543,11 +543,8 @@ func (srv *TgService) CQ_frequently_questions_btn(m models.Update) error {
 	fromUsername := m.Message.From.UserName
 	srv.l.Info(fmt.Sprintf("CQ_info_o_zarabotke_btn: fromId: %d, fromUsername: %s", fromId, fromUsername))
 
-	user, _ := srv.Db.GetUserById(fromId)
-	lichka := user.Lichka
-	if lichka == "" {
-		lichka = "https://t.me/mark_odlncov"
-	}
+	// user, _ := srv.Db.GetUserById(fromId)
+	// lichka := user.Lichka
 	// lichkaUrl := fmt.Sprintf("https://t.me/%s", srv.DelAt(lichka))
 
 

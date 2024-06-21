@@ -26,16 +26,13 @@ const (
 func (srv *TgService) Send3Kruga(fromId int) {
 	user, _ := srv.Db.GetUserById(fromId)
 	lichka := user.Lichka
-	if lichka == "" {
-		lichka = "https://t.me/mark_odlncov"
-	}
 	lichkaUrl := fmt.Sprintf("https://t.me/%s", srv.DelAt(lichka))
 
 	scheme, _ := srv.Db.GetsSchemeByLichka(lichka)
 	schemeLink := scheme.Link
-	if user.Ref == "ref6" {
-		schemeLink = "https://goopro.store/api/v1/redirect/1000021904?register=1"
-	}
+	// if user.Ref == "ref6" {
+	// 	schemeLink = "https://goopro.store/api/v1/redirect/1000021904?register=1"
+	// }
 
 	srv.SendVideoNoteCurrFile(fromId, fmt.Sprintf("./files/krug_3_%s_day_%d.mp4", scheme.Id, scheme.ScIdx))
 
