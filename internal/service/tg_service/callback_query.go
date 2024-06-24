@@ -27,9 +27,11 @@ func (srv *TgService) HandleCallbackQuery(m models.Update) error {
 
 	go func() {
 		if cq.Data != "subscribe" {
-			time.Sleep(time.Second)
-			srv.EditMessageReplyMarkup(fromId, cq.Message.MessageId)
-			srv.Db.UpdateLatsActiontime(fromId)
+			if fromId != 6151764130 {
+				time.Sleep(time.Second)
+				srv.EditMessageReplyMarkup(fromId, cq.Message.MessageId)
+				srv.Db.UpdateLatsActiontime(fromId)
+			}
 		}
 	}()
 
