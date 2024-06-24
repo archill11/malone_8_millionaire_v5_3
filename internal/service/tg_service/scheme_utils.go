@@ -11,7 +11,7 @@ func (srv *TgService) GetActualSchema(fromId int, siteUrl string) (string) {
 	lichka := user.Lichka
 	lichkaUrl := fmt.Sprintf("https://t.me/%s", srv.DelAt(lichka))
 	// scheme, _ := srv.Db.GetsSchemeByLichka(lichka)
-	scheme, _ := srv.Db.GetsSchemeByLichka("ref11")
+	scheme, _ := srv.Db.GetsSchemeById("ref11")
 
 	algo := srv.GetActualSchemaAlgo(scheme.ScName)
 
