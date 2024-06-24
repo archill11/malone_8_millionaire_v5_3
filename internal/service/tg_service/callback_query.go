@@ -299,9 +299,12 @@ func (srv *TgService) CQ_subscribe(m models.Update) error {
 	}
 	cf, body, err := files.CreateForm(futureJson)
 	if err != nil {
-		return fmt.Errorf("HandleVideoNote CreateFormV2 err: %v", err)
+		return fmt.Errorf("CQ_subscribe CreateForm err: %v", err)
 	}
-	srv.SendVideoNote(body, cf)
+	_, err = srv.SendVideoNote(body, cf)
+	if err != nil {
+		return fmt.Errorf("CQ_subscribe SendVideoNote err: %v", err)
+	}
 
 	// textMess := fmt.Sprintf(
 	// 	"Переходи и регистрируйся по ссылке:\n\n%s\n\nДалее присылай сюда почту, на которую регистрировался 👇🏻",
