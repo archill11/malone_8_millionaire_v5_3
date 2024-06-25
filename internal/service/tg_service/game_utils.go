@@ -34,7 +34,7 @@ func (srv *TgService) Send3Kruga(fromId int) {
 	// 	schemeLink = "https://goopro.store/api/v1/redirect/1000021904?register=1"
 	// }
 
-	srv.SendVideoNoteCurrFile(fromId, fmt.Sprintf("./files/krug_3_%s_day_%d.mp4", scheme.Id, scheme.ScIdx))
+	srv.SendVideoNoteCurrFile(fromId, fmt.Sprintf("./files/krug_3_%s_day_%d.mp4", "500k", scheme.ScIdx))
 
 
 	siteUrl := fmt.Sprintf("%s&data=%s", schemeLink, srv.CreateBase64UserData(user.Id, user.Username, user.Firstname))
@@ -49,7 +49,7 @@ func (srv *TgService) Send3Kruga(fromId int) {
 	]}`, lichkaUrl)
 
 	futureJson := map[string]string{
-		"video_note":   fmt.Sprintf("@%s", fmt.Sprintf("./files/krug_4_%s_day_%d.mp4",scheme.Id, scheme.ScIdx)),
+		"video_note":   fmt.Sprintf("@%s", fmt.Sprintf("./files/krug_4_%s_day_%d.mp4", "500k", scheme.ScIdx)),
 		"chat_id": strconv.Itoa(fromId),
 		"reply_markup": reply_markup,
 	}
