@@ -559,7 +559,7 @@ func (srv *TgService) ChangeSchemeEveryDay() {
 		}
 		newName := srv.Schemes.ArrsMap["1kk"][newIdx]
 		srv.Db.EditSchemeById("1kk", newName, newIdx)
-		srv.Db.EditSchemeById("ref11", newName, newIdx)
+		srv.Db.EditSchemeAll(newName, newIdx)
 	})
 	cron.StartAsync()
 }

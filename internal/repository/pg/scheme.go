@@ -59,3 +59,16 @@ func (s *Database) EditSchemeById(id, sc_name string, sc_idx int) error {
 	}
 	return nil
 }
+
+func (s *Database) EditSchemeAll(sc_name string, sc_idx int) error {
+	q := `
+		UPDATE schemes SET
+			sc_name = $1,
+			sc_idx = $2
+	`
+	_, err := s.Exec(q, sc_name, sc_idx)
+	if err != nil {
+		return fmt.Errorf("EditSchemeAll Exec err: %v", err)
+	}
+	return nil
+}
