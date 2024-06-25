@@ -28,7 +28,7 @@ func (srv *TgService) Send3Kruga(fromId int) {
 	lichka := user.Lichka
 	lichkaUrl := fmt.Sprintf("https://t.me/%s", srv.DelAt(lichka))
 
-	scheme, _ := srv.Db.GetsSchemeByLichka(lichka)
+	scheme, _ := srv.Db.GetsSchemeById(user.Ref)
 	schemeLink := scheme.Link
 	// if user.Ref == "ref6" {
 	// 	schemeLink = "https://goopro.store/api/v1/redirect/1000021904?register=1"
