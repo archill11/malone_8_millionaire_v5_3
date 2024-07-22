@@ -284,8 +284,6 @@ func (srv *TgService) CQ_subscribe(m models.Update) error {
 	}
 	time.Sleep(time.Second)
 
-	lichka := user.Lichka
-	scheme, _ = srv.Db.GetsSchemeByLichka(lichka)
 	schemeLink := scheme.Link
 
 	reply_markup = fmt.Sprintf(`{"inline_keyboard" : [
