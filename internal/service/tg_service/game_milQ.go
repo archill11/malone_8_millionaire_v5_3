@@ -324,6 +324,7 @@ func (srv *TgService) ShowQWin(chatId int, q_num string) error {
 		user, _ := srv.Db.GetUserById(chatId)
 		scheme, _ := srv.Db.GetsSchemeById(user.Ref)
 		chLink := scheme.ChatCheckLink
+		secondChLink := srv.Cfg.SecondChLink
 		// chLink := "https://t.me/+aC2nuKzjkTwxNzZh"
 		// if user.Ref == "ref15" {
 		// 	chLink = "https://t.me/+yGMKYazOioVkMTAx"
@@ -332,7 +333,7 @@ func (srv *TgService) ShowQWin(chatId int, q_num string) error {
 		// 	chLink = "https://t.me/+36S69s4Z9GY4NWUx"
 		// }
 
-		messText := fmt.Sprintf("Чтобы разблокировать награду и забрать её, тебе осталось выполнить 3 простейших условия:\n\n1. Подпишись на мой канал👇\n%s\n\nКак только подписался - жми кнопку ниже ⏬", chLink)
+		messText := fmt.Sprintf("Чтобы разблокировать награду и забрать её, тебе осталось выполнить 3 простейших условия:\n\n1. Подпишись на мой канал👇\n%s\n%s\n\nКак только подписался - жми кнопку ниже ⏬", chLink, secondChLink)
 		reply_markup := `{"inline_keyboard" : [
 			[{ "text": "Подписался☑️", "callback_data": "subscribe" }]
 		]}`
